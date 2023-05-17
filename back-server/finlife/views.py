@@ -101,3 +101,10 @@ def top_rate(req):
     serializers = DepositProductSerializer(products)
 
     return Response(serializers.data)
+
+
+@api_view(['GET'])
+def deposit_product(req, fin_prdt_cd):
+    product = get_object_or_404(DepositProduct, fin_prdt_cd=fin_prdt_cd) 
+    serializers = DepositProductSerializer(product)
+    return Response(serializers.data)
