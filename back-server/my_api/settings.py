@@ -46,7 +46,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Django Apps
-    # 'accounts',
+    'accounts',
     'articles',
     'finlife',
     'rest_framework',
@@ -55,15 +55,15 @@ INSTALLED_APPS = [
     "corsheaders",
 
     # Auth
-    # 'rest_framework.authtoken',
-    # 'dj_rest_auth',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
 
     # registration
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'dj_rest_auth.registration',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 
     # OpenAPI 3.0
     # 'drf_spectacular',
@@ -78,17 +78,17 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-# REST_FRAMEWORK = {
-#     # Authentication
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication',
-#     ],
-
+REST_FRAMEWORK = {
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 #     # permission
-#     # 'DEFAULT_PERMISSION_CLASSES': [
-#     #     # 'rest_framework.permissions.IsAuthenticated',
-#     #     'rest_framework.permissions.AllowAny',
-#     # ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 #     # spectacular Settings
 #     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -195,4 +195,25 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
+
+REST_AUTH={ # 회원가입시 토큰 발급
+    'SESSION_LOGIN': False,
+    'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+}
+
+# dj-rest-auth는 email을 필수적으로 사용하도록 구현되어 있으므로, 해당 사항을 수정
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = None
+
+# django 인증 시스템에서 사용할 백엔드 클래스 지정
+# 기본 인증 백엔드와 allauth 패키지에서 제공하는 인증 백엔드를 모두 사용하겠다는 설정.
+AUTHENTICATION_BACKENDS=(
+    # django 기본 인증 백엔드
+    "django.contrib.auth.backends.ModelBackend",
+    # django-allauth 패키지에서 제공하는 인증 백엔드 클래스
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+# allauth 의 default adapter 설정
+ACCOUNT_ADAPTER = 'accounts.models.CustomAccountAdapter'
