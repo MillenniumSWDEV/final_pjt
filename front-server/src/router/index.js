@@ -5,6 +5,7 @@ import CreateView from '@/views/CreateView'
 import DetailView from '@/views/DetailView'
 // import SignUpView from '@/views/SignUpView'
 // import LogInView from '@/views/LogInView'
+import MapView from '@/views/MapView'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
 		path: '/:id',
 		name: 'DetailView',
 		component: DetailView,
+	},
+	{
+		path: '/map',
+		name: 'MapView',
+		component: MapView,
 	},
 ]
 
