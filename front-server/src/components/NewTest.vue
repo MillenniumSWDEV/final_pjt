@@ -1,9 +1,9 @@
 <template>
-	<div id="NewTest">새로운 테스트!</div>
+  <div id="NewTest">새로운 테스트!</div>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style></style>

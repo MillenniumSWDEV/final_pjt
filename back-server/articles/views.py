@@ -20,8 +20,8 @@ from rest_framework.permissions import IsAuthenticated
 # @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
-        # articles = Article.objects.all()
-        articles = get_list_or_404(Article)
+        articles = Article.objects.all()
+        # articles = get_list_or_404(Article)
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 

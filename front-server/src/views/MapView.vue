@@ -52,29 +52,30 @@ export default {
         );
         if (positions.length > 0) {
           // 마커 생성
-          this.markers = positions.map(
-            (position, index) => {
-              const marker = new kakao.maps.Marker({
-                map: this.mapInstance,
-                position,
-              })
-              var iwContent = '<div style="padding:5px;">' + this.data[index].place_name +'</div>'; 
-              console.log(iwContent)
-              const infowindow = new kakao.maps.InfoWindow({
-                content : iwContent
-              });
-              kakao.maps.event.addListener(marker, 'mouseover', () => {
+          this.markers = positions.map((position, index) => {
+            const marker = new kakao.maps.Marker({
+              map: this.mapInstance,
+              position,
+            });
+            var iwContent =
+              '<div style="padding:5px;">' +
+              this.data[index].place_name +
+              "</div>";
+            console.log(iwContent);
+            const infowindow = new kakao.maps.InfoWindow({
+              content: iwContent,
+            });
+            kakao.maps.event.addListener(marker, "mouseover", () => {
               //마커 position을 출력합니다.
               console.log(this.data[index].place_name);
               infowindow.open(this.mapInstance, marker);
-              });
-              kakao.maps.event.addListener(marker, 'mouseout', function() {
-                  // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-                infowindow.close();
-              });
-          return marker
-        });
-          
+            });
+            kakao.maps.event.addListener(marker, "mouseout", function () {
+              // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+              infowindow.close();
+            });
+            return marker;
+          });
 
           const bounds = positions.reduce(
             (bounds, latlng) => bounds.extend(latlng),
