@@ -43,7 +43,7 @@ class RegisterSerializer(serializers.Serializer):
         # 추가 은행을 여기에 나열할 수 있습니다.
     )
 
-    SAVING_PREFERENCED_CHOICES = (
+    SAVING_PREFERENCE_CHOICES = (
         ('예금', '예금'),
         ('적금', '저금'),
         ('대출', '대출'),
@@ -85,7 +85,7 @@ class RegisterSerializer(serializers.Serializer):
     preferred_bank = serializers.ChoiceField(choices=PREFERRED_BANK_CHOICES)
     age = serializers.IntegerField(validators=[MinValueValidator(0)])
     # subscribed_products = serializers.CharField()
-    saving_preferenced = serializers.ChoiceField(choices=SAVING_PREFERENCED_CHOICES)
+    saving_preference = serializers.ChoiceField(choices=SAVING_PREFERENCE_CHOICES)
     financial_goal = serializers.ChoiceField(choices=FINANCIAL_GOAL_CHOICES)
     investment_experience = serializers.ChoiceField(choices=INVESTMENT_EXPERIENCE_CHOICES)
     asset_holdings = serializers.ChoiceField(choices=ASSET_HOLDINGS_CHOICES)
@@ -132,7 +132,8 @@ class RegisterSerializer(serializers.Serializer):
             'age': self.validated_data.get('age', ''),
             'job': self.validated_data.get('job', ''),
             'monthly_expenses': self.validated_data.get('monthly_expenses', ''),
-            'saving_preferenced': self.validated_data.get('saving_preferenced', ''),
+            'preferred_bank': self.validated_data.get('preferred_bank', ''),
+            'saving_preference': self.validated_data.get('saving_preference', ''),
             'financial_goal': self.validated_data.get('financial_goal', ''),
             'investment_experience': self.validated_data.get('investment_experience', ''),
             'asset_holdings': self.validated_data.get('asset_holdings', ''),

@@ -37,7 +37,7 @@ class User(AbstractUser):
         # 추가 은행을 여기에 나열할 수 있습니다.
     )
 
-    SAVING_PREFERENCED_CHOICES = (
+    SAVING_PREFERENCE_CHOICES = (
         ('예금', '예금'),
         ('적금', '저금'),
         ('대출', '대출'),
@@ -71,7 +71,7 @@ class User(AbstractUser):
     age = models.PositiveIntegerField(null=True)  # 나이
     preferred_bank = models.CharField(max_length=255, choices=PREFERRED_BANK_CHOICES, null=True)  # 선호하는 은행
     subscribed_products = models.ManyToManyField(DepositProduct, blank=True)  # 이미 가입된 상품
-    saving_preference = models.CharField(max_length=20, choices=SAVING_PREFERENCED_CHOICES, null=True)  # 저축 성향
+    saving_preference = models.CharField(max_length=20, choices=SAVING_PREFERENCE_CHOICES, null=True)  # 저축 성향
     financial_goal = models.CharField(max_length=20, choices=FINANCIAL_GOAL_CHOICES, null=True)  # 재무목표
     investment_experience = models.CharField(max_length=20, choices=INVESTMENT_EXPERIENCE_CHOICES, null=True)  # 투자경험
     asset_holdings = models.CharField(max_length=20, choices=ASSET_HOLDINGS_CHOICES, null=True)  # 보유자산
