@@ -2,14 +2,30 @@
   <div>
     <h1>Sign Up Page</h1>
     <form @submit.prevent="signUp">
-      <label for="username">username : </label>
+      <label for="username">ID : </label>
       <input id="username" v-model.trim="username" type="text" /><br />
 
       <label for="password1"> password : </label>
       <input id="password1" v-model.trim="password1" type="password" /><br />
 
       <label for="password2"> password confirmation : </label>
-      <input id="password2" v-model.trim="password2" type="password" />
+      <input id="password2" v-model.trim="password2" type="password" /><br />
+
+      <label for="email">email : </label>
+      <input id="email" v-model.trim="email" type="email" /><br />
+
+      <label for="nickname">nickname : </label>
+      <input id="nickname" v-model.trim="nickname" type="text" /><br />
+
+      <label for="job">직업 : </label>
+      <select v-model.trim="job" name="job">
+        <option value="학생">학생</option>
+        <option value="직장인">직장인</option>
+        <option value="전업주부">전업주부</option>
+        <option value="무직">Music</option>
+        <option value="기타">기타</option>
+      </select>
+      <br />
 
       <input type="submit" value="SignUp" />
     </form>
@@ -24,6 +40,9 @@ export default {
       username: null,
       password1: null,
       password2: null,
+      email: null,
+      nickname: null,
+      job: null,
     };
   },
   methods: {
@@ -31,7 +50,7 @@ export default {
       if (this.password1 !== this.password2) {
         alert("비밀번호와 확인이 틀립니다.");
       } else {
-        console.log(username, password1, password2);
+        console.log(username, password1, password2, email, nickname);
       }
     },
   },

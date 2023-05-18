@@ -5,7 +5,10 @@ import CreateView from "@/views/CreateView";
 import DetailView from "@/views/DetailView";
 import SignUpView from "@/views/SignUpView";
 import LogInView from "@/views/LogInView";
+import ProductsView from "@/views/ProductsView";
 import MapView from "@/views/MapView";
+import GBTIView from "@/views/GBTIView";
+import TournamentView from "@/views/TournamentView";
 
 Vue.use(VueRouter);
 
@@ -38,9 +41,24 @@ const routes = [
     component: DetailView,
   },
   {
+    path: "/products",
+    name: "ProductsView",
+    component: ProductsView,
+  },
+  {
     path: "/map",
     name: "MapView",
     component: MapView,
+  },
+  {
+    path: "/tournament",
+    name: "TournamentView",
+    component: TournamentView,
+  },
+  {
+    path: "/GBTI",
+    name: "GBTIView",
+    component: GBTIView,
   },
 ];
 
