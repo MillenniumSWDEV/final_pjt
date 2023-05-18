@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'articles',
     'finlife',
     'rest_framework',
-
+    
     # CORS policy
     "corsheaders",
 
@@ -64,6 +64,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+
+    # swagger
+    'drf_yasg',
 
     # OpenAPI 3.0
     # 'drf_spectacular',
