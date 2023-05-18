@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.conf import settings
 from django.http.response import JsonResponse
 from rest_framework.decorators import api_view
-from .models import DepositProduct,DepositOptions
+from .models import DepositProduct,DepositOptions, SavingProduct, SavingOptions
 from rest_framework.response import Response
-from .serializers import DepositProductSerializer, DepositOptionsSerializer
+from .serializers import DepositProductSerializer, DepositOptionsSerializer, SavingProductSerializer, SavingOptionsSerializer
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
@@ -32,6 +32,7 @@ def api_test(req):
     }
     response= requests.get(URL, params=params)
     return response  
+
 
 @api_view(['GET'])
 def save_deposit_products(req):
@@ -108,3 +109,59 @@ def deposit_product(req, fin_prdt_cd):
     product = get_object_or_404(DepositProduct, fin_prdt_cd=fin_prdt_cd) 
     serializers = DepositProductSerializer(product)
     return Response(serializers.data)
+
+
+def api_test2(req):
+    URL = BASE_URL + 'savingProductsSearch.json'
+    params = {
+        'auth' : settings.API_KEY,
+        'topFinGrpNo': '020000',
+        'pageNo': 1        
+    }
+    response = requests.get(URL, params=params)
+    return response
+
+
+@api_view(['GET'])
+def save_savings_products(req):
+    data = api_test2(req).json()
+    products = data['result']
+
+    for product in products['baseList']:
+        try: 
+            product_inDB= SavingProduct.objects.get(fin_prdt_cd=product["fin_prdt_cd"])
+        except:
+            serializer = SavingProductSerializer(data = product)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+    
+    # return Response(data)
+    for option in products['optionList']:
+        if option['intr_rate'] == None:
+            option['intr_rate'] = -1
+        
+        if option['intr_rate2'] == None:
+            option['intr_rate2'] = -1
+         
+        product = SavingProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
+        serializer = SavingOptionsSerializer(data = option)
+
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(fin_prdt_cd=product)
+
+    return Response( status =status.HTTP_201_CREATED )
+
+@api_view(['GET', 'POST'])
+def saving_products(req):
+    if req.method == 'GET':
+        products = SavingProduct.objects.all()
+        serializer = SavingProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+    elif req.method == 'POST':
+        serializer = SavingProductSerializer(data = req.data)
+        if serializer.is_valid(raise_exception=True):
+            # raise_exception = True // 유효성 검사 실패시 400상태코드 반환.
+            serializer.save()
+            return Response( status =status.HTTP_201_CREATED )
+
