@@ -3,7 +3,6 @@ from .models import DepositProduct, DepositOptions, SavingProduct, SavingOptions
 
 
 
-
 class DepositOptionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DepositOptions
@@ -16,6 +15,7 @@ class DepositProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = DepositProduct
         fields = '__all__'
+        read_only_fields = ('carted_user',)
 
 
 class SavingOptionsSerializer(serializers.ModelSerializer):
@@ -30,3 +30,5 @@ class SavingProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = SavingProduct
         fields = '__all__'
+        read_only_fields = ('carted_user',)
+
