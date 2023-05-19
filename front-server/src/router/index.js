@@ -10,6 +10,7 @@ import MapView from "@/views/MapView";
 import ExchangeRateView from "@/views/ExchangeRateView";
 import GBTIView from "@/views/GBTIView";
 import TournamentView from "@/views/TournamentView";
+import ProductDetailView from "@/views/ProductDetailView";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes = [
     path: "/products",
     name: "ProductsView",
     component: ProductsView,
+  },
+  {
+    path: "/product/:id",
+    name: "ProductDetailView",
+    component: ProductDetailView,
   },
   {
     path: "/map",
