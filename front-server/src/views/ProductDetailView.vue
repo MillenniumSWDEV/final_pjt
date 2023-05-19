@@ -14,7 +14,7 @@
 
     <!-- 예금 옵션 조건문 -->
     <div v-if="pd.depositoptions_set">
-      <ul v-for="option in pd.depositoptions_set" v-bind:key="option.id">
+      <ul v-for="option in pd.depositoptions_set" :key="option.id">
         <li>저축 기간: {{ option.save_trm }}개월</li>
         <li>저축 금리 유형: {{ option.intr_rate_type_nm }}</li>
         <li>저축 금리: {{ option.intr_rate }}</li>
@@ -24,8 +24,8 @@
 
     <!-- 적금 옵션 조건문 -->
     <div v-else>
-      <ul v-for="option in pd.savingoptions_set" v-bind:key="option.id">
-        <li style="font-weight: bold;">적립 유형: {{ option.rsrv_type_nm }}</li>
+      <ul v-for="option in pd.savingoptions_set" :key="option.id">
+        <li style="font-weight: bold">적립 유형: {{ option.rsrv_type_nm }}</li>
         <li>저축 기간: {{ option.save_trm }}개월</li>
         <li>저축 금리 유형: {{ option.intr_rate_type_nm }}</li>
         <li>저축 금리: {{ option.intr_rate }}</li>
@@ -34,21 +34,19 @@
     </div>
     <p>기타 유의 사항 {{ pd.etc_note }}</p>
     <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p>
-    <hr>
+    <hr />
   </div>
 </template>
 
 <script>
 export default {
-    name: "ProductDetailView",
-    computed: {
-      pd() {
-        return this.$route.params.data
-      }
-    }
-}
+  name: "ProductDetailView",
+  computed: {
+    pd() {
+      return this.$route.params.data;
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

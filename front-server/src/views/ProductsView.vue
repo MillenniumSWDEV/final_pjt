@@ -9,32 +9,31 @@
         <SavingProducts />
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import DepositProducts from '../components/DepositProducts.vue';
-import SavingProducts from '../components/SavingProducts.vue';
+import DepositProducts from "../components/DepositProducts.vue";
+import SavingProducts from "../components/SavingProducts.vue";
 
 export default {
   name: "ProductsView",
+  components: {
+    DepositProducts,
+    SavingProducts,
+  },
   created() {
-    this.getDepositProducts()
-    this.getSavingProducts()
+    this.getDepositProducts();
+    this.getSavingProducts();
   },
   methods: {
     getDepositProducts() {
-      this.$store.dispatch("getDepositProducts")
+      this.$store.dispatch("getDepositProducts");
     },
     getSavingProducts() {
-      this.$store.dispatch("getSavingProducts")
-    }
+      this.$store.dispatch("getSavingProducts");
+    },
   },
-  components: {
-    DepositProducts,
-    SavingProducts
-  }
 };
 </script>
 
@@ -47,6 +46,6 @@ export default {
   width: 50%;
   height: 100%;
   background-color: #f2aeb1;
-  border: 1px solid white
+  border: 1px solid white;
 }
 </style>
