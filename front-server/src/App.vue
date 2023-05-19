@@ -3,7 +3,8 @@
     <nav>
       <router-link :to="{ name: 'ArticleView' }">Articles</router-link> |
       <router-link :to="{ name: 'ProductsView' }">ProductsView</router-link> |
-      <router-link :to="{ name: 'MapView' }">MapView</router-link> |
+      <router-link :to="{ name: 'MapView' }">근처 은행</router-link> |
+      <router-link :to="{ name: 'ExchangeRateView' }">환율</router-link> |
       <router-link :to="{ name: 'LogInView' }">LogInPage</router-link> |
       <router-link :to="{ name: 'SignUpView' }">SignUpPage</router-link> |
       <router-link :to="{ name: 'TournamentView' }">BATTLE</router-link> |

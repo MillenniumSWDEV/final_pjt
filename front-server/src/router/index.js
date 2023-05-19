@@ -7,6 +7,7 @@ import SignUpView from "@/views/SignUpView";
 import LogInView from "@/views/LogInView";
 import ProductsView from "@/views/ProductsView";
 import MapView from "@/views/MapView";
+import ExchangeRateView from "@/views/ExchangeRateView";
 import GBTIView from "@/views/GBTIView";
 import TournamentView from "@/views/TournamentView";
 
@@ -49,6 +50,11 @@ const routes = [
     path: "/map",
     name: "MapView",
     component: MapView,
+  },
+  {
+    path: "/ex-rate",
+    name: "ExchangeRateView",
+    component: ExchangeRateView,
   },
   {
     path: "/tournament",
