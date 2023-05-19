@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     getExRates() {
-        this.$store.dispatch('getExRates')
+      this.$store.dispatch('getExRates')
     }
   },
   computed: {
