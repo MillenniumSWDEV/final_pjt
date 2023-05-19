@@ -100,13 +100,17 @@ export default new Vuex.Store({
     },
     // 환율 정보 내놔
     getExRates(context) {
-      axios.get(`${API_URL}/finlife/save-ex-rate/`)
-      .then((res) => {
-        context.commit("GET_EX_RATES", res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      if (this.state.exchangeRates.length === 0) {
+        axios.get(`${API_URL}/finlife/save-ex-rate/`)
+        .then((res) => {
+          context.commit("GET_EX_RATES", res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      } else {
+        console.log('화뉼화뉼')
+      }
     }
   },
   modules: {},
