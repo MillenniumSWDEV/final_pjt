@@ -12,9 +12,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     articles: [],
-    depositProducts: [],
-    savingProducts: [],
-    exchangeRates: []
+    depositProducts: null,
+    savingProducts: null,
+    exchangeRates: null
   },
   getters: {},
   mutations: {
@@ -56,58 +56,36 @@ export default new Vuex.Store({
     },
     // 예금 정보 axios
     getDepositProducts(context) {
-      if (this.state.depositProducts.length === 0) {
+      if (!this.state.depositProducts) {
         axios.get(`${API_URL}/finlife/deposit-products/`)
         .then((res) => {
           context.commit("GET_DEPOSIT_PRODUCTS", res.data)
         })
-        .catch((error) => {
-          console.log(error)
-          // 에러라면 무조건 데이터가 없는 경우일 것.
-          // 저장 시키고 재호출
-          axios.get(`${API_URL}/finlife/save-deposit-products/`)
-          .then(this.getDepositProducts())
-          .catch((err) => {
-            console.log(err)
-          })
-        })
+        .catch(error => console.log(error))
       } else {
         console.log('야금야금')
-        return
       }
     },
     // 적금 상품 axios
     getSavingProducts(context) {
-      if (this.state.savingProducts.length === 0) {
+      if (!this.state.savingProducts) {
         axios.get(`${API_URL}/finlife/saving-products/`)
         .then((res) => {
           context.commit("GET_SAVING_PRODUCTS", res.data)
         })
-        .catch((error) => {
-          console.log(error)
-          // 에러라면 무조건 데이터가 없는 경우일 것.
-          // 저장 시키고 재호출
-          axios.get(`${API_URL}/finlife/save-savings-products/`)
-          .then(this.getSavingProducts())
-          .catch((err) => {
-            console.log(err)
-          })
-        })
+        .catch(error => console.log(error))
       } else {
         console.log('저끔저끔')
-        return
       }
     },
     // 환율 정보 내놔
     getExRates(context) {
-      if (this.state.exchangeRates.length === 0) {
+      if (!this.state.exchangeRates) {
         axios.get(`${API_URL}/finlife/save-ex-rate/`)
         .then((res) => {
           context.commit("GET_EX_RATES", res.data)
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch(err => console.log(err))
       } else {
         console.log('화뉼화뉼')
       }
