@@ -14,22 +14,32 @@ export default new Vuex.Store({
     articles: [],
     depositProducts: [],
     savingProducts: [],
+    exchangeRates: []
   },
   getters: {},
   mutations: {
+    // 게시글
     GET_ARTICLES(state, newArticle) {
       state.articles = newArticle;
     },
+    // 예금 상품 저장
     GET_DEPOSIT_PRODUCTS(state, DPdata) {
       state.depositProducts = DPdata
       console.log(DPdata)
     },
+    // 적금 상품 저장
     GET_SAVING_PRODUCTS(state, SPdata) {
       state.savingProducts = SPdata
       console.log(SPdata)
     },
+    // 환율 정보 저장
+    GET_EX_RATES(state, ERdata) {
+      state.exchangeRates = ERdata
+      console.log(ERdata)
+    },
   },
   actions: {
+    // 게시글 axios
     getArticles(context) {
       axios({
         method: "get",
@@ -44,6 +54,7 @@ export default new Vuex.Store({
           context.commit("GET_ARTICLES", []);
         });
     },
+    // 예금 정보 axios
     getDepositProducts(context) {
       if (this.state.depositProducts.length === 0) {
         axios.get(`${API_URL}/finlife/deposit-products/`)
@@ -53,7 +64,7 @@ export default new Vuex.Store({
         .catch((error) => {
           console.log(error)
           // 에러라면 무조건 데이터가 없는 경우일 것.
-          // 다시 한 번 받아와서 또 호출하면 그만이양
+          // 저장 시키고 재호출
           axios.get(`${API_URL}/finlife/save-deposit-products/`)
           .then(this.getDepositProducts())
           .catch((err) => {
@@ -65,6 +76,7 @@ export default new Vuex.Store({
         return
       }
     },
+    // 적금 상품 axios
     getSavingProducts(context) {
       if (this.state.savingProducts.length === 0) {
         axios.get(`${API_URL}/finlife/saving-products/`)
@@ -74,7 +86,7 @@ export default new Vuex.Store({
         .catch((error) => {
           console.log(error)
           // 에러라면 무조건 데이터가 없는 경우일 것.
-          // 다시 한 번 받아와서 또 호출하면 그만이양
+          // 저장 시키고 재호출
           axios.get(`${API_URL}/finlife/save-savings-products/`)
           .then(this.getSavingProducts())
           .catch((err) => {
@@ -86,6 +98,16 @@ export default new Vuex.Store({
         return
       }
     },
+    // 환율 정보 내놔
+    getExRates(context) {
+      axios.get(`${API_URL}/finlife/save-ex-rate/`)
+      .then((res) => {
+        context.commit("GET_EX_RATES", res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   },
   modules: {},
 });
