@@ -11,4 +11,5 @@ urlpatterns = [
     path('deposit-product/<str:fin_prdt_cd>/', views.deposit_product),   # 상품 하나의 데이터.
     path('save-savings-products/', views.save_savings_products),
     path('saving-products/', views.saving_products), # 전체 적금 상품 목록 출력 & 데이터 삽입    
+    path('save-ex-rate/', views.save_ex_rate), # 환율정보저장
 ]

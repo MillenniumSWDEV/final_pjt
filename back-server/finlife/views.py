@@ -20,7 +20,6 @@ def test(req):
     }
     return Response(json)
 
-
 def api_test(req):
     URL = BASE_URL + 'depositProductsSearch.json'
     print('apikey', settings.API_KEY)
@@ -31,7 +30,16 @@ def api_test(req):
         'pageNo': 1
     }
     response= requests.get(URL, params=params)
-    return response  
+    return response
+
+def api_ex_rate(req):
+    URL = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON'
+    params = {
+        'authkey' : settings.EXRATE_API_KEY,
+        'data' : "AP01",
+    }
+    response = requests.get(URL, params=params)
+    return response
 
 
 @api_view(['GET'])
@@ -149,7 +157,7 @@ def save_savings_products(req):
         if serializer.is_valid(raise_exception=True):
             serializer.save(fin_prdt_cd=product)
 
-    return Response( status =status.HTTP_201_CREATED )
+    return Response( status=status.HTTP_201_CREATED )
 
 @api_view(['GET', 'POST'])
 def saving_products(req):
@@ -165,3 +173,8 @@ def saving_products(req):
             serializer.save()
             return Response( status =status.HTTP_201_CREATED )
 
+
+@api_view(['GET'])
+def save_ex_rate(req):
+    data = api_ex_rate(req).json()
+    return Response(data)

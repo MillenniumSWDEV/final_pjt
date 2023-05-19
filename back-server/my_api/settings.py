@@ -28,7 +28,7 @@ environ.Env.read_env(
 
 # 3. 설정한 변수를 읽어옴 읽어옴
 API_KEY = env('API_KEY')
-
+EXRATE_API_KEY = env('EXRATE_API_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
