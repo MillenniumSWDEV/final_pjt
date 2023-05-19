@@ -1,8 +1,11 @@
 <template>
   <div>
     <h4>저끔저끔~!</h4>
-  <div v-for="sp, idx in this.savingProducts" v-bind:key="idx">
-        {{ idx+1 }} - {{ sp.fin_prdt_nm }}
+    <div v-for="sp, idx in this.savingProducts" v-bind:key="idx">
+      {{ idx+1 }} - {{ sp.fin_prdt_nm }}/{{ sp.kor_co_nm }}
+      <router-link :to="{ name: 'ProductDetailView', params: { id: sp.id, data: sp } }">
+        [자세히 보기]
+      </router-link>
     </div>
   </div>
 </template>

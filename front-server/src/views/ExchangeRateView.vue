@@ -2,7 +2,7 @@
   <div>
     <h3>환율</h3>
     <div v-for="er in exchangeRates" v-bind:key="er.curnm">
-      {{ er.cur_unit }} - {{ er.ttb }} / {{ er.tts }}
+      {{ er.cur_nm}}({{ er.cur_unit }}) - {{ er.ttb }} / {{ er.tts }}
     </div>
   </div>
 </template>
