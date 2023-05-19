@@ -1,7 +1,10 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
 class DepositProduct(models.Model):
+
+    carted_user = models.ManyToManyField(settings.AUTH_USER_MODEL,  related_name="cart_deposit")
+
     fin_prdt_cd = models.TextField(unique=True) # 금융 상품 코드
     kor_co_nm = models.TextField() # 금융 회사명
     fin_prdt_nm = models.TextField() # 금융 상품명
@@ -10,6 +13,10 @@ class DepositProduct(models.Model):
     join_member = models.TextField() # 가입 대상
     join_way = models.TextField() # 가입 방법
     spcl_cnd = models.TextField() # 우대 조건
+
+    def __str__(self):
+        return f'{self.kor_co_nm} / {self.fin_prdt_nm}'
+
 
 class DepositOptions(models.Model):
     fin_prdt_cd = models.ForeignKey(DepositProduct, on_delete=models.CASCADE) # 외래키
@@ -20,6 +27,9 @@ class DepositOptions(models.Model):
     
 
 class SavingProduct(models.Model):
+
+    carted_user = models.ManyToManyField(settings.AUTH_USER_MODEL,  related_name="cart_saving")
+
     fin_prdt_cd = models.TextField(unique=True) # 금융 상품 코드
     kor_co_nm = models.TextField() # 금융 회사명
     fin_prdt_nm = models.TextField() # 금융 상품명
@@ -28,6 +38,7 @@ class SavingProduct(models.Model):
     join_member = models.TextField() # 가입 대상
     join_way = models.TextField() # 가입 방법
     spcl_cnd = models.TextField() # 우대 조건
+
 
 class SavingOptions(models.Model):
     fin_prdt_cd = models.ForeignKey(SavingProduct, on_delete=models.CASCADE) # 외래키

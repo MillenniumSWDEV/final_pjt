@@ -64,6 +64,9 @@ class User(AbstractUser):
         ('1억원 이하', '1억원 이하'),
     )
     # 여기다가 닉네임필드 만들구
+
+
+
     nickname = models.CharField(max_length=50)
     salary = models.CharField(max_length=20, choices=SALARY_CHOICES, null=True, blank=True)
     job = models.CharField(max_length=255, choices=JOB_CHOICES, null=True, blank=True)  # 직업
@@ -75,6 +78,11 @@ class User(AbstractUser):
     financial_goal = models.CharField(max_length=20, choices=FINANCIAL_GOAL_CHOICES, null=True, blank=True)  # 재무목표
     investment_experience = models.CharField(max_length=20, choices=INVESTMENT_EXPERIENCE_CHOICES, null=True, blank=True)  # 투자경험
     asset_holdings = models.CharField(max_length=20, choices=ASSET_HOLDINGS_CHOICES, null=True, blank=True)  # 보유자산
+
+
+    def __str__(self):
+        return f'이름이 {self.username}인 유저'
+
 
 
 # 상속 받아서 구현해보기

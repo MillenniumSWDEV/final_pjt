@@ -7,11 +7,13 @@ from rest_framework.response import Response
 from .serializers import DepositProductSerializer, DepositOptionsSerializer, SavingProductSerializer, SavingOptionsSerializer
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
 
 import requests
 
 BASE_URL = 'http://finlife.fss.or.kr/finlifeapi/'
-
 
 @api_view(['GET'])
 def test(req):
@@ -174,7 +176,53 @@ def saving_products(req):
             return Response( status =status.HTTP_201_CREATED )
 
 
+# 환율정보 받아서 응답하기
 @api_view(['GET'])
 def save_ex_rate(req):
     data = api_ex_rate(req).json()
     return Response(data)
+
+
+# 예금상품 장바구니 불러오기 및 추가
+@api_view(['POST'])
+def deposit_product_cart(req, fin_prdt_cd):
+    product = DepositProduct.objects.get(fin_prdt_cd=fin_prdt_cd)
+    print('dddd')
+    product.carted_user.add(req.user)
+    product.save()
+    serializer = DepositProductSerializer(product)
+
+    return Response(serializer.data)
+
+
+# 예금 장바구니 리스트 불러오기
+@api_view(['GET'])
+def deposit_cart(req):
+    User = get_user_model()
+    user = User.objects.get(id=req.user.pk)
+    print(user)
+    print(user.pk)
+    carted_products = user.cart_deposit.all()  # 해당 사용자의 장바구니에 추가된 예금 상품들을 가져옴
+    print(carted_products)
+    serializers = DepositProductSerializer(carted_products, many=True)
+
+    return Response(serializers.data)
+
+# 적금상품 장바구에 추가
+@api_view(['POST'])
+def saving_product_cart(req, fin_prdt_cd):
+    product = SavingProduct.objects.get(fin_prdt_cd=fin_prdt_cd)
+    product.carted_user.add(req.user)
+    product.save()
+    serializer = SavingProductSerializer(product)
+
+    return Response(serializer.data)
+
+# 적금 장바구니 리스트 불러오기
+@api_view(['GET'])
+def saving_cart(req):
+    User = get_user_model()
+    user = User.objects.get(id=req.user.pk)
+    carted_products = user.cart_saving.all()
+    serializers = SavingProductSerializer(carted_products, many=True)
+    return Response(serializers.data)
