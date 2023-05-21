@@ -17,6 +17,9 @@
       <label for="nickname">nickname : </label>
       <input id="nickname" v-model.trim="nickname" type="text" /><br />
 
+      <label for="age">age : </label>
+      <input id="age" v-model.trim="age" type="number" /><br />
+
       <label for="job">직업 : </label>
       <select v-model.trim="job" name="job">
         <option value="학생">학생</option>
@@ -43,14 +46,31 @@ export default {
       email: null,
       nickname: null,
       job: null,
+      age: null,
     };
   },
   methods: {
     signUp() {
+      const username = this.username;
+      const password1 = this.password1;
+      const password2 = this.password2;
+      const email = this.email;
+      const nickname = this.nickname;
+      const job = this.job;
+      const age = this.age;
       if (this.password1 !== this.password2) {
         alert("비밀번호와 확인이 틀립니다.");
       } else {
-        console.log(username, password1, password2, email, nickname);
+        const payload = {
+          username,
+          password1,
+          password2,
+          email,
+          nickname,
+          job,
+          age,
+        };
+        this.$store.dispatch("signUp", payload);
       }
     },
   },
