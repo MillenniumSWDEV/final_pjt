@@ -11,6 +11,7 @@ import ExchangeRateView from "@/views/ExchangeRateView";
 import GBTIView from "@/views/GBTIView";
 import TournamentView from "@/views/TournamentView";
 import ProductDetailView from "@/views/ProductDetailView";
+import MyPageView from "@/views/MyPageView";
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
     path: "/GBTI",
     name: "GBTIView",
     component: GBTIView,
+  },
+  {
+    path: "/mypage",
+    name: "MyPageView",
+    component: MyPageView,
   },
 ];
 

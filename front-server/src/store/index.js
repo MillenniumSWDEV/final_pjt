@@ -18,6 +18,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
+    userData: null,
     articles: [],
     token: null,
     depositProducts: null,
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token;
       router.push({ name: "ArticleView" });
+    },
+    USER_DETAIL(state, userData) {
+      state.userData = userData;
     },
   },
   actions: {
@@ -157,7 +161,6 @@ export default new Vuex.Store({
         });
     },
     login(context, payload) {
-      console.log("action까지옴");
       const username = payload.username;
       const password = payload.password;
 
@@ -173,6 +176,21 @@ export default new Vuex.Store({
           context.commit("SAVE_TOKEN", res.data.key);
         })
         .catch((err) => console.log(err));
+    },
+    userDetail(context) {
+      axios({
+        method: "get",
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      })
+        .then((res) => {
+          context.commit("USER_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   modules: {

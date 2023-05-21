@@ -203,7 +203,9 @@ AUTH_USER_MODEL = 'accounts.User'
 REST_AUTH={ # 회원가입시 토큰 발급
     'SESSION_LOGIN': False,
     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
 }
+
 
 # dj-rest-auth는 email을 필수적으로 사용하도록 구현되어 있으므로, 해당 사항을 수정
 ACCOUNT_EMAIL_REQUIRED = False
