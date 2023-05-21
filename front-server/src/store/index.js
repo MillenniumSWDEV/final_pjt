@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import finlife from "./modules/finlife";
+import router from "../router";
+import createPersistedState from "vuex-persistedstate";
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -14,8 +16,10 @@ const EX_RATE_URL =
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     articles: [],
+    token: null,
     depositProducts: null,
     savingProducts: null,
     exchangeRates: {
@@ -59,6 +63,11 @@ export default new Vuex.Store({
     GET_EX_RATES(state, ERdata) {
       state.exchangeRates = ERdata;
       console.log(ERdata);
+    },
+    // 토큰 저장
+    SAVE_TOKEN(state, token) {
+      state.token = token;
+      router.push({ name: "ArticleView" });
     },
   },
   actions: {
@@ -109,12 +118,61 @@ export default new Vuex.Store({
         axios
           .get(`${API_URL}/finlife/save-ex-rate/`)
           .then((res) => {
+            console.log(res);
             context.commit("GET_EX_RATES", res.data);
           })
           .catch((err) => console.log(err));
       } else {
         console.log("화뉼화뉼");
       }
+    },
+    signUp(context, payload) {
+      const username = payload.username;
+      const password1 = payload.password1;
+      const password2 = payload.password2;
+      const email = payload.email;
+      const nickname = payload.nickname;
+      const job = payload.job;
+      const age = payload.age;
+
+      axios({
+        method: "post",
+        url: `${API_URL}/accounts/signup/`,
+        data: {
+          username,
+          password1,
+          password2,
+          email,
+          nickname,
+          job,
+          age,
+        },
+      })
+        .then((res) => {
+          console.log(res.data.key);
+          context.commit("SAVE_TOKEN", res.data.key);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    login(context, payload) {
+      console.log("action까지옴");
+      const username = payload.username;
+      const password = payload.password;
+
+      axios({
+        method: "post",
+        url: `${API_URL}/accounts/login/`,
+        data: {
+          username,
+          password,
+        },
+      })
+        .then((res) => {
+          context.commit("SAVE_TOKEN", res.data.key);
+        })
+        .catch((err) => console.log(err));
     },
   },
   modules: {
