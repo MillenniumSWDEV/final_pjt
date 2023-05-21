@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="saveData">
+    <form @submit.prevent="updateUser">
       <label for="username">ID : </label>
       <input id="username" v-model.trim="username" type="text" /><br />
 
@@ -58,6 +58,9 @@
       /><br />
 
       <input type="submit" value="save" />
+      <!-- <form @submit.prevent="deleteUser">
+        <input type="submit" value="탈퇴" />
+      </form> -->
     </form>
   </div>
 </template>
@@ -83,8 +86,34 @@ export default {
     this.$store.dispatch("userDetail");
   },
   methods: {
-    saveData() {
-      return;
+    updateUser() {
+      const nickname = this.nickname;
+      const job = this.job;
+      const age = this.age;
+      const monthly_expenses = this.monthly_expenses;
+      const preferred_bank = this.preferred_bank;
+      const saving_preference = this.saving_preference;
+      const investment_experience = this.investment_experience;
+      const asset_holdings = this.asset_holdings;
+      const financial_goal = this.financial_goal;
+      const salary = this.salary;
+
+      const payload = {
+        nickname,
+        job,
+        age,
+        monthly_expenses,
+        preferred_bank,
+        saving_preference,
+        investment_experience,
+        asset_holdings,
+        financial_goal,
+        salary,
+      };
+      this.$store.dispatch("updateUser", payload);
+    },
+    deleteUser() {
+      this.$store.dispatch("deleteUser");
     },
   },
 };
