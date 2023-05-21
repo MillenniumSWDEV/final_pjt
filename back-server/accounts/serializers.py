@@ -6,6 +6,7 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
+from django.contrib.auth import get_user_model
 
 
 class RegisterSerializer(serializers.Serializer):
@@ -159,3 +160,63 @@ class RegisterSerializer(serializers.Serializer):
         self.custom_signup(request, user)
         setup_user_email(request, user, [])
         return user
+    
+
+
+UserModel = get_user_model()
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    """
+    User model w/o password
+    """
+
+    @staticmethod
+    def validate_username(username):
+        if 'allauth.account' not in settings.INSTALLED_APPS:
+            # We don't need to call the all-auth
+            # username validator unless its installed
+            return username
+
+        from allauth.account.adapter import get_adapter
+        username = get_adapter().clean_username(username)
+        return username
+
+    class Meta:
+        extra_fields = []
+        # see https://github.com/iMerica/dj-rest-auth/issues/181
+        # UserModel.XYZ causing attribute error while importing other
+        # classes from `serializers.py`. So, we need to check whether the auth model has
+        # the attribute or not
+        if hasattr(UserModel, 'USERNAME_FIELD'):
+            extra_fields.append(UserModel.USERNAME_FIELD)
+        if hasattr(UserModel, 'EMAIL_FIELD'):
+            extra_fields.append(UserModel.EMAIL_FIELD)
+        if hasattr(UserModel, 'first_name'):
+            extra_fields.append('first_name')
+        if hasattr(UserModel, 'last_name'):
+            extra_fields.append('last_name')
+        if hasattr(UserModel, 'nickname'):
+            extra_fields.append('nickname')
+        if hasattr(UserModel, 'salary'):
+            extra_fields.append('salary')
+        if hasattr(UserModel, 'job'):
+            extra_fields.append('job')
+        if hasattr(UserModel, 'monthly_expenses'):
+            extra_fields.append('monthly_expenses') 
+        if hasattr(UserModel, 'age'):
+            extra_fields.append('age')   
+        if hasattr(UserModel, 'preferred_bank'):
+            extra_fields.append('preferred_bank')        
+        if hasattr(UserModel, 'saving_preference'):
+            extra_fields.append('saving_preference')         
+        if hasattr(UserModel, 'financial_goal'):
+            extra_fields.append('financial_goal')      
+        if hasattr(UserModel, 'investment_experience'):
+            extra_fields.append('investment_experience')    
+        if hasattr(UserModel, 'asset_holdings'):
+            extra_fields.append('asset_holdings') 
+        if hasattr(UserModel, 'date_joined'):
+            extra_fields.append('date_joined')                                          
+        model = UserModel
+        fields = ('pk', *extra_fields)
+        read_only_fields = ('email',)

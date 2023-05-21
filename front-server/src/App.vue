@@ -9,6 +9,7 @@
       <router-link :to="{ name: 'SignUpView' }">SignUpPage</router-link> |
       <router-link :to="{ name: 'TournamentView' }">BATTLE</router-link> |
       <router-link :to="{ name: 'GBTIView' }">TEST</router-link> |
+      <router-link :to="{ name: 'MyPageView' }">MyPage</router-link> |
     </nav>
     <router-view />
   </div>
