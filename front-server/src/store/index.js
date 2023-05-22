@@ -23,26 +23,27 @@ export default new Vuex.Store({
     token: null,
     depositProducts: null,
     savingProducts: null,
-    exchangeRates: {
-      0: {
-        cur_nm: "메이플 메소",
-        cur_unit: "MPM",
-        ttb: 0.000025,
-        tts: 0.000025,
-      },
-      1: {
-        cur_nm: "키보토스 크레딧(100)",
-        cur_unit: "KTC",
-        ttb: 1000,
-        tts: 950,
-      },
-      2: {
-        cur_nm: "키보토스 청휘석",
-        cur_unit: "DOL",
-        ttb: 15,
-        tts: 15,
-      },
-    },
+    exchangeRates: null,
+    // {
+    //   0: {
+    //     cur_nm: "메이플 메소",
+    //     cur_unit: "MPM",
+    //     ttb: 0.000025,
+    //     tts: 0.000025,
+    //   },
+    //   1: {
+    //     cur_nm: "키보토스 크레딧(100)",
+    //     cur_unit: "KTC",
+    //     ttb: 1000,
+    //     tts: 950,
+    //   },
+    //   2: {
+    //     cur_nm: "키보토스 청휘석",
+    //     cur_unit: "DOL",
+    //     ttb: 15,
+    //     tts: 15,
+    //   },
+    // },
   },
   getters: {},
   mutations: {

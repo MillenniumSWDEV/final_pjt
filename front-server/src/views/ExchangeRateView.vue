@@ -9,12 +9,13 @@
       <option
         v-for="er in exchangeRates"
         :key="er.cur_unit"
-        :value="[er.cur_nm, er.ttb, er.tts]"
+        :value="{ unit: er.cur_unit, ttb: er.ttb, tts: er.tts }"
       >
         {{ er.cur_nm }}({{ er.cur_unit }})
       </option>
     </select>
     <input v-model="curN" type="number" />
+    {{ selectedCur }}
     <button @click="CtoW">$</button>
     <br />
     <input v-model="WN" type="number" />
@@ -36,8 +37,10 @@ export default {
     exchangeRates() {
       return this.$store.state.exchangeRates;
     },
+    // 컴퓨티드 속성에 함수를 넣는 것으로 값을 초기화하고, 보기 쉽도록 인풋 값 뒤에 화폐유닛을 리턴해줍니다.
     selectedCur() {
-      return this.cur;
+      this.changedC();
+      return this.cur.unit;
     },
   },
   created() {
@@ -47,16 +50,23 @@ export default {
     getExRates() {
       this.$store.dispatch("getExRates");
     },
+    // 인풋 값 초기화
+    changedC() {
+      this.curN = 0;
+      this.WN = 0;
+    },
+    // 타국 화폐 >>> 원화
     CtoW() {
       if (typeof this.cur === "object") {
-        this.WN = this.curN * this.cur[2];
+        this.WN = this.curN * this.cur.tts;
       } else {
         alert("화폐 단위를 선택해주세요");
       }
     },
+    // 원화 >>> 타국 화폐
     WtoC() {
       if (typeof this.cur === "object") {
-        this.curN = this.WN / this.cur[1];
+        this.curN = this.WN / this.cur.ttb;
       } else {
         alert("화폐 단위를 선택해주세요");
       }
