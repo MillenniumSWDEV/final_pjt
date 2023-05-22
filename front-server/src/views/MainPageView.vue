@@ -17,6 +17,8 @@
     <BulletinBoards />
     <ExchangeRate />
     <KakaoMap />
+    <ProductsBoard />
+    <DetailProducts />
   </div>
 </template>
 
@@ -24,12 +26,16 @@
 import BulletinBoards from "../components/BulletinBoards/BulletinBoards.vue";
 import ExchangeRate from "../components/ExchangeRate/ExchangeRate.vue";
 import KakaoMap from "../components/KakaoMap/KakaoMap.vue";
+import ProductsBoard from "../components/Products/ProductsBoard.vue";
+import DetailProducts from "../components/Products/DetailProducts.vue";
 
 export default {
   components: {
     BulletinBoards,
     ExchangeRate,
     KakaoMap,
+    ProductsBoard,
+    DetailProducts,
   },
 };
 </script>
