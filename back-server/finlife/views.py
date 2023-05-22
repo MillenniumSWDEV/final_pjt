@@ -183,11 +183,10 @@ def save_ex_rate(req):
     return Response(data)
 
 
-# 예금상품 장바구니 불러오기 및 추가
+# 예금상품 장바구니에 추가
 @api_view(['POST'])
 def deposit_product_cart(req, fin_prdt_cd):
     product = DepositProduct.objects.get(fin_prdt_cd=fin_prdt_cd)
-    print('dddd')
     product.carted_user.add(req.user)
     product.save()
     serializer = DepositProductSerializer(product)
@@ -200,8 +199,6 @@ def deposit_product_cart(req, fin_prdt_cd):
 def deposit_cart(req):
     User = get_user_model()
     user = User.objects.get(id=req.user.pk)
-    print(user)
-    print(user.pk)
     carted_products = user.cart_deposit.all()  # 해당 사용자의 장바구니에 추가된 예금 상품들을 가져옴
     print(carted_products)
     serializers = DepositProductSerializer(carted_products, many=True)

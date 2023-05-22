@@ -14,7 +14,7 @@ class User(AbstractUser):
         ('학생', '학생'),
         ('직장인', '직장인'),
         ('전업주부', '전업주부'),
-        ('취준생', '취준생')
+        ('취준생', '취준생'),
     )
 
     MONTHLY_EXPENSES_CHOICES = (
@@ -64,7 +64,6 @@ class User(AbstractUser):
         ('1억원 이하', '1억원 이하'),
     )
     # 여기다가 닉네임필드 만들구
-
 
 
     nickname = models.CharField(max_length=50)

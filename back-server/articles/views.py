@@ -1,4 +1,3 @@
-
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Authentication Decorators
@@ -6,30 +5,48 @@ from rest_framework.decorators import api_view
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
 from .models import Article, Comment
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
 
-@api_view(['GET', 'POST'])
-# @permission_classes([IsAuthenticated])
-def article_list(request):
-    if request.method == 'GET':
-        articles = Article.objects.all()
-        # articles = get_list_or_404(Article)
+class ArticleListView(APIView):
+    permission_classes = [AllowAny]
+ 
+    def get(self, request):
+        articles = get_list_or_404(Article)
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+    def post(self, request):
+        self.permission_classes = [IsAuthenticated]
+        self.check_permissions(request)
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# @api_view(['GET', 'POST'])
+# # @permission_classes([IsAuthenticated])
+# def article_list(request):
+#     permissions_classes = [IsAuthenticated]
+
+#     if request.method == 'GET':
+#         articles = Article.objects.all()
+#         # articles = get_list_or_404(Article)
+#         serializer = ArticleListSerializer(articles, many=True)
+#         return Response(serializer.data)
+
+#     elif request.method == 'POST':
+#         # print('ddd')
+#         serializer = ArticleSerializer(data=request.data)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save(user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
