@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <h5>{{ article.id }}</h5>
     <p>{{ article.title }}</p>
     <p>{{ article.content }}</p>
@@ -16,6 +17,16 @@ export default {
   props: {
     article: Object,
   },
+  data() {
+      return {
+        fields: ['first_name', 'last_name', 'age'],
+        items: [
+          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald', status: 'awesome' },
+          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+          { age: 89, first_name: 'Geneva', last_name: 'Wilson' }
+        ]
+      }
+    },
 };
 </script>
 

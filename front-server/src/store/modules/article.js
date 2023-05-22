@@ -5,13 +5,14 @@ const API_URL = "http://127.0.0.1:8000";
 
 const article = {
   state: {
-    articles: [],
+    articles: null,
     article: null,
   },
   mutations: {
     // 게시글
     GET_ARTICLES(state, newArticle) {
       state.articles = newArticle;
+      console.log(state.articles)
     },
     GET_ARTICLE_DETAIL(state, articleDetail) {
       state.article = articleDetail;

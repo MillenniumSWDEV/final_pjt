@@ -1,12 +1,10 @@
 <template>
   <div id="BoardList">
     <h3>BoardList</h3>
+    <div>
+    <b-table striped hover :items="items"></b-table>
+  </div>
     <div v-if="articles.length !== 0">
-      <BoardListItem
-        v-for="article in articles"
-        :key="article.id"
-        :article="article"
-      />
     </div>
     <div v-else>
       <h4>없어요</h4>
@@ -15,19 +13,35 @@
 </template>
 
 <script>
-import BoardListItem from "./BoardListItem.vue";
+// import BoardListItem from "./BoardListItem.vue";
 
 export default {
   name: "BoardList",
   components: {
-    BoardListItem,
+    
   },
   computed: {
     articles() {
-      return this.$store.state.articles;
+      return this.$store.state.article.articles;
     },
   },
-};
+  created() {
+    this.getArticles();
+  },
+  methods: {
+    getArticles() {
+      this.$store.dispatch("getArticles");
+    },
+    fullName(value) {
+        return `${value.first} ${value.last}`
+      },
+  },
+  data() {
+      return {
+        items: this.$store.state.article.articles
+      }
+    },
+  }
 </script>
 
 <style>

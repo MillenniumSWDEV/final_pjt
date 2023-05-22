@@ -16,14 +16,7 @@ export default {
     BoardList,
   },
   computed: {},
-  created() {
-    this.getArticles();
-  },
-  methods: {
-    getArticles() {
-      this.$store.dispatch("getArticles");
-    },
-  },
+
 };
 </script>
 
