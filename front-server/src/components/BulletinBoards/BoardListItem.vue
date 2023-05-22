@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "ArticleListItem",
+  name: "BoardListItem",
   props: {
     article: Object,
   },

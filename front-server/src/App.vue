@@ -1,21 +1,20 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link :to="{ name: 'ArticleView' }">Articles</router-link> |
-      <router-link :to="{ name: 'ProductsView' }">ProductsView</router-link> |
-      <router-link :to="{ name: 'MapView' }">근처 은행</router-link> |
-      <router-link :to="{ name: 'ExchangeRateView' }">환율</router-link> |
-      <router-link :to="{ name: 'LogInView' }">LogInPage</router-link> |
-      <router-link :to="{ name: 'SignUpView' }">SignUpPage</router-link> |
-      <router-link :to="{ name: 'TournamentView' }">BATTLE</router-link> |
-      <router-link :to="{ name: 'GBTIView' }">TEST</router-link> |
-      <router-link :to="{ name: 'MyPageView' }">MyPage</router-link> |
-    </nav>
-    <router-view />
+    <MainPageView />
   </div>
 </template>
 
-<style>
+<script>
+import MainPageView from "./views/MainPageView.vue";
+
+export default {
+  components: {
+    MainPageView,
+  },
+};
+</script>
+
+<!-- <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,4 +35,4 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
-</style>
+</style> -->

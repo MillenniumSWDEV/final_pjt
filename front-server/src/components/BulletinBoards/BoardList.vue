@@ -1,8 +1,8 @@
 <template>
-  <div class="article-list">
-    <h3>Article List</h3>
+  <div id="BoardList">
+    <h3>BoardList</h3>
     <div v-if="articles.length !== 0">
-      <ArticleListItem
+      <BoardListItem
         v-for="article in articles"
         :key="article.id"
         :article="article"
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import ArticleListItem from "./ArticleListItem.vue";
+import BoardListItem from "./BoardListItem.vue";
 
 export default {
-  name: "ArticleList",
+  name: "BoardList",
   components: {
-    ArticleListItem,
+    BoardListItem,
   },
   computed: {
     articles() {
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-.article-list {
+#BoardList {
   text-align: start;
 }
 </style>

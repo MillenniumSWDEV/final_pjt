@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h1>Article Page</h1>
+    <h1>Board Page</h1>
     <router-link :to="{ name: 'CreateView' }">[CREATE]</router-link>
-    <ArticleList />
+    <BoardList />
     <hr />
   </div>
 </template>
 
 <script>
-import ArticleList from "@/components/ArticleList.vue";
+import BoardList from "./BoardList.vue";
 
 export default {
-  name: "ArticleView",
+  name: "BulletinBoards",
   components: {
-    ArticleList,
+    BoardList,
   },
   computed: {},
   created() {

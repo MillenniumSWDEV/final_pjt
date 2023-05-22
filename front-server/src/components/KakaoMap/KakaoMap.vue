@@ -1,18 +1,37 @@
 <template>
-  <div>
-    <div class="search-box">
-      <div>
-        <input v-model="keyword" type="text" @keyup.enter="searchPlace" />
-        <button @click="searchPlace">검색</button>
-      </div>
-    </div>
-    <div id="map" ref="map" class="map"></div>
+  <div id="KakaoMap" class="container">
+    <b-card-group deck class="">
+      <b-card header="ExchangeRate" header-tag="header">
+        <template #header>
+          <h3 class="mb-0">카카오맵 검색</h3>
+        </template>
+        <div class="search-box">
+          <b-button-toolbar
+            class="pb-3"
+            aria-label="Toolbar with button groups and input groups"
+          >
+            <b-input-group size="md" type="text">
+              <b-form-input
+                v-model="keyword"
+                class="text-right"
+                type="text"
+                @keyup.enter="searchPlace"
+              ></b-form-input>
+            </b-input-group>
+            <b-button-group size="sm" class="mr-1 ml-3">
+              <b-button @click="searchPlace">검색</b-button>
+            </b-button-group>
+          </b-button-toolbar>
+        </div>
+        <div id="map" ref="map" class="map"></div>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 
 <script>
 export default {
-  name: "MapView",
+  name: "KakaoMap",
   data() {
     return {
       mapInstance: null,
