@@ -17,7 +17,7 @@ export default {
   name: "SavingProducts",
   computed: {
     savingProducts() {
-      return this.$store.state.savingProducts;
+      return this.$store.state.finlife.savingProducts;
     },
   },
 };

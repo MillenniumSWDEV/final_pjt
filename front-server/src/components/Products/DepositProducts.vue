@@ -17,7 +17,7 @@ export default {
   name: "DepositPoducts",
   computed: {
     depositProducts() {
-      return this.$store.state.depositProducts;
+      return this.$store.state.finlife.depositProducts;
     },
   },
 };

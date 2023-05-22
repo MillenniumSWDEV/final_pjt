@@ -5,9 +5,6 @@
         <template #header>
           <h3 class="mb-0">환율</h3>
         </template>
-        <div v-for="er in exchangeRates" :key="er.curnm" class="pb-3">
-          {{ er.cur_nm }}({{ er.cur_unit }}) - {{ er.ttb }} / {{ er.tts }}
-        </div>
         <div class="pb-3">
           <b-form-select v-model="cur">
             <option>화폐를 선택하세요</option>
@@ -34,13 +31,16 @@
         <b-button-toolbar
           aria-label="Toolbar with button groups and input groups"
         >
-          <b-input-group size="sm" prepend="$" type="number">
+          <b-input-group size="sm" prepend="￦" type="number">
             <b-form-input v-model="WN" class="text-right"></b-form-input>
           </b-input-group>
           <b-button-group size="sm" class="mr-1 ml-3">
             <b-button @click="WtoC">변환</b-button>
           </b-button-group>
         </b-button-toolbar>
+        <b-card-text class="pt-3"
+          >(소숫점 둘째 자리까지 변환됩니다)</b-card-text
+        >
         <br />
       </b-card>
     </b-card-group>
@@ -59,10 +59,7 @@ export default {
   },
   computed: {
     exchangeRates() {
-      return this.$store.state.exchangeRates;
-    },
-    selectedCur() {
-      return this.cur;
+      return this.$store.state.finlife.exchangeRates;
     },
   },
   created() {
@@ -74,14 +71,14 @@ export default {
     },
     CtoW() {
       if (typeof this.cur === "object") {
-        this.WN = this.curN * this.cur[2];
+        this.WN = (this.curN * this.cur[2].replace(",", "")).toFixed(2);
       } else {
         alert("화폐 단위를 선택해주세요");
       }
     },
     WtoC() {
       if (typeof this.cur === "object") {
-        this.curN = this.WN / this.cur[1];
+        this.curN = (this.WN / this.cur[1].replace(",", "")).toFixed(2);
       } else {
         alert("화폐 단위를 선택해주세요");
       }

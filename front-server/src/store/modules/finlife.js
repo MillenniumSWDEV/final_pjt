@@ -1,3 +1,8 @@
+import axios from "axios";
+import router from "../../router";
+
+const API_URL = "http://127.0.0.1:8000";
+
 const finlife = {
   state: {
     depositProducts: null,
@@ -20,7 +25,6 @@ const finlife = {
       state.exchangeRates = ERdata;
       console.log(ERdata);
     },
-
   },
   actions: {
     // 예금 정보 axios
@@ -63,6 +67,7 @@ const finlife = {
         console.log("화뉼화뉼");
       }
     },
+  },
+};
 
-  }
-}
+export default finlife;
