@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import DepositProducts from "../components/DepositProducts.vue";
-import SavingProducts from "../components/SavingProducts.vue";
+import DepositProducts from "./DepositProducts.vue";
+import SavingProducts from "./SavingProducts.vue";
 
 export default {
   name: "ProductsView",
