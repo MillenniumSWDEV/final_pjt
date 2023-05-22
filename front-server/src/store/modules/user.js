@@ -1,3 +1,6 @@
+import axios from "axios";
+import router from "../../router";
+
 const user = {
   state: {
     userData: null,
@@ -134,6 +137,7 @@ const user = {
           console.log(err);
         });
     },
+  },
+};
 
-  }
-}
+export default user;
