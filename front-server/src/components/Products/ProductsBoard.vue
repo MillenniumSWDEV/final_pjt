@@ -1,20 +1,17 @@
 <template>
   <div>
-    <h1>Products</h1>
+    <div class="container-lg">
+      <DepositProducts />
+    </div>
     <div class="container">
-      <div class="box">
-        <DepositProducts />
-      </div>
-      <div class="box">
-        <SavingProducts />
-      </div>
+      <SavingProducts />
     </div>
   </div>
 </template>
 
 <script>
-import DepositProducts from "../components/DepositProducts.vue";
-import SavingProducts from "../components/SavingProducts.vue";
+import DepositProducts from "./DepositProducts.vue";
+import SavingProducts from "./SavingProducts.vue";
 
 export default {
   name: "ProductsView",
@@ -45,7 +42,6 @@ export default {
 .box {
   width: 50%;
   height: 100%;
-  background-color: #f2aeb1;
   border: 1px solid white;
 }
 </style>

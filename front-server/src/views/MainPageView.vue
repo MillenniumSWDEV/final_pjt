@@ -15,21 +15,18 @@
       <b-nav-item>고객센터</b-nav-item>
     </b-nav>
     <BulletinBoards />
-    <ExchangeRate />
-    <KakaoMap />
+    <ProductsBoard />
   </div>
 </template>
 
 <script>
 import BulletinBoards from "../components/BulletinBoards/BulletinBoards.vue";
-import ExchangeRate from "../components/ExchangeRate/ExchangeRate.vue";
-import KakaoMap from "../components/KakaoMap/KakaoMap.vue";
+import ProductsBoard from "@/components/Products/ProductsBoard.vue";
 
 export default {
   components: {
     BulletinBoards,
-    ExchangeRate,
-    KakaoMap,
+    ProductsBoard,
   },
 };
 </script>
