@@ -45,7 +45,10 @@ export default new Vuex.Store({
     //   },
     // },
   },
-  getters: {},
+  getters: {    
+    isLogin(state){
+      return state.token ? true : false
+  }},
   mutations: {
     // 게시글
     GET_ARTICLES(state, newArticle) {
@@ -86,12 +89,34 @@ export default new Vuex.Store({
         url: `${API_URL}/api/v1/articles/`,
       })
         .then((res) => {
+          console.log(res.data)
           context.commit("GET_ARTICLES", res.data);
         })
         .catch((err) => {
           console.log(err);
           // 404 싫어요
           context.commit("GET_ARTICLES", []);
+        });
+    },
+    // 게시글 작성
+    createArticle(context, payload){
+      const title = payload.title
+      const content = payload.content
+
+      axios({
+        method: "post",
+        url: `${API_URL}/api/v1/articles/`,
+        data: { title, content },
+        headers : {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then((res) => {
+          console.log(res.data);
+          router.push({ name: "ArticleView" });
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     // 예금 정보 axios

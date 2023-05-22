@@ -49,6 +49,19 @@ export default {
       age: null,
     };
   },
+  computed:{
+    isLogin(){
+      return this.$store.getters.isLogin //로그인 여부
+    }
+  },
+  created() {
+    if (this.isLogin){
+      alert("로그아웃해주세요");
+      this.$router.push({name: 'ArticleView'}) // 로그인 페이지로 이동..
+
+    } else {
+    }
+  },
   methods: {
     signUp() {
       const username = this.username;

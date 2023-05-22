@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
@@ -26,34 +25,37 @@ export default {
       content: null,
     };
   },
+  computed:{
+    isLogin(){
+      return this.$store.getters.isLogin //로그인 여부
+    }
+  },
   methods: {
     createArticle() {
-      const title = this.title;
-      const content = this.content;
-
-      if (!title) {
-        alert("제목 입력해주세요");
-        return;
-      } else if (!content) {
-        alert("내용 입력해주세요");
-        return;
+      if(this.isLogin){
+        const title = this.title;
+        const content = this.content;
+  
+        if (!title) {
+          alert("제목 입력해주세요");
+          return;
+        } else if (!content) {
+          alert("내용 입력해주세요");
+          return;
+        }
+  
+        const payload ={
+          title, content
+        }
+  
+        this.$store.dispatch('createArticle', payload)
+      }else{
+        alert('로그인이 필요한 페이지입니다.')
+        this.$router.push({name: 'LogInView'}) // 로그인 페이지로 이동..
       }
-
-      axios({
-        method: "post",
-        url: `${API_URL}/api/v1/articles/`,
-        data: { title, content },
-      })
-        .then((res) => {
-          console.log(res);
-          this.$router.push({ name: "ArticleView" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
-};
+}
 </script>
 
 <style></style>
