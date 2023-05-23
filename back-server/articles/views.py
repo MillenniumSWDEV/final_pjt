@@ -48,25 +48,53 @@ class ArticleListView(APIView):
 #             serializer.save(user=request.user)
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+class ArticleDetailView(APIView):
+    permission_classes = [AllowAny]
 
-@api_view(['GET', 'DELETE', 'PUT'])
-def article_detail(request, article_pk):
-    # article = Article.objects.get(pk=article_pk)
-    article = get_object_or_404(Article, pk=article_pk)
-
-    if request.method == 'GET':
+    def get(self, request, article_pk):
+        article = get_object_or_404(Article, pk=article_pk)
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     
-    elif request.method == 'DELETE':
+    def delete(self, request, article_pk):   
+        self.permission_classes = [IsAuthenticated]
+        self.check_permissions(request)
+        article = get_object_or_404(Article, pk=article_pk)
+        if article.user != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    elif request.method == 'PUT':
+    def put(self, request, article_pk):
+        self.permission_classes = [IsAuthenticated]
+        self.check_permissions(request)
+        article = get_object_or_404(Article, pk=article_pk)
+        if article.user != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
         serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+        
+
+# @api_view(['GET', 'DELETE', 'PUT'])
+# def article_detail(request, article_pk):
+#     # article = Article.objects.get(pk=article_pk)
+#     article = get_object_or_404(Article, pk=article_pk)
+
+#     if request.method == 'GET':
+#         serializer = ArticleSerializer(article)
+#         return Response(serializer.data)
+    
+#     elif request.method == 'DELETE':
+#         article.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+#     elif request.method == 'PUT':
+#         serializer = ArticleSerializer(article, data=request.data)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save()
+#             return Response(serializer.data)
 
 
 @api_view(['GET'])
