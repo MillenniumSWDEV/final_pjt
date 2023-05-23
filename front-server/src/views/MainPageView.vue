@@ -20,6 +20,7 @@
     <ProductsBoard />
     <DetailProducts />
     <ProductsBoard />
+    <DetailBoard/>
   </div>
 </template>
 
@@ -29,6 +30,7 @@ import ExchangeRate from "../components/ExchangeRate/ExchangeRate.vue";
 import KakaoMap from "../components/KakaoMap/KakaoMap.vue";
 import ProductsBoard from "../components/Products/ProductsBoard.vue";
 import DetailProducts from "../components/Products/DetailProducts.vue";
+import DetailBoard from "@/components/BulletinBoards/DetailBoard.vue";
 
 export default {
   components: {
@@ -38,6 +40,7 @@ export default {
     ProductsBoard,
     DetailProducts,
     ProductsBoard,
+    DetailBoard
   },
 };
 </script>
