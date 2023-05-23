@@ -15,9 +15,15 @@
           <b-col>
             <!-- 예금 옵션 조건문 -->
             <div v-if="pd.depositoptions_set">
-              <div v-for="option in pd.depositoptions_set" :key="option.id">
-                <button @click="selectTrm(option.id)">{{ option.save_trm }}</button>
-                <ul v-if="selected === option.id">
+              <div class="mt-3">
+                <b-button-group size="sm">
+                  <b-button variant="primary" v-for="(option, idx) in pd.depositoptions_set" :key="idx" @click="selectTrm(idx)" :pressed="selected === idx">
+                    {{ option.save_trm }}개월
+                  </b-button>
+                </b-button-group>
+              </div>
+              <div v-for="(option, idx) in pd.depositoptions_set" :key="idx">
+                <ul v-if="selected === idx">
                   <li>저축 기간: {{ option.save_trm }}개월</li>
                   <li>저축 금리 유형: {{ option.intr_rate_type_nm }}</li>
                   <li>저축 금리: {{ option.intr_rate }}</li>
@@ -49,21 +55,15 @@
 
         </b-row>
 
-        <b-card-text>A second paragraph of text in the card.</b-card-text>
-
-        <a href="#" class="card-link">Card link</a>
-        <b-link href="#" class="card-link">Another link</b-link>
+        <b-card-text>기타 유의 사항 {{ pd.etc_note }}
+        </b-card-text>
+        <p>
+          마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명
+        </p>
+        <b-link href="#" class="card-link">카트에 담기</b-link>
       </b-card>
     </div>
-    <!-- 공통 옵션 -->
-    <h3></h3>
 
-    
-    
-
-    <p>기타 유의 사항 {{ pd.etc_note }}</p>
-    <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p>
-    <hr />
   </div>
 </template>
 

@@ -19,6 +19,7 @@
     <KakaoMap />
     <ProductsBoard />
     <DetailProducts />
+    <ProductsBoard />
   </div>
 </template>
 
@@ -36,6 +37,7 @@ export default {
     KakaoMap,
     ProductsBoard,
     DetailProducts,
+    ProductsBoard,
   },
 };
 </script>

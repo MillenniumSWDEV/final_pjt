@@ -1,13 +1,10 @@
 <template>
   <div>
-    <h1>Products</h1>
+    <div class="container-lg">
+      <DepositProducts />
+    </div>
     <div class="container">
-      <div class="box">
-        <DepositProducts />
-      </div>
-      <div class="box">
-        <SavingProducts />
-      </div>
+      <SavingProducts />
     </div>
   </div>
 </template>
@@ -45,7 +42,6 @@ export default {
 .box {
   width: 50%;
   height: 100%;
-  background-color: #f2aeb1;
   border: 1px solid white;
 }
 </style>
