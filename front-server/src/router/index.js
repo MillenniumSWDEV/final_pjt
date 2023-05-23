@@ -4,7 +4,8 @@ import MainPageView from "@/views/MainPageView";
 import BulletinBoardView from "@/views/BulletinBoardView";
 import OnlineProductView from "@/views/OnlineProductView";
 import TestView from "@/views/TestView";
-import AccountsView from "@/views/AccountsView";
+import LoginView from "@/views/LoginView";
+import SignupView from "@/views/SignupView";
 
 Vue.use(VueRouter);
 
@@ -30,9 +31,14 @@ const routes = [
     component: TestView,
   },
   {  
-    path: "/online-product",
-    name: "AccountsView",
-    component: AccountsView,
+    path: "/Login",
+    name: "LoginView",
+    component: LoginView,
+  },
+  {  
+    path: "/Signup",
+    name: "SignupView",
+    component: SignupView,
   },
 ];
 
