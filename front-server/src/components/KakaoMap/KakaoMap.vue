@@ -1,7 +1,11 @@
 <template>
-  <div id="KakaoMap" class="container">
-    <b-card-group deck class="">
-      <b-card header="ExchangeRate" header-tag="header">
+  <div id="KakaoMap" class="container" style="width: 400px">
+    <b-card-group deck>
+      <b-card
+        header="ExchangeRate"
+        header-tag="header"
+        style="border-radius: 10px; box-shadow: 2px 2px 20px 3px #f6f1f1"
+      >
         <template #header>
           <h3 class="mb-0">카카오맵 검색</h3>
         </template>
@@ -113,6 +117,6 @@ export default {
 <style scoped>
 .map {
   width: 100%;
-  height: 700px;
+  height: 350px;
 }
 </style>
