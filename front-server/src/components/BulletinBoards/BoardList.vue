@@ -9,7 +9,12 @@
     </b-input-group>
     <br />
     <div style="background-color: #fff">
-      <b-table striped hover :items="articles"></b-table>
+      <b-table
+        striped
+        hover
+        :items="articles"
+        @row-clicked="handleRowClicked"
+      ></b-table>
     </div>
     <div v-if="articles.length !== 0"></div>
     <div v-else>
@@ -67,6 +72,13 @@ export default {
     },
     searchInput() {
       this.articles;
+    },
+    handleRowClicked(item) {
+      // item 클릭 시, 다른 화면으로 이동하도록 처리
+      this.$router.push({
+        name: "DetailView",
+        params: { articleId: "111" },
+      });
     },
   },
 };

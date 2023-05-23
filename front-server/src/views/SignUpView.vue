@@ -1,17 +1,15 @@
 <template>
   <div>
-      <Signup />
+    <Signup />
   </div>
 </template>
 
 <script>
-import Signup from '@/components/Accounts/Signup.vue';
+import Signup from "@/components/Accounts/Signup.vue";
 
 export default {
-  components: { Signup }
-}
+  components: { Signup },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

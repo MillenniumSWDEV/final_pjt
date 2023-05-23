@@ -6,6 +6,7 @@ import OnlineProductView from "@/views/OnlineProductView";
 import TestView from "@/views/TestView";
 import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
+import DetailView from "@/views/DetailView";
 
 Vue.use(VueRouter);
 
@@ -30,15 +31,20 @@ const routes = [
     name: "TestView",
     component: TestView,
   },
-  {  
+  {
     path: "/Login",
     name: "LoginView",
     component: LoginView,
   },
-  {  
+  {
     path: "/Signup",
     name: "SignupView",
     component: SignupView,
+  },
+  {
+    path: "/detail",
+    name: "DetailView",
+    component: DetailView,
   },
 ];
 
