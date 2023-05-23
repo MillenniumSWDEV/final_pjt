@@ -1,10 +1,10 @@
 <template>
-  <div class="MainPageView d-flex container">
+  <div class="MainPageView d-flex justify-content-evenly container">
     <div class="mt-3">
-      <ExchangeRate style="opacity: 95%; margin-bottom: 20px" />
-      <KakaoMap />
+      <ExchangeRate style="opacity: 95%; margin-bottom: 20px;" />
+      <KakaoMap style="opacity: 95%;"/>
     </div>
-    <div class="mt-3">
+    <div class="mt-3 flex-fill" style="overflow:hidden">
       <ImageSlider />
     </div>
   </div>
