@@ -1,13 +1,13 @@
 <template>
-  <div id="NavBar" class="container">
+  <div id="NavBar" class="container pt-2">
     <b-nav class="d-flex align-items-center w-100 justify-content-between">
       <div>
         <b-navbar-brand @click="goMainPage()">
           <img
-            src="@/assets/logo.jpg"
+            src="@/assets/logo.png"
             alt="금융페이지"
             class="d-inline-block align-top"
-            width="150px"
+            width="200px"
           />
         </b-navbar-brand>
       </div>

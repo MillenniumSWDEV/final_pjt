@@ -1,7 +1,11 @@
 <template>
   <div id="ExchangeRate" class="container" style="width: 400px">
     <b-card-group deck>
-      <b-card header="ExchangeRate" header-tag="header">
+      <b-card
+        header="ExchangeRate"
+        header-tag="header"
+        style="border-radius: 10px; box-shadow: 2px 2px 20px 3px #f6f1f1"
+      >
         <template #header>
           <h3 class="mb-0">환율</h3>
         </template>
