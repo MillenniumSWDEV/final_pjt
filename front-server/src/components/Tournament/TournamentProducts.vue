@@ -20,13 +20,19 @@
     <b-button variant="danger" @click="next"
       >{{ roundCnt }}강 시작하기</b-button
     >
+    <p v-if="!complete">{{ next_round.length }} / {{ roundCnt / 2 }}</p>
     <div align="center" justify="center" style="display: flex">
       <div cols="6" align="center" style="width: 370px">
-        <TournamentChoice id="left" :prdt="left" @choiceEvent="leftChoice" />
+        <TournamentChoice id="left" :prdt="left" @choice-event="leftChoice" />
       </div>
       <div cols="6" align="center" style="width: 370px">
-        <TournamentChoice id="right" :prdt="right" @choiceEvent="rightChoice" />
+        <TournamentChoice
+          id="right"
+          :prdt="right"
+          @choice-event="rightChoice"
+        />
       </div>
+      <br />
     </div>
 
     <div v-if="complete">
@@ -34,7 +40,7 @@
       <hr />
       <v-row align="center" justify="center">
         <v-col cols="6">
-          <p>{{ winner }}</p>
+          <p>{{ winner.fin_prdt_nm }}</p>
         </v-col>
       </v-row>
     </div>
@@ -88,6 +94,7 @@ export default {
       this.selected = v;
       this.next_round = [];
       this.roundCnt = 32;
+      this.complete = false;
       if (v === "예금") {
         this.products = [...this.$store.state.finlife.depositProducts]
           .sort(() => Math.random() - 0.5)
@@ -106,20 +113,31 @@ export default {
       this.next_round.push(this.left);
       this.left = null;
       this.right = null;
-      this.next();
+      this.next(true);
     },
 
     rightChoice() {
       this.next_round.push(this.right);
       this.left = null;
       this.right = null;
-      this.next();
+      this.next(true);
     },
 
-    next() {
-      this.left = this.products.pop();
-      this.right = this.products.pop();
-      console.log(this.next_round);
+    next(n) {
+      if (!this.selected) {
+        alert("선택해 당장");
+      } else {
+        if (
+          this.products.length === 0 ||
+          this.products.length === 32 ||
+          n === true
+        ) {
+          this.left = this.products.pop();
+          this.right = this.products.pop();
+        }
+        console.log(this.next_round);
+        console.log(this.products);
+      }
     },
   },
 };
