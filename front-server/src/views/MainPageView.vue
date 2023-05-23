@@ -16,18 +16,23 @@
     </b-nav>
     <BulletinBoards />
     <ProductsBoard />
+    <DetailBoard/>
   </div>
 </template>
 
 <script>
 import BulletinBoards from "../components/BulletinBoards/BulletinBoards.vue";
 import ProductsBoard from "../components/Products/ProductsBoard.vue";
+import DetailProducts from "../components/Products/DetailProducts.vue";
+import DetailBoard from "@/components/BulletinBoards/DetailBoard.vue";
+
 
 export default {
   name: "MainPageView",
   components: {
     BulletinBoards,
     ProductsBoard,
+    DetailBoard
   },
 };
 </script>
