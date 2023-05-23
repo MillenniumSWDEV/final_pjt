@@ -4,6 +4,7 @@ import MainPageView from "@/views/MainPageView";
 import BulletinBoardView from "@/views/BulletinBoardView";
 import OnlineProductView from "@/views/OnlineProductView";
 import TestView from "@/views/TestView";
+import AccountsView from "@/views/AccountsView";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/finance-psychological-test",
     name: "TestView",
     component: TestView,
+  },
+  {  
+    path: "/online-product",
+    name: "AccountsView",
+    component: AccountsView,
   },
 ];
 
