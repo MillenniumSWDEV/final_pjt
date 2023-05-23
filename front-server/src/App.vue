@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <MainPageView />
+    <TestView />
   </div>
 </template>
 
 <script>
 import MainPageView from "./views/MainPageView.vue";
+import TestView from "./views/TestView.vue";
 
 export default {
   components: {
     MainPageView,
+    TestView,
   },
 };
 </script>
