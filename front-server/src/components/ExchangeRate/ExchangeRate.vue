@@ -1,6 +1,6 @@
 <template>
-  <div id="ExchangeRate" class="container" style="width: 400px">
-    <b-card-group deck>
+  <div id="ExchangeRate" class="container" style="width: 550px; ">
+    <b-card-group deck style="width: 400px;">
       <b-card
         header="ExchangeRate"
         header-tag="header"

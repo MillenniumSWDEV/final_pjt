@@ -1,6 +1,6 @@
 <template>
-  <div id="KakaoMap" class="container" style="width: 400px">
-    <b-card-group deck>
+  <div id="KakaoMap" class="container" style="width: 550px;">
+    <b-card-group deck style="width: 450px;">
       <b-card
         header="ExchangeRate"
         header-tag="header"
@@ -14,7 +14,7 @@
             class="pb-3"
             aria-label="Toolbar with button groups and input groups"
           >
-            <b-input-group size="md" type="text">
+            <b-input-group size="lg" type="text">
               <b-form-input
                 v-model="keyword"
                 class="text-right"
@@ -22,7 +22,7 @@
                 @keyup.enter="searchPlace"
               ></b-form-input>
             </b-input-group>
-            <b-button-group size="sm" class="mr-1 ml-3">
+            <b-button-group size="md" class="mr-1 ml-3">
               <b-button @click="searchPlace">검색</b-button>
             </b-button-group>
           </b-button-toolbar>
