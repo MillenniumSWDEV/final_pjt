@@ -22,7 +22,13 @@
           >금융 심리 테스트</b-nav-text
         >
         <b-nav-text class="p-3">마이페이지</b-nav-text>
-        <b-button variant="primary" class="m-3">로그인</b-button>
+        <template v-if="isLogin">
+            <b-button variant="primary" class="m-3" @click="goMyPage">마이페이지</b-button>
+            <b-button variant="danger" class="m-3" @click="logout">로그아웃</b-button>
+          </template>
+          <template v-else>
+            <b-button variant="primary" class="m-3" @click="goAccountsView">로그인</b-button>
+          </template>
       </div>
     </b-nav>
   </div>
@@ -31,6 +37,11 @@
 <script>
 export default {
   name: "NavBar",
+  computed:{
+    isLogin(){
+      return this.$store.state.user.isLogin
+    }
+  },
   methods: {
     goMainPage() {
       this.$router.push({
@@ -52,8 +63,16 @@ export default {
         name: "TestView",
       });
     },
+    goAccountsView() {
+      this.$router.push({
+        name: 'AccountsView',
+      });
+    },
+    logout(){
+      this.$store.dispatch('logout')
+    }
   },
-};
+}
 </script>
 
 <style></style>

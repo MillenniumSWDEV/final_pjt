@@ -1,16 +1,20 @@
 import axios from "axios";
 import router from "../../router";
 
+const API_URL = "http://127.0.0.1:8000";
+
 const user = {
   state: {
     userData: null,
     token: null,
+    isLogin: false
   },
   mutations: {
     // 토큰 저장
     SAVE_TOKEN(state, token) {
       state.token = token;
-      router.push({ name: "ArticleView" });
+      state.isLogin = true;
+      router.push({ name: "MainPageView" });
     },
     USER_DETAIL(state, userData) {
       state.userData = userData;
@@ -18,6 +22,11 @@ const user = {
     DELETE_USER(state) {
       (state.userData = null), (state.token = null);
     },
+    RESET_TOKEN(state){
+      state.token = null,
+      state.isLogin = false
+      router.push({ name: "MainPageView" });
+    }
   },
   actions: {
     signUp(context, payload) {
@@ -67,6 +76,17 @@ const user = {
         })
         .catch((err) => console.log(err));
     },
+    logout(context){
+      console.log('로그아웃요청들어옴')
+      axios({
+        method: "POST",
+        url: `${API_URL}/accounts/logout/`,
+      })
+        .then((res) => {
+          context.commit("RESET_TOKEN");
+        })
+        .catch((err) => console.log(err));
+    },      
     userDetail(context) {
       axios({
         method: "get",
