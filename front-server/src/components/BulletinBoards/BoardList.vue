@@ -1,14 +1,28 @@
 <template>
-  <div id="BoardList">
-    <h3>BoardList</h3>
-    <div>
-    <b-table striped hover :items="items"></b-table>
-  </div>
-    <div v-if="articles.length !== 0">
+  <div id="BoardList" style="width: 100%" class="mt-3">
+    <h3 style="font-weight: 900">게시판</h3>
+    <b-input-group class="mt-3">
+      <b-form-input v-model="searchData"></b-form-input>
+      <b-input-group-append>
+        <b-button variant="info" @click="searchInput()">검색</b-button>
+      </b-input-group-append>
+    </b-input-group>
+    <br />
+    <div style="background-color: #fff">
+      <b-table striped hover :items="articles"></b-table>
     </div>
+    <div v-if="articles.length !== 0"></div>
     <div v-else>
       <h4>없어요</h4>
     </div>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="totalRows"
+      :per-page="perPage"
+      first-number
+      last-number
+      style="justify-content: center"
+    ></b-pagination>
   </div>
 </template>
 
@@ -17,12 +31,28 @@
 
 export default {
   name: "BoardList",
-  components: {
-    
+  components: {},
+  data() {
+    return {
+      searchData: "",
+      perPage: 10,
+      currentPage: 1,
+      items: "",
+    };
   },
   computed: {
+    totalRows() {
+      return this.items.length;
+    },
     articles() {
-      return this.$store.state.article.articles;
+      const items = this.$store.state.article.articles.filter((item) =>
+        item.title.includes(this.searchData)
+      );
+      console.log("나는 아이템이다", items);
+      return items.slice(
+        (this.currentPage - 1) * this.perPage,
+        this.currentPage * this.perPage
+      );
     },
   },
   created() {
@@ -30,18 +60,16 @@ export default {
   },
   methods: {
     getArticles() {
-      this.$store.dispatch("getArticles");
+      this.items = this.$store.dispatch("getArticles");
     },
     fullName(value) {
-        return `${value.first} ${value.last}`
-      },
-  },
-  data() {
-      return {
-        items: this.$store.state.article.articles
-      }
+      return `${value.first} ${value.last}`;
     },
-  }
+    searchInput() {
+      this.articles;
+    },
+  },
+};
 </script>
 
 <style>

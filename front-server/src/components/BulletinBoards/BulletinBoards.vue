@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1>Board Page</h1>
-    <router-link :to="{ name: 'CreateView' }">[CREATE]</router-link>
+  <div id="BulletinBoards" class="container">
     <BoardList />
     <hr />
   </div>
@@ -16,7 +14,6 @@ export default {
     BoardList,
   },
   computed: {},
-
 };
 </script>
 
