@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import MainPageView from "@/views/MainPageView";
 import BulletinBoardView from "@/views/BulletinBoardView";
 import OnlineProductView from "@/views/OnlineProductView";
+import TestView from "@/views/TestView";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/online-product",
     name: "OnlineProductView",
     component: OnlineProductView,
+  },
+  {
+    path: "/finance-psychological-test",
+    name: "TestView",
+    component: TestView,
   },
 ];
 
