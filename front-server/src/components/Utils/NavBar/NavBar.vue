@@ -27,7 +27,8 @@
             <b-button variant="danger" class="m-3" @click="logout">로그아웃</b-button>
           </template>
           <template v-else>
-            <b-button variant="primary" class="m-3" @click="goAccountsView">로그인</b-button>
+            <b-button variant="primary" class="m-3" @click="goLoginView">로그인</b-button>
+            <b-button variant="primary" class="m-3" @click="goSignupView">회원가입</b-button>
           </template>
       </div>
     </b-nav>
@@ -63,10 +64,15 @@ export default {
         name: "TestView",
       });
     },
-    goAccountsView() {
+    goLoginView() {
       this.$router.push({
-        name: 'AccountsView',
-      });
+          name: 'LoginView',
+      })
+    },
+    goSignupView(){
+      this.$router.push({
+          name: 'SignupView',
+      })
     },
     logout(){
       this.$store.dispatch('logout')
