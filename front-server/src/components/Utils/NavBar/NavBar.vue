@@ -18,7 +18,9 @@
         <b-nav-text class="p-3" @click="goOnlineProduct()"
           >온라인 상품</b-nav-text
         >
-        <b-nav-text class="p-3">금융 심리 테스트</b-nav-text>
+        <b-nav-text class="p-3" @click="goTournament()"
+          >금융 심리 테스트</b-nav-text
+        >
         <b-nav-text class="p-3">마이페이지</b-nav-text>
         <b-button variant="primary" class="m-3">로그인</b-button>
       </div>
@@ -43,6 +45,11 @@ export default {
     goOnlineProduct() {
       this.$router.push({
         name: "OnlineProductView",
+      });
+    },
+    goTournament() {
+      this.$router.push({
+        name: "TestView",
       });
     },
   },
