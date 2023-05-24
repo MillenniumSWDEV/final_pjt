@@ -189,15 +189,21 @@ def save_ex_rate(req):
 
 
 # 예금상품 장바구니에 추가
-@api_view(['POST'])
+@api_view(['POST', 'DELETE'])
 def deposit_product_cart(req, fin_prdt_cd):
     product = DepositProduct.objects.get(fin_prdt_cd=fin_prdt_cd)
-    product.carted_user.add(req.user)
-    product.save()
-    serializer = DepositProductSerializer(product)
+    if req.method == 'POST':
+        product.carted_user.add(req.user)
+        product.save()
+        serializer = DepositProductSerializer(product)
 
-    return Response(serializer.data)
+        return Response(serializer.data)
 
+    elif req.method == 'DELETE':
+        product.carted_user.remove(req.user)
+        product.save()
+        
+        return Response(status = status.HTTP_204_NO_CONTENT)
 
 # 예금 장바구니 리스트 불러오기
 @api_view(['GET'])
@@ -210,15 +216,23 @@ def deposit_cart(req):
 
     return Response(serializers.data)
 
-# 적금상품 장바구에 추가
-@api_view(['POST'])
+# 적금상품 장바구니에 추가
+@api_view(['POST', 'DELETE'])
 def saving_product_cart(req, fin_prdt_cd):
     product = SavingProduct.objects.get(fin_prdt_cd=fin_prdt_cd)
-    product.carted_user.add(req.user)
-    product.save()
-    serializer = SavingProductSerializer(product)
+    if req.method == 'POST':
+        product.carted_user.add(req.user)
+        product.save()
+        serializer = SavingProductSerializer(product)
 
-    return Response(serializer.data)
+        return Response(serializer.data)
+
+    elif req.method == 'DELETE':
+        product.carted_user.remove(req.user)
+        product.save()
+        
+        return Response(status = status.HTTP_204_NO_CONTENT)
+
 
 # 적금 장바구니 리스트 불러오기
 @api_view(['GET'])

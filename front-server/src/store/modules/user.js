@@ -28,7 +28,10 @@ const user = {
       (state.userData = null), (state.token = null);
     },
     RESET_TOKEN(state) {
-      (state.token = null), (state.isLogin = false);
+      (state.token = null),
+        (state.isLogin = false),
+        (this.state.finlife.depositCart = null),
+        (this.state.finlife.savingCart = null);
       router.push({ name: "MainPageView" });
     },
   },

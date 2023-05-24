@@ -29,7 +29,11 @@
               </h5>
               <b-card-text>{{ dp.spcl_cnd }}</b-card-text>
               <div>
-                <b-button variant="info">가입하기</b-button>
+                <b-button
+                  variant="info"
+                  @click="addToDepositCart(dp.fin_prdt_cd)"
+                  >가입하기</b-button
+                >
                 <b-button class="mx-3" @click="goDetailPage(dp)"
                   >상세보기</b-button
                 >
@@ -91,6 +95,10 @@ export default {
     },
     backToList() {
       this.goDetail = false;
+    },
+    addToDepositCart(fin_prdt_cd) {
+      console.log(fin_prdt_cd);
+      this.$store.dispatch("addToDepositCart", fin_prdt_cd);
     },
   },
 };
