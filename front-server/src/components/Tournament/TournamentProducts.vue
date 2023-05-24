@@ -126,7 +126,7 @@ export default {
         alert("선택해 당장");
       } else if (
         // 자기 마음대로 넘어가는 현상 및 다음 스테이지로 넘어가지 않는 현상 방지용 조건문
-        (this.next_round.length === 0 && this.products.length % 4 === 0) ||
+        (this.next_round.length === 0 && this.products.length % 2 === 0) ||
         this.products.length === 32 ||
         n === true
       ) {

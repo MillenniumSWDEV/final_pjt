@@ -1,19 +1,24 @@
 <template>
-  <div class="m-5">
-    <h1>금.사.빠 (금융과 사랑에 빠지다.)</h1>
-    <div class="fjs">
-      <b-button @click="selectTest('tournament')"
-        >금융 상품 이상형 월드컵</b-button
+  <div>
+    <b-nav class="container mt-3" tabs fill>
+      <b-nav-item
+        :active="selected"
+        style="font-weight: 900; font-size: 22px"
+        @click="selectTest(true)"
+        >금융 상품 월드컵</b-nav-item
       >
-      <b-button @click="selectTest('GBTI')">소비 성향 테스트</b-button>
+      <b-nav-item
+        :active="!selected"
+        style="font-weight: 900; font-size: 22px"
+        @click="selectTest(false)"
+        >소비 성향 테스트</b-nav-item
+      >
+    </b-nav>
+    <div v-if="selected" class="mt-3 container">
+      <TournamentProducts />
     </div>
-    <div>
-      <div v-if="selected === 'tournament'">
-        <TournamentProducts />
-      </div>
-      <div v-if="selected === 'GBTI'">
-        <GBTITest />
-      </div>
+    <div v-if="!selected" class="mt-3 container">
+      <GBTITest />
     </div>
   </div>
 </template>
@@ -30,7 +35,7 @@ export default {
   },
   data() {
     return {
-      selected: null,
+      selected: true,
     };
   },
   methods: {

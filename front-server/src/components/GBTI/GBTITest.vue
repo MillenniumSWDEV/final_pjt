@@ -27,7 +27,7 @@ export default {
         impulse: 0,
         enjoy: 0,
       },
-      res: false,
+      res: true,
     };
   },
   methods: {
@@ -46,6 +46,7 @@ export default {
       if (this.stage === 15) {
         this.res = true;
       }
+      console.log("imp:", this.score.impulse, "enj:", this.score.enjoy);
     },
   },
 };
