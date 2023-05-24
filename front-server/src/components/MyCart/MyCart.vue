@@ -1,30 +1,28 @@
 <template>
-  <div >
-    <h4>deposit Cart</h4>
+  <div>
+    <h4>[deposit Cart]</h4>
     <div v-for="(item, index) in depositCart" :key="index">
-        <p>{{ item.fin_prdt_cd }}</p>
-        <p>{{ item.kor_co_nm }}</p>
-        <p>{{ item.fin_prdt_nm }}</p>
-        <p>{{ item.etc_note }}</p>
-        <p>{{ item.join_deny }}</p>
-        <p>{{ item.join_member }}</p>
-        <p>{{ item.join_way }}</p>
-        <p>{{ item.spcl_cnd }}</p>
-        <p>{{ item.carted_user }}</p>
-        <hr>
+      <p>{{ item.kor_co_nm }} / {{ item.fin_prdt_nm }}</p>
+      <p>{{ item.etc_note }}</p>
+      <p>{{ item.join_member }}</p>
+      <p>{{ item.join_way }}</p>
+      <p>{{ item.spcl_cnd }}</p>
+      <button @click="deleteDPfromCart(item.fin_prdt_cd)">
+        장바구니에서빼기
+      </button>
+      <hr />
     </div>
-    <h4>saving Cart</h4>
+    <h4>[saving Cart]</h4>
     <div v-for="(item, index) in savingCart" :key="index">
-        <p>{{ item.fin_prdt_cd }}</p>
-        <p>{{ item.kor_co_nm }}</p>
-        <p>{{ item.fin_prdt_nm }}</p>
-        <p>{{ item.etc_note }}</p>
-        <p>{{ item.join_deny }}</p>
-        <p>{{ item.join_member }}</p>
-        <p>{{ item.join_way }}</p>
-        <p>{{ item.spcl_cnd }}</p>
-        <p>{{ item.carted_user }}</p>
-        <hr>
+      <p>{{ item.kor_co_nm }} / {{ item.fin_prdt_nm }}</p>
+      <p>{{ item.etc_note }}</p>
+      <p>{{ item.join_member }}</p>
+      <p>{{ item.join_way }}</p>
+      <p>{{ item.spcl_cnd }}</p>
+      <button @click="deleteSPfromCart(item.fin_prdt_cd)">
+        장바구니에서빼기
+      </button>
+      <hr />
     </div>
   </div>
 </template>
@@ -33,19 +31,27 @@
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
-    data(){
-        return {
-            depositCart : this.$store.state.finlife.depositCart,
-            savingCart : this.$store.state.finlife.savingCart,
-        }
+  computed: {
+    depositCart() {
+      return this.$store.state.finlife.depositCart;
     },
-    created(){
-        this.$store.dispatch('getDepositCart')
-        this.$store.dispatch('getSavingCart')
+    savingCart() {
+      return this.$store.state.finlife.savingCart;
     },
-}
+  },
+  created() {
+    this.$store.dispatch("getDepositCart");
+    this.$store.dispatch("getSavingCart");
+  },
+  methods: {
+    deleteDPfromCart(fin_prdt_cd) {
+      this.$store.dispatch("deleteDPfromCart", fin_prdt_cd);
+    },
+    deleteSPfromCart(fin_prdt_cd) {
+      this.$store.dispatch("deleteSPfromCart", fin_prdt_cd);
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
