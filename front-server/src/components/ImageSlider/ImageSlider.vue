@@ -58,7 +58,7 @@ export default {
     },
     goTournament() {
       this.$router.push({
-        name: "TestView",
+        name: "FinTestView",
       });
     },
   },
