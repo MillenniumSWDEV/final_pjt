@@ -7,7 +7,7 @@ const user = {
   state: {
     userData: null,
     token: null,
-    isLogin: null,
+    isLogin: false,
   },
   // getters: {
   //   isLogin(state){
@@ -27,11 +27,10 @@ const user = {
     DELETE_USER(state) {
       (state.userData = null), (state.token = null);
     },
-    RESET_TOKEN(state){
-      state.token = null,
-      state.isLogin = false
+    RESET_TOKEN(state) {
+      (state.token = null), (state.isLogin = false);
       router.push({ name: "MainPageView" });
-    }
+    },
   },
   actions: {
     signUp(context, payload) {
@@ -81,8 +80,8 @@ const user = {
         })
         .catch((err) => console.log(err));
     },
-    logout(context){
-      console.log('로그아웃요청들어옴')
+    logout(context) {
+      console.log("로그아웃요청들어옴");
       axios({
         method: "POST",
         url: `${API_URL}/accounts/logout/`,
@@ -91,13 +90,13 @@ const user = {
           context.commit("RESET_TOKEN");
         })
         .catch((err) => console.log(err));
-    },      
+    },
     userDetail(context) {
       axios({
         method: "get",
         url: `${API_URL}/accounts/user/`,
         headers: {
-          Authorization: `Token ${this.state.token}`,
+          Authorization: `Token ${this.state.user.token}`,
         },
       })
         .then((res) => {
@@ -123,7 +122,7 @@ const user = {
         method: "patch",
         url: `${API_URL}/accounts/user/`,
         headers: {
-          Authorization: `Token ${this.state.token}`,
+          Authorization: `Token ${this.state.user.token}`,
         },
         data: {
           nickname,
@@ -151,7 +150,7 @@ const user = {
         method: "delete",
         url: `${API_URL}/accounts/user/delete`,
         headers: {
-          Authorization: `Token ${this.state.token}`,
+          Authorization: `Token ${this.state.user.token}`,
         },
       })
         .then((res) => {
