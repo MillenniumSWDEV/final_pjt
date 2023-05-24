@@ -31,6 +31,12 @@
           @click="goTournament()"
           >금융 심리 테스트</b-nav-item
         >
+        <b-nav-item
+          class="p-3"
+          :class="{ activeMenu: cartActive }"
+          @click="goMyCart()"
+          >장바구니</b-nav-item
+        >
         <template v-if="isLogin">
           <b-button variant="primary" class="m-3" @click="goMyPage"
             >마이페이지</b-button
@@ -60,6 +66,7 @@ export default {
       boardActive: false,
       productActive: false,
       finTestActive: false,
+      cartActive: false,
     };
   },
   computed: {
@@ -72,6 +79,7 @@ export default {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = false;
+      this.cartActive = false;
       this.$router.push({
         name: "MainPageView",
       });
@@ -80,6 +88,7 @@ export default {
       this.boardActive = true;
       this.productActive = false;
       this.finTestActive = false;
+      this.cartActive = false;
       this.$router.push({
         name: "BulletinBoardView",
       });
@@ -88,6 +97,7 @@ export default {
       this.boardActive = false;
       this.productActive = true;
       this.finTestActive = false;
+      this.cartActive = false;
       this.$router.push({
         name: "OnlineProductView",
       });
@@ -96,14 +106,25 @@ export default {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = true;
+      this.cartActive = false;
       this.$router.push({
         name: "FinTestView",
+      });
+    },
+    goMyCart() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = false;
+      this.cartActive = true;
+      this.$router.push({
+        name: "MyCartView",
       });
     },
     goLoginView() {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = false;
+      this.cartActive = true;
       this.$router.push({
         name: "LoginView",
       });
@@ -112,6 +133,7 @@ export default {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = false;
+      this.cartActive = false;
       this.$router.push({
         name: "SignupView",
       });
