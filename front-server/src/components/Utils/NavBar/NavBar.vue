@@ -11,15 +11,25 @@
           />
         </b-navbar-brand>
       </div>
-      <div>
-        <b-nav-text class="p-3 ms-5" @click="goBulletinBoard()"
-          >게시판</b-nav-text
+      <div class="d-flex">
+        <b-nav-item
+          class="p-3 ms-5"
+          style="color: black"
+          :class="{ activeMenu: boardActive }"
+          @click="goBulletinBoard()"
+          >게시판</b-nav-item
         >
-        <b-nav-text class="p-3" @click="goOnlineProduct()"
-          >온라인 상품</b-nav-text
+        <b-nav-item
+          class="p-3"
+          :class="{ activeMenu: productActive }"
+          @click="goOnlineProduct()"
+          >온라인 상품</b-nav-item
         >
-        <b-nav-text class="p-3" @click="goTournament()"
-          >금융 심리 테스트</b-nav-text
+        <b-nav-item
+          class="p-3"
+          :class="{ activeMenu: finTestActive }"
+          @click="goTournament()"
+          >금융 심리 테스트</b-nav-item
         >
         <template v-if="isLogin">
           <b-button variant="primary" class="m-3" @click="goMyPage"
@@ -45,6 +55,13 @@
 <script>
 export default {
   name: "NavBar",
+  data() {
+    return {
+      boardActive: false,
+      productActive: false,
+      finTestActive: false,
+    };
+  },
   computed: {
     isLogin() {
       return this.$store.state.user.isLogin;
@@ -52,31 +69,49 @@ export default {
   },
   methods: {
     goMainPage() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = false;
       this.$router.push({
         name: "MainPageView",
       });
     },
     goBulletinBoard() {
+      this.boardActive = true;
+      this.productActive = false;
+      this.finTestActive = false;
       this.$router.push({
         name: "BulletinBoardView",
       });
     },
     goOnlineProduct() {
+      this.boardActive = false;
+      this.productActive = true;
+      this.finTestActive = false;
       this.$router.push({
         name: "OnlineProductView",
       });
     },
     goTournament() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = true;
       this.$router.push({
         name: "FinTestView",
       });
     },
     goLoginView() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = false;
       this.$router.push({
         name: "LoginView",
       });
     },
     goSignupView() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = false;
       this.$router.push({
         name: "SignupView",
       });
@@ -88,4 +123,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.activeMenu {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.activeMenu > a {
+  color: #0067ac;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 900;
+}
+</style>
