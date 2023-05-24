@@ -7,8 +7,13 @@ const user = {
   state: {
     userData: null,
     token: null,
-    isLogin: false
+    isLogin: null,
   },
+  // getters: {
+  //   isLogin(state){
+  //     return state.token ? true : false
+  //   }
+  // },
   mutations: {
     // 토큰 저장
     SAVE_TOKEN(state, token) {

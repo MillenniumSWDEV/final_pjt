@@ -1,13 +1,17 @@
 <template>
   <div id="BoardList" style="width: 100%" class="mt-3">
     <h3 style="font-weight: 900">게시판</h3>
+    
     <b-input-group class="mt-3">
       <b-form-input v-model="searchData"></b-form-input>
       <b-input-group-append>
         <b-button variant="info" @click="searchInput()">검색</b-button>
       </b-input-group-append>
     </b-input-group>
-    <br />
+    <br/>
+    <b-button class="mb-2" variant="outline-primary" @click="GoCreateView">글작성하기</b-button>
+
+    <br/>
     <div style="background-color: #fff">
       <b-table
         striped
@@ -42,12 +46,15 @@ export default {
       searchData: "",
       perPage: 10,
       currentPage: 1,
-      items: "",
+      items: [],
     };
   },
   computed: {
     totalRows() {
       return this.items.length;
+    },
+    isLogin(){
+      return this.$store.state.user.isLogin //로그인 여부
     },
     articles() {
       const items = this.$store.state.article.articles.filter((item) =>
@@ -79,6 +86,15 @@ export default {
         name: "DetailView",
         params: { articleId: item.id },
       });
+    },
+    GoCreateView(){
+      if(this.isLogin){
+        this.$router.push({
+          name: "CreateView",
+        })
+      } else {
+        alert('로그인이 필요한 페이지입니다.') 
+      }
     },
   },
 };
