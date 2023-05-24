@@ -1,7 +1,11 @@
 <template>
-  <div id="ExchangeRate" class="container" style="width: 400px">
-    <b-card-group deck>
-      <b-card header="ExchangeRate" header-tag="header">
+  <div id="ExchangeRate" class="container" style="width: 550px">
+    <b-card-group deck style="width: 400px">
+      <b-card
+        header="ExchangeRate"
+        header-tag="header"
+        style="border-radius: 10px; box-shadow: 2px 2px 20px 3px #f6f1f1"
+      >
         <template #header>
           <h3 class="mb-0">환율</h3>
         </template>
@@ -21,7 +25,7 @@
           class="pb-3"
           aria-label="Toolbar with button groups and input groups"
         >
-          <b-input-group size="sm" prepend="$" type="number">
+          <b-input-group size="md" prepend="$" type="number">
             <b-form-input v-model="curN" class="text-right"></b-form-input>
           </b-input-group>
           <b-button-group size="sm" class="mr-1 ml-3">
@@ -31,7 +35,7 @@
         <b-button-toolbar
           aria-label="Toolbar with button groups and input groups"
         >
-          <b-input-group size="sm" prepend="￦" type="number">
+          <b-input-group size="md" prepend="￦" type="number">
             <b-form-input v-model="WN" class="text-right"></b-form-input>
           </b-input-group>
           <b-button-group size="sm" class="mr-1 ml-3">

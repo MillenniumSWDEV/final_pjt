@@ -1,38 +1,45 @@
 <template>
   <div id="app">
-    <MainPageView />
+    <NavBar />
+    <div style="height: 880px; overflow: hidden">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import MainPageView from "./views/MainPageView.vue";
+import NavBar from "@/components/Utils/NavBar/NavBar.vue";
 
 export default {
   components: {
-    MainPageView,
+    NavBar,
   },
 };
 </script>
 
-<!-- <style>
+<style>
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  background-color: #e8f7fd;
   color: #2c3e50;
-}
+  width: 100%;
+  height: 100%;
 
-nav {
-  padding: 30px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  margin: 0 auto;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style> -->
+</style>

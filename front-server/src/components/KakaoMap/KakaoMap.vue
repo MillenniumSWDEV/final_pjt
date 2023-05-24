@@ -1,7 +1,11 @@
 <template>
-  <div id="KakaoMap" class="container">
-    <b-card-group deck class="">
-      <b-card header="ExchangeRate" header-tag="header">
+  <div id="KakaoMap" class="container" style="width: 550px;">
+    <b-card-group deck style="width: 450px;">
+      <b-card
+        header="ExchangeRate"
+        header-tag="header"
+        style="border-radius: 10px; box-shadow: 2px 2px 20px 3px #f6f1f1"
+      >
         <template #header>
           <h3 class="mb-0">카카오맵 검색</h3>
         </template>
@@ -10,7 +14,7 @@
             class="pb-3"
             aria-label="Toolbar with button groups and input groups"
           >
-            <b-input-group size="md" type="text">
+            <b-input-group size="lg" type="text">
               <b-form-input
                 v-model="keyword"
                 class="text-right"
@@ -18,7 +22,7 @@
                 @keyup.enter="searchPlace"
               ></b-form-input>
             </b-input-group>
-            <b-button-group size="sm" class="mr-1 ml-3">
+            <b-button-group size="md" class="mr-1 ml-3">
               <b-button @click="searchPlace">검색</b-button>
             </b-button-group>
           </b-button-toolbar>
@@ -113,6 +117,6 @@ export default {
 <style scoped>
 .map {
   width: 100%;
-  height: 700px;
+  height: 350px;
 }
 </style>

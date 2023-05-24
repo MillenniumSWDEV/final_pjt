@@ -1,0 +1,53 @@
+<template>
+  <div>
+    <b-nav class="container mt-3" tabs fill>
+      <b-nav-item
+        :active="selected"
+        style="font-weight: 900; font-size: 22px"
+        @click="selectTest(true)"
+        >금융 상품 월드컵</b-nav-item
+      >
+      <b-nav-item
+        :active="!selected"
+        style="font-weight: 900; font-size: 22px"
+        @click="selectTest(false)"
+        >소비 성향 테스트</b-nav-item
+      >
+    </b-nav>
+    <div v-if="selected" class="mt-3 container">
+      <TournamentProducts />
+    </div>
+    <div v-if="!selected" class="mt-3 container">
+      <GBTITest />
+    </div>
+  </div>
+</template>
+
+<script>
+import GBTITest from "../components/GBTI/GBTITest.vue";
+import TournamentProducts from "../components/Tournament/TournamentProducts.vue";
+
+export default {
+  name: "TestView",
+  components: {
+    TournamentProducts,
+    GBTITest,
+  },
+  data() {
+    return {
+      selected: true,
+    };
+  },
+  methods: {
+    selectTest(test) {
+      this.selected = test;
+    },
+  },
+};
+</script>
+<style>
+.fjs {
+  display: flex;
+  justify-content: space-around;
+}
+</style>

@@ -1,18 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainPageView from "@/views/MainPageView";
-// import ArticleView from "@/views/ArticleView";
-// import CreateView from "@/views/CreateView";
-// import DetailView from "@/views/DetailView";
-// import SignUpView from "@/views/SignUpView";
-// import LogInView from "@/views/LogInView";
-// import ProductsView from "@/views/ProductsView";
-// import MapView from "@/views/MapView";
-// import ExchangeRateView from "@/views/ExchangeRateView";
-// import GBTIView from "@/views/GBTIView";
-// import TournamentView from "@/views/TournamentView";
-// import ProductDetailView from "@/views/ProductDetailView";
-// import MyPageView from "@/views/MyPageView";
+import BulletinBoardView from "@/views/BulletinBoardView";
+import OnlineProductView from "@/views/OnlineProductView";
+import FinTestView from "@/views/FinTestView";
+import LoginView from "@/views/LoginView";
+import SignupView from "@/views/SignupView";
+import DetailView from "@/views/DetailView";
+import MyPageView from "@/views/MyPageView";
+import CreateView from "@/views/CreateView";
+import MyCartView from "@/views/MyCartView";
 
 Vue.use(VueRouter);
 
@@ -22,63 +19,55 @@ const routes = [
     name: "MainPageView",
     component: MainPageView,
   },
-  // {
-  //   path: "/create",
-  //   name: "CreateView",
-  //   component: CreateView,
-  // },
-  // {
-  //   path: "/signup",
-  //   name: "SignUpView",
-  //   component: SignUpView,
-  // },
+  {
+    path: "/board",
+    name: "BulletinBoardView",
+    component: BulletinBoardView,
+  },
+  {
+    path: "/online-product",
+    name: "OnlineProductView",
+    component: OnlineProductView,
+  },
+  {
+    path: "/finance-psychological-test",
+    name: "FinTestView",
+    component: FinTestView,
+  },
+  {
+    path: "/Login",
+    name: "LoginView",
+    component: LoginView,
+  },
+  {
+    path: "/Signup",
+    name: "SignupView",
+    component: SignupView,
+  },
+  {
+    path: "/detail/:articleId",
+    name: "DetailView",
+    component: DetailView,
+    props: true,
+  },
+  {
+    path: "my-page",
+    name: "MyPageView",
+    component: MyPageView,
+  },
+  {
+    path: "/create",
+    name: "CreateView",
+    component: CreateView,
+    props: true,
 
-  // {
-  //   path: "/login",
-  //   name: "LogInView",
-  //   component: LogInView,
-  // },
-
-  // {
-  //   path: "/article/:id",
-  //   name: "DetailView",
-  //   component: DetailView,
-  // },
-  // {
-  //   path: "/products",
-  //   name: "ProductsView",
-  //   component: ProductsView,
-  // },
-  // {
-  //   path: "/product/:id",
-  //   name: "ProductDetailView",
-  //   component: ProductDetailView,
-  // },
-  // {
-  //   path: "/map",
-  //   name: "MapView",
-  //   component: MapView,
-  // },
-  // {
-  //   path: "/ex-rate",
-  //   name: "ExchangeRateView",
-  //   component: ExchangeRateView,
-  // },
-  // {
-  //   path: "/tournament",
-  //   name: "TournamentView",
-  //   component: TournamentView,
-  // },
-  // {
-  //   path: "/GBTI",
-  //   name: "GBTIView",
-  //   component: GBTIView,
-  // },
-  // {
-  //   path: "/mypage",
-  //   name: "MyPageView",
-  //   component: MyPageView,
-  // },
+  },
+  {
+    path: "/MyCart",
+    name: "MyCartView",
+    component: MyCartView,
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
