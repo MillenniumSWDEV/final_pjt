@@ -77,7 +77,7 @@ export default {
       // item 클릭 시, 다른 화면으로 이동하도록 처리
       this.$router.push({
         name: "DetailView",
-        params: { articleId: "111" },
+        params: { articleId: item.id },
       });
     },
   },

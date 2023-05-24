@@ -7,18 +7,18 @@
       <p>내용 : {{ article?.content }}</p>
       <p>작성시간 : {{ article?.created_at }}</p>
       <p>수정시간 : {{ article?.updated_at }}</p>
-      <p>작성자 : {{ article?.user }}</p>
+      <p>작성자 : {{ article?.username }}</p>
       <button @click="showUpdateBoard = true">수정하러가기</button>
       <button @click="articleDelete">삭제하기</button>
       <hr />
       <div v-for="com in article?.comment_set" :key="com.id">
         <p>
-          내용 - {{ com.content }}
+          {{com.username}} - {{ com.content }}
           <input
             id="delete"
             type="submit"
             value="댓글삭제"
-            @click="deleteComment(com.id)"
+            @click="deleteComment(com)"
           />
         </p>
       </div>
@@ -28,9 +28,9 @@
           id="comment"
           v-model.trim="comment"
           type="text"
-          @keyup.enter="createComment"
+          @keyup.enter="submit"
         />
-        <input id="submit" type="submit" />
+        <input id="submit" type="submit"/>
       </form>
     </div>
     <UpdateBoard v-if="showUpdateBoard" @goBack="handleGoBack" />
@@ -52,45 +52,48 @@ export default {
   },
   data() {
     return {
-      article: null,
+      // article: this.$store.state.article.article,
       comment: null,
       showUpdateBoard: false,
+      // commentList: this.article.comment_set,
     };
   },
   computed: {
-    isLogin() {
-      return this.$store.getters.isLogin; //로그인 여부
+    article() {
+      return this.$store.state.article.article
     },
+    isLogin() {
+      return this.$store.state.user.isLogin; //로그인 여부
+    },
+    // comment_set(){
+    //   console.log(this.article.comment_set)
+    //   return this.article.comment_set
+    // }
   },
   created() {
-    console.log("dd", this.articleId);
     this.getArticleDetail();
+    console.log('xxxx',this.commentList)
+  },
+  watch:{
+    number: function(val,oldval){
+      console.log(`값이 ${oldval}에서 ${val}로 변함`)
+    }
   },
   methods: {
     handleGoBack(updatedArticle) {
       this.showUpdateBoard = false;
-      this.article = updatedArticle;
+      // this.article = updatedArticle;
     },
     getArticleDetail() {
-      axios({
-        method: "get",
-        //   url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`,
-        url: `${API_URL}/api/v1/articles/20/`, // 테스트용
-      })
-        .then((res) => {
-          console.log(res);
-          this.article = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$store.dispatch('getArticleDetail', this.$route.params.articleId)
     },
     articleDelete() {
       console.log("삭제요청");
+      console.log('로그인여부', this.isLogin)
       if (this.isLogin) {
         axios({
           method: "DELETE",
-          url: `${API_URL}/api/v1/articles/${this.$route.params.id}`,
+          url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}`,
           // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용
           headers: {
             Authorization: `Token ${this.$store.state.user.token}`,
@@ -110,22 +113,22 @@ export default {
       }
     },
     createComment() {
-      const content = this.comment;
-      axios({
-        method: "post",
-        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/comments/`,
-        data: { content },
-      })
-        .then(this.$router.go(0))
-        .catch((error) => console.log(error));
+      console.log('로그인여부', this.isLogin)
+      if (this.isLogin){
+        console.log(this.comment)
+        const content= this.comment
+        const articleId = this.$route.params.articleId
+        const payload = {
+          content,articleId
+        }
+        this.$store.dispatch('createComment', payload)
+      } else {
+        alert("로그인이필요합니다");
+      }
     },
-    deleteComment(commentId) {
-      axios({
-        method: "delete",
-        url: `${API_URL}/api/v1/comments/${commentId}/`,
-      })
-        .them(this.$router.go(0))
-        .catch((err) => console.log(err));
+    deleteComment(comment) {
+      console.log('삭제. 댓글', comment)
+      this.$store.dispatch('deleteComment', comment )
     },
   },
 };

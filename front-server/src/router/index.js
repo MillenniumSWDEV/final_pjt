@@ -42,9 +42,10 @@ const routes = [
     component: SignupView,
   },
   {
-    path: "/detail",
+    path: "/detail/:articleId",
     name: "DetailView",
     component: DetailView,
+    props: true,
   },
 ];
 
