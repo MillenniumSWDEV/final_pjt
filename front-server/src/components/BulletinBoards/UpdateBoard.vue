@@ -44,7 +44,7 @@ export default {
     getArticleDetail() {
       axios({
         method: "get",
-        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`,
+        url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}/`,
         // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용    
       })
         .then((res) => {
@@ -62,7 +62,7 @@ export default {
           const content = this.article.content
           axios({
               method: "PUT",
-              url: `${API_URL}/api/v1/articles/${this.$route.params.id}`,
+              url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}`,
               // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용   
               data: {
                 title, content

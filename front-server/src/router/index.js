@@ -6,6 +6,7 @@ import OnlineProductView from "@/views/OnlineProductView";
 import FinTestView from "@/views/FinTestView";
 import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
+import DetailView from "@/views/DetailView";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,12 @@ const routes = [
     path: "/Signup",
     name: "SignupView",
     component: SignupView,
+  },
+  {
+    path: "/detail/:articleId",
+    name: "DetailView",
+    component: DetailView,
+    props: true,
   },
 ];
 

@@ -29,25 +29,6 @@ class ArticleListView(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-# @api_view(['GET', 'POST'])
-# # @permission_classes([IsAuthenticated])
-# def article_list(request):
-#     permissions_classes = [IsAuthenticated]
-
-#     if request.method == 'GET':
-#         articles = Article.objects.all()
-#         # articles = get_list_or_404(Article)
-#         serializer = ArticleListSerializer(articles, many=True)
-#         return Response(serializer.data)
-
-#     elif request.method == 'POST':
-#         # print('ddd')
-#         serializer = ArticleSerializer(data=request.data)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save(user=request.user)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 class ArticleDetailView(APIView):
     permission_classes = [AllowAny]
 
@@ -61,7 +42,7 @@ class ArticleDetailView(APIView):
         self.check_permissions(request)
         article = get_object_or_404(Article, pk=article_pk)
         if article.user != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -70,32 +51,11 @@ class ArticleDetailView(APIView):
         self.check_permissions(request)
         article = get_object_or_404(Article, pk=article_pk)
         if article.user != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
-        
-
-# @api_view(['GET', 'DELETE', 'PUT'])
-# def article_detail(request, article_pk):
-#     # article = Article.objects.get(pk=article_pk)
-#     article = get_object_or_404(Article, pk=article_pk)
-
-#     if request.method == 'GET':
-#         serializer = ArticleSerializer(article)
-#         return Response(serializer.data)
-    
-#     elif request.method == 'DELETE':
-#         article.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-
-#     elif request.method == 'PUT':
-#         serializer = ArticleSerializer(article, data=request.data)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save()
-#             return Response(serializer.data)
-
 
 @api_view(['GET'])
 def comment_list(request):
@@ -105,29 +65,37 @@ def comment_list(request):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
+class CommentDetailView(APIView):
+    permission_classes = [AllowAny]
 
-@api_view(['GET', 'DELETE', 'PUT'])
-def comment_detail(request, comment_pk):
-    # comment = Comment.objects.get(pk=comment_pk)
-    comment = get_object_or_404(Comment, pk=comment_pk)
-
-    if request.method == 'GET':
+    def get(self, request, comment_pk):
+        comment = get_object_or_404(Comment, pk=comment_pk)
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
-
-    elif request.method == 'DELETE':
+    
+    def delete(self, request, comment_pk):   
+        self.permission_classes = [IsAuthenticated]
+        self.check_permissions(request)
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        if comment.user != request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    elif request.method == 'PUT':
+    def put(self, request, comment_pk):
+        self.permission_classes = [IsAuthenticated]
+        self.check_permissions(request)
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        article = get_object_or_404(Article, pk=comment.article.pk)
+        if comment.user != request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(article=article, user=request.user)
             return Response(serializer.data)
 
-
-
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def comment_create(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
     article = get_object_or_404(Article, pk=article_pk)
