@@ -69,8 +69,46 @@
         </b-row>
 
         <b-card-text>기타 유의 사항 {{ pd.etc_note }} </b-card-text>
-        <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p>
-        <b-link href="#" class="card-link">카트에 담기</b-link>
+        <!-- <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p> -->
+        <div v-if="pd.depositoptions_set">
+          <b-button
+            v-if="
+              !$store.state.finlife.depositCart.some((cartedProduct) =>
+                Object.values(cartedProduct).includes(pd.fin_prdt_cd)
+              )
+            "
+            variant="info"
+            @click="addOrDeleteDepositCart(pd.fin_prdt_cd)"
+          >
+            추가하기
+          </b-button>
+          <b-button
+            v-else
+            variant="danger"
+            @click="addOrDeleteDepositCart(pd.fin_prdt_cd)"
+            >삭제하기</b-button
+          >
+        </div>
+
+        <div v-else>
+          <b-button
+            v-if="
+              !$store.state.finlife.savingCart.some((cartedProduct) =>
+                Object.values(cartedProduct).includes(pd.fin_prdt_cd)
+              )
+            "
+            variant="info"
+            @click="addOrDeleteSavingCart(pd.fin_prdt_cd)"
+          >
+            추가하기
+          </b-button>
+          <b-button
+            v-else
+            variant="danger"
+            @click="addOrDeleteSavingCart(pd.fin_prdt_cd)"
+            >삭제하기</b-button
+          >
+        </div>
       </b-card>
     </div>
   </div>
@@ -92,9 +130,30 @@ export default {
       },
     };
   },
+  computed: {
+    isLogin() {
+      return this.$store.state.user.isLogin; //로그인 여부
+    },
+  },
   methods: {
     selectTrm(id) {
       this.selected = id;
+    },
+    addOrDeleteDepositCart(fin_prdt_cd) {
+      if (this.isLogin) {
+        console.log(fin_prdt_cd);
+        this.$store.dispatch("addOrDeleteDepositCart", fin_prdt_cd);
+      } else {
+        alert("로그인이 필요한 작업입니다.");
+      }
+    },
+    addOrDeleteSavingCart(fin_prdt_cd) {
+      if (this.isLogin) {
+        console.log(fin_prdt_cd);
+        this.$store.dispatch("addOrDeleteSavingCart", fin_prdt_cd);
+      } else {
+        alert("로그인이 필요한 작업입니다.");
+      }
     },
   },
 };
