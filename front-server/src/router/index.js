@@ -8,6 +8,7 @@ import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
 import DetailView from "@/views/DetailView";
 import MyPageView from "@/views/MyPageView";
+import CreateView from "@/views/CreateView";
 
 Vue.use(VueRouter);
 
@@ -52,6 +53,13 @@ const routes = [
     path: "my-page",
     name: "MyPageView",
     component: MyPageView,
+  },
+  {
+    path: "/create",
+    name: "CreateView",
+    component: CreateView,
+    props: true,
+
   },
 ];
 

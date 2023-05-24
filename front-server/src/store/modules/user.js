@@ -9,6 +9,11 @@ const user = {
     token: null,
     isLogin: false,
   },
+  // getters: {
+  //   isLogin(state){
+  //     return state.token ? true : false
+  //   }
+  // },
   mutations: {
     // 토큰 저장
     SAVE_TOKEN(state, token) {
