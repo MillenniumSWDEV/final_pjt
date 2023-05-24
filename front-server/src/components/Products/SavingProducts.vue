@@ -72,6 +72,9 @@ export default {
     };
   },
   computed: {
+    isLogin() {
+      return this.$store.state.user.isLogin; //로그인 여부
+    },
     savingProducts() {
       const items = this.$store.state.finlife.savingProducts;
 
@@ -93,9 +96,12 @@ export default {
       this.goDetail = false;
     },
     addToSavingCart(fin_prdt_cd) {
-      console.log("ddd");
-      console.log(fin_prdt_cd);
-      this.$store.dispatch("addToSavingCart", fin_prdt_cd);
+      if (this.isLogin) {
+        console.log(fin_prdt_cd);
+        this.$store.dispatch("addToSavingCart", fin_prdt_cd);
+      } else {
+        alert("로그인이 필요한 작업입니다.");
+      }
     },
   },
 };
