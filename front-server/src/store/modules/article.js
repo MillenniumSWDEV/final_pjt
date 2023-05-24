@@ -12,11 +12,11 @@ const article = {
     // 게시글
     GET_ARTICLES(state, newArticle) {
       state.articles = newArticle;
-      console.log(state.articles)
+      console.log(state.articles);
     },
     GET_ARTICLE_DETAIL(state, articleDetail) {
       state.article = articleDetail;
-      console.log('뮤테이션', state.article)
+      console.log("뮤테이션", state.article);
     },
   },
   actions: {
@@ -37,13 +37,13 @@ const article = {
     },
     // article의 id로 detail을 불러오는 함수
     getArticleDetail(context, articleId) {
-      console.log('action호출')
+      console.log("action호출");
       axios({
         method: "get",
         url: `${API_URL}/api/v1/articles/${articleId}/`,
       })
         .then((res) => {
-          console.log('응답받음')
+          console.log("응답받음");
           context.commit("GET_ARTICLE_DETAIL", res.data);
         })
         .catch((err) => {
@@ -51,25 +51,25 @@ const article = {
         });
     },
     // 게시글작성
-    createArticle(context, payload){
-      const title = payload.title
-      const content = payload.content
+    createArticle(context, payload) {
+      const title = payload.title;
+      const content = payload.content;
 
       axios({
-        method: 'post',
+        method: "post",
         url: `${API_URL}/api/v1/articles/`,
         data: { title, content },
-        headers : {
-          Authorization : `Token ${this.state.user.token}`
-        }        
+        headers: {
+          Authorization: `Token ${this.state.user.token}`,
+        },
       })
-      .then((res) => {
-        console.log(res.data)
-        context.commit('GET_ARTICLES')
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then((res) => {
+          console.log(res.data);
+          this.dispatch("getArticles");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     // 게시글 지우는 코드
     articleDelete(context, articleId) {
@@ -88,36 +88,36 @@ const article = {
     },
     // 댓글 달기
     createComment(context, payload) {
-      const articleId = payload.articleId
-      const content = payload.content
+      const articleId = payload.articleId;
+      const content = payload.content;
       axios({
         method: "post",
         url: `${API_URL}/api/v1/articles/${articleId}/comments/`,
         data: { content },
-        headers : {
-          Authorization : `Token ${this.state.user.token}`
-        }
+        headers: {
+          Authorization: `Token ${this.state.user.token}`,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.dispatch('getArticleDetail', res.data.article)
-      })
-      .catch((error) => console.log(error, context));
+        .then((res) => {
+          console.log(res.data);
+          this.dispatch("getArticleDetail", res.data.article);
+        })
+        .catch((error) => console.log(error, context));
     },
     // 댓글 지우기
     deleteComment(context, comment) {
-      const commentId = comment.id
-      const articleID = comment.article
-      console.log('deleteComment액션')
+      const commentId = comment.id;
+      const articleID = comment.article;
+      console.log("deleteComment액션");
       axios({
         method: "delete",
         url: `${API_URL}/api/v1/comments/${commentId}/`,
         headers: {
           Authorization: `Token ${this.state.user.token}`,
-        },        
+        },
       })
-        .then((res)=>{
-          this.dispatch('getArticleDetail', articleID)
+        .then((res) => {
+          this.dispatch("getArticleDetail", articleID);
         })
         .catch((err) => console.log(err, context));
     },
