@@ -23,13 +23,21 @@
         >
         <b-nav-text class="p-3">마이페이지</b-nav-text>
         <template v-if="isLogin">
-            <b-button variant="primary" class="m-3" @click="goMyPage">마이페이지</b-button>
-            <b-button variant="danger" class="m-3" @click="logout">로그아웃</b-button>
-          </template>
-          <template v-else>
-            <b-button variant="primary" class="m-3" @click="goLoginView">로그인</b-button>
-            <b-button variant="primary" class="m-3" @click="goSignupView">회원가입</b-button>
-          </template>
+          <b-button variant="primary" class="m-3" @click="goMyPage"
+            >마이페이지</b-button
+          >
+          <b-button variant="danger" class="m-3" @click="logout"
+            >로그아웃</b-button
+          >
+        </template>
+        <template v-else>
+          <b-button variant="primary" class="m-3" @click="goLoginView"
+            >로그인</b-button
+          >
+          <b-button variant="primary" class="m-3" @click="goSignupView"
+            >회원가입</b-button
+          >
+        </template>
       </div>
     </b-nav>
   </div>
@@ -38,10 +46,10 @@
 <script>
 export default {
   name: "NavBar",
-  computed:{
-    isLogin(){
-      return this.$store.state.user.isLogin
-    }
+  computed: {
+    isLogin() {
+      return this.$store.state.user.isLogin;
+    },
   },
   methods: {
     goMainPage() {
@@ -61,24 +69,24 @@ export default {
     },
     goTournament() {
       this.$router.push({
-        name: "TestView",
+        name: "FinTestView",
       });
     },
     goLoginView() {
       this.$router.push({
-          name: 'LoginView',
-      })
+        name: "LoginView",
+      });
     },
-    goSignupView(){
+    goSignupView() {
       this.$router.push({
-          name: 'SignupView',
-      })
+        name: "SignupView",
+      });
     },
-    logout(){
-      this.$store.dispatch('logout')
-    }
+    logout() {
+      this.$store.dispatch("logout");
+    },
   },
-}
+};
 </script>
 
 <style></style>

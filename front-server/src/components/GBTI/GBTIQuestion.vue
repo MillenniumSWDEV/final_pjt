@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-card :title="nowStage + 1 + '. ' + questions[nowStage].q">
+      <b-card-text> {{ nowStage + 1 }} / 15 </b-card-text>
       <b-card-text>
         <b-form-checkbox
           id="checkbox-1"

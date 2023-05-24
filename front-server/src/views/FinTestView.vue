@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="m-5">
     <h1>금.사.빠 (금융과 사랑에 빠지다.)</h1>
     <div class="fjs">
       <b-button @click="selectTest('tournament')"
@@ -8,10 +8,10 @@
       <b-button @click="selectTest('GBTI')">소비 성향 테스트</b-button>
     </div>
     <div>
-      <div v-if="selected === 'tournament'" class="m-5">
+      <div v-if="selected === 'tournament'">
         <TournamentProducts />
       </div>
-      <div v-if="selected === 'GBTI'" class="m-5">
+      <div v-if="selected === 'GBTI'">
         <GBTITest />
       </div>
     </div>
