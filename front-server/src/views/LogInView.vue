@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    class="LoginView"
+    style="height: 80vh; display: flex; align-items: center"
+  >
     <Login />
   </div>
 </template>
@@ -8,6 +11,7 @@
 import Login from "@/components/Accounts/Login.vue";
 
 export default {
+  name: "LoginView",
   components: { Login },
 };
 </script>

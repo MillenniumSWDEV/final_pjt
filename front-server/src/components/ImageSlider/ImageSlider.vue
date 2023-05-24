@@ -65,15 +65,16 @@ export default {
 };
 </script>
 <style>
-.carousel-control-next > .carousel-control-next-icon, .carousel-control-prev > .carousel-control-prev-icon{
-  background-color: rgb(42,169,224);
+.carousel-control-next > .carousel-control-next-icon,
+.carousel-control-prev > .carousel-control-prev-icon {
+  background-color: rgb(42, 169, 224);
   width: 50px;
   height: 50px;
   box-sizing: content-box;
-  fill: rgb(42,169,224);
+  fill: rgb(42, 169, 224);
   justify-content: center;
 }
-.carousel-control-next{
-  margin-right: 80px;
+.carousel-control-next {
+  margin-right: 30px;
 }
 </style>
