@@ -27,7 +27,7 @@ export default {
         impulse: 0,
         enjoy: 0,
       },
-      res: true,
+      res: false,
     };
   },
   methods: {
