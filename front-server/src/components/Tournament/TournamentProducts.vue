@@ -1,14 +1,16 @@
 <template>
   <div id="TournamentView" class="container">
     <div v-if="startImage" class="mt-5">
-    <img src="@/assets/이상형월드컵이미지.png" @click="startTest()">
+      <img src="@/assets/이상형월드컵이미지.png" @click="startTest()" />
     </div>
     <div v-else class="d-flex flex-column justify-content-center mt-5 mx-auto">
-      <h3 style="font-weight: 800; text-align: center; margin-bottom: 30px">금사빠 (금융과 사랑에 빠지다)</h3>
+      <h3 style="font-weight: 800; text-align: center; margin-bottom: 30px">
+        금사빠 (금융과 사랑에 빠지다)
+      </h3>
       <b-button-group size="md" class="d-flex w-10">
         <b-button
-        class="me-5"
-        pill
+          class="me-5"
+          pill
           variant="primary"
           :pressed="selected === '예금'"
           @click="select('예금')"
@@ -16,8 +18,8 @@
           예금
         </b-button>
         <b-button
-        class="me-5"
-        pill
+          class="me-5"
+          pill
           variant="info"
           :pressed="selected === '적금'"
           @click="select('적금')"
@@ -44,13 +46,7 @@
       </div>
 
       <div v-if="complete">
-        <h1>우승!</h1>
-        <hr />
-        <v-row align="center" justify="center">
-          <v-col cols="6">
-            <p>{{ winner.fin_prdt_nm }}</p>
-          </v-col>
-        </v-row>
+        <DetailProducts :pd="winner" />
       </div>
     </div>
   </div>
@@ -58,11 +54,12 @@
 
 <script>
 import TournamentChoice from "./TournamentChoice.vue";
-
+import DetailProducts from "../Products/DetailProducts.vue";
 export default {
   name: "TournamentView",
   components: {
     TournamentChoice,
+    DetailProducts,
   },
   data() {
     return {
@@ -99,8 +96,8 @@ export default {
     },
   },
   methods: {
-    startTest(){
-      this.startImage = false
+    startTest() {
+      this.startImage = false;
     },
     // 버튼을 누름에 따라 32개의 상품이 무작위로 products에 들어가게 됩니다.
     select(v) {
@@ -146,6 +143,9 @@ export default {
         this.left = this.products.pop();
         this.right = this.products.pop();
       }
+    },
+    winnerSet() {
+      this.winner = this.products[17];
     },
   },
 };

@@ -26,13 +26,25 @@
               </h5>
               <b-card-text>{{ sp.spcl_cnd }}</b-card-text>
               <div>
-                <b-button
-                  variant="info"
-                  @click="addToSavingCart(sp.fin_prdt_cd)"
-                  >가입하기</b-button
-                >
-                <b-button class="mx-3" @click="goDetailPage(sp)"
+                <b-button class="mx-3" @click="listOrDetail(sp)"
                   >상세보기</b-button
+                >
+                <b-button
+                  v-if="
+                    !$store.state.finlife.savingCart.some((cartedProduct) =>
+                      Object.values(cartedProduct).includes(sp.fin_prdt_cd)
+                    )
+                  "
+                  variant="info"
+                  @click="addOrDeleteSavingCart(sp.fin_prdt_cd)"
+                >
+                  추가하기
+                </b-button>
+                <b-button
+                  v-else
+                  variant="danger"
+                  @click="addOrDeleteSavingCart(sp.fin_prdt_cd)"
+                  >삭제하기</b-button
                 >
               </div>
             </div>
@@ -50,7 +62,7 @@
     </div>
 
     <div v-else>
-      <b-button @click="backToList">뒤로 가기</b-button>
+      <b-button @click="listOrDetail">뒤로 가기</b-button>
       <DetailProducts :pd="prdt" />
     </div>
   </div>
@@ -88,17 +100,14 @@ export default {
     },
   },
   methods: {
-    goDetailPage(sp) {
+    listOrDetail(sp) {
       this.prdt = sp;
-      this.goDetail = true;
+      this.goDetail = this.goDetail ? false : true;
     },
-    backToList() {
-      this.goDetail = false;
-    },
-    addToSavingCart(fin_prdt_cd) {
+    addOrDeleteSavingCart(fin_prdt_cd) {
       if (this.isLogin) {
         console.log(fin_prdt_cd);
-        this.$store.dispatch("addToSavingCart", fin_prdt_cd);
+        this.$store.dispatch("addOrDeleteSavingCart", fin_prdt_cd);
       } else {
         alert("로그인이 필요한 작업입니다.");
       }
