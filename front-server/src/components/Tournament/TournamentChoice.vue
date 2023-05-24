@@ -9,17 +9,18 @@
         align="center"
       >
         <b-card-text>
+          {{ prdt.id }}
           <p>{{ prdt.kor_co_nm }}</p>
           <p>{{ prdt.etc_note }}</p>
           <p>{{ prdt.spcl_cnd }}</p>
           <div v-if="prdt.depositoptions_set">
             <p v-for="option in prdt.depositoptions_set" :key="option.id">
-              최대 금리 {{ option.intr_rate2 }}
+              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}
             </p>
           </div>
           <div v-else>
             <p v-for="option in prdt.savingoptions_set" :key="option.id">
-              최대 금리 {{ option.intr_rate2 }}
+              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}
             </p>
           </div>
         </b-card-text>
