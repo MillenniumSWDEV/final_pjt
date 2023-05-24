@@ -7,6 +7,7 @@ import FinTestView from "@/views/FinTestView";
 import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
 import DetailView from "@/views/DetailView";
+import CreateView from "@/views/CreateView";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,12 @@ const routes = [
     path: "/detail/:articleId",
     name: "DetailView",
     component: DetailView,
+    props: true,
+  },
+  {
+    path: "/create",
+    name: "CreateView",
+    component: CreateView,
     props: true,
   },
 ];

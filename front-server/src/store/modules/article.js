@@ -50,6 +50,27 @@ const article = {
           console.log(err);
         });
     },
+    // 게시글작성
+    createArticle(context, payload){
+      const title = payload.title
+      const content = payload.content
+
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/articles/`,
+        data: { title, content },
+        headers : {
+          Authorization : `Token ${this.state.user.token}`
+        }        
+      })
+      .then((res) => {
+        console.log(res.data)
+        context.commit('GET_ARTICLES')
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
     // 게시글 지우는 코드
     articleDelete(context, articleId) {
       console.log("deleted");
