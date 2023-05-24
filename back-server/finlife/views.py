@@ -60,6 +60,12 @@ def save_deposit_products(req):
                 serializer.save()
 
     for option in products['optionList']:
+        if option['intr_rate'] == None:
+            option['intr_rate'] = -1
+        
+        if option['intr_rate2'] == None:
+            option['intr_rate2'] = -1
+         
         # serializer = DepositOptionsSerializer(data = option)
         # if serializer.is_valid(raise_exception = True):
         #     serializer.save()
