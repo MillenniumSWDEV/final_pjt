@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <h3>소비 성향 테스트</h3>
-    <div v-if="!res">
-      <GBTIQuestion :now-stage="stage" @select-answer="choiceEvent" />
+  <div id="GBTIView" class="container">
+    <div v-if="startImage" class="mt-5">
+    <img src="@/assets/소비성향테스트이미지.png" @click="startTest()">
     </div>
-    <div v-else>
-      <GBTIResult :test-score="score" />
+    <div v-else class="mt-5 d-flex justify-content-center w-100">
+      <div v-if="!res">
+        <GBTIQuestion :now-stage="stage" @select-answer="choiceEvent" />
+      </div>
+      <div v-else>
+        <GBTIResult :test-score="score" />
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +26,7 @@ export default {
   },
   data() {
     return {
+      startImage: true,
       stage: 0,
       score: {
         impulse: 0,
@@ -31,6 +36,9 @@ export default {
     };
   },
   methods: {
+    startTest(){
+      this.startImage = false
+    },
     choiceEvent(data) {
       if (data === "i") {
         this.score.impulse++;
