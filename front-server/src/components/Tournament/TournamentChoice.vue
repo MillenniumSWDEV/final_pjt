@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     select() {
-      this.$emit("choiceEvent", true);
+      this.$emit("choice-event", true);
     },
   },
 };
