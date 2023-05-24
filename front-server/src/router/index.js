@@ -7,6 +7,7 @@ import FinTestView from "@/views/FinTestView";
 import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
 import DetailView from "@/views/DetailView";
+import MyPageView from "@/views/MyPageView";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ const routes = [
     name: "DetailView",
     component: DetailView,
     props: true,
+  },
+  {
+    path: "my-page",
+    name: "MyPageView",
+    component: MyPageView,
   },
 ];
 

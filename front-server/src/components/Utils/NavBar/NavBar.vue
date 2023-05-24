@@ -32,18 +32,18 @@
           >금융 심리 테스트</b-nav-item
         >
         <template v-if="isLogin">
-          <b-button variant="primary" class="m-3" @click="goMyPage"
+          <b-button variant="primary" class="m-3" @click="goMyPage()"
             >마이페이지</b-button
           >
-          <b-button variant="danger" class="m-3" @click="logout"
+          <b-button variant="danger" class="m-3" @click="logout()"
             >로그아웃</b-button
           >
         </template>
         <template v-else>
-          <b-button variant="primary" class="m-3" @click="goLoginView"
+          <b-button variant="primary" class="m-3" @click="goLoginView()"
             >로그인</b-button
           >
-          <b-button variant="primary" class="m-3" @click="goSignupView"
+          <b-button variant="primary" class="m-3" @click="goSignupView()"
             >회원가입</b-button
           >
         </template>
@@ -114,6 +114,14 @@ export default {
       this.finTestActive = false;
       this.$router.push({
         name: "SignupView",
+      });
+    },
+    goMyPage() {
+      this.boardActive = false;
+      this.productActive = false;
+      this.finTestActive = false;
+      this.$router.push({
+        name: "MyPageView",
       });
     },
     logout() {

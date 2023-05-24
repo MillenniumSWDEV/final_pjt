@@ -29,7 +29,7 @@ const finlife = {
   actions: {
     // 예금 정보 axios
     getDepositProducts(context) {
-      if (!this.state.depositProducts) {
+      if (!this.state.finlife.depositProducts) {
         axios
           .get(`${API_URL}/finlife/deposit-products/`)
           .then((res) => {
@@ -42,7 +42,7 @@ const finlife = {
     },
     // 적금 상품 axios
     getSavingProducts(context) {
-      if (!this.state.savingProducts) {
+      if (!this.state.finlife.savingProducts) {
         axios
           .get(`${API_URL}/finlife/saving-products/`)
           .then((res) => {
@@ -55,7 +55,7 @@ const finlife = {
     },
     // 환율 정보 내놔
     getExRates(context) {
-      if (!this.state.exchangeRates) {
+      if (!this.state.finlife.exchangeRates) {
         axios
           .get(`${API_URL}/finlife/save-ex-rate/`)
           .then((res) => {
