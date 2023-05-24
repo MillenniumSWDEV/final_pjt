@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import MainPageView from "@/views/MainPageView";
 import BulletinBoardView from "@/views/BulletinBoardView";
 import OnlineProductView from "@/views/OnlineProductView";
-import TestView from "@/views/TestView";
+import FinTestView from "@/views/FinTestView";
 import LoginView from "@/views/LoginView";
 import SignupView from "@/views/SignupView";
 
@@ -27,15 +27,15 @@ const routes = [
   },
   {
     path: "/finance-psychological-test",
-    name: "TestView",
-    component: TestView,
+    name: "FinTestView",
+    component: FinTestView,
   },
-  {  
+  {
     path: "/Login",
     name: "LoginView",
     component: LoginView,
   },
-  {  
+  {
     path: "/Signup",
     name: "SignupView",
     component: SignupView,

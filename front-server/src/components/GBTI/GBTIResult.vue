@@ -20,13 +20,13 @@ export default {
   },
   computed: {
     result() {
-      if (this.testScore.impulse < 5 && this.testScore.enjoy < 5) {
+      if (this.testScore.impulse <= 5 && this.testScore.enjoy < 5) {
         return "개미";
       }
-      if (this.testScore.impulse > 5 && this.testScore.enjoy < 5) {
+      if (this.testScore.impulse > 5 && this.testScore.enjoy <= 5) {
         return "소확행";
       }
-      if (this.testScore.impulse < 5 && this.testScore.enjoy > 5) {
+      if (this.testScore.impulse <= 5 && this.testScore.enjoy > 5) {
         return "정승";
       } else {
         return "배짱이";
