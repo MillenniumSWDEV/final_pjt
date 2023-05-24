@@ -1,5 +1,5 @@
 <template>
-  <div id="NavBar" class="container pt-2">
+  <div id="NavBar" class="container pt-2 my-auto">
     <b-nav class="d-flex align-items-center w-100 justify-content-between">
       <div>
         <b-navbar-brand @click="goMainPage()">
@@ -21,7 +21,6 @@
         <b-nav-text class="p-3" @click="goTournament()"
           >금융 심리 테스트</b-nav-text
         >
-        <b-nav-text class="p-3">마이페이지</b-nav-text>
         <template v-if="isLogin">
           <b-button variant="primary" class="m-3" @click="goMyPage"
             >마이페이지</b-button
