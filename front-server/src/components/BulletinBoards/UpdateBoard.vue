@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <h1>게시글수정하기</h1>
-    <p>글 번호 : {{ article?.id }}</p>
-    <p>
-      제목 : <input type="text" v-model="article.title" />
-    </p>
-    <p>
-      내용 : <textarea v-model="article.content"></textarea>
-    </p>
-    <p>작성시간 : {{ article?.created_at }}</p>
-    <p>수정시간 : {{ article?.updated_at }}</p>
-    <p>작성자 : {{ article?.user }}</p>
-    <button @click="goBack">뒤로가기</button> 
-    <button @click="articleEdit">수정하기</button> 
-    <hr />
+  <div id="UpdateBoardComponent" class="container d-flex flex-column w-100">
+    <div class="d-felx">
+      <b-button @click="goBack">뒤로가기</b-button>
+      <h1 style="text-align: center; margin-bottom: 30px">게시글 수정</h1>
+    </div>
+    <b-card-group deck>
+      <b-card>
+        <form class="d-flex flex-column" @submit.prevent="createArticle">
+          <label for="title">제목 : </label>
+          <input v-model="article.title" type="text" /><br />
+          <label for="content">내용 : </label>
+          <textarea v-model="article.content" cols="30" rows="10"></textarea
+          ><br />
+          <b-button variant="primary" @click="articleEdit">수정하기</b-button>
+        </form>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 
@@ -29,23 +31,23 @@ export default {
       comment: null,
     };
   },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin; //로그인 여부
+    },
+  },
   created() {
     this.getArticleDetail();
   },
-  computed:{
-    isLogin(){
-      return this.$store.getters.isLogin //로그인 여부
-    },
-  },
   methods: {
     goBack() {
-      this.$emit('goBack', this.article);
+      this.$emit("goBack", this.article);
     },
     getArticleDetail() {
       axios({
         method: "get",
         url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}/`,
-        // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용    
+        // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용
       })
         .then((res) => {
           console.log(res);
@@ -57,32 +59,33 @@ export default {
     },
     articleEdit() {
       console.log("수정요청");
-      if(this.isLogin){
-          const title = this.article.title
-          const content = this.article.content
-          axios({
-              method: "PUT",
-              url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}`,
-              // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용   
-              data: {
-                title, content
-              },
-              headers: {
-              Authorization: `Token ${this.$store.state.user.token}`,
-              // Authorization: `Token a365d5005ce82ab5dd1681e97e5042216dd2aa8a`, // 테스트용
-              },
-          })
+      if (this.isLogin) {
+        const title = this.article.title;
+        const content = this.article.content;
+        axios({
+          method: "PUT",
+          url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}`,
+          // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용
+          data: {
+            title,
+            content,
+          },
+          headers: {
+            Authorization: `Token ${this.$store.state.user.token}`,
+            // Authorization: `Token a365d5005ce82ab5dd1681e97e5042216dd2aa8a`, // 테스트용
+          },
+        })
           .then((res) => {
-              console.log(res.data)
-              this.article = res.data
+            console.log(res.data);
+            this.article = res.data;
           })
           .catch((err) => {
             console.log(err);
           });
-      }else{
-          alert('로그인이필요합니다')
+      } else {
+        alert("로그인이필요합니다");
       }
     },
   },
-  }
+};
 </script>
