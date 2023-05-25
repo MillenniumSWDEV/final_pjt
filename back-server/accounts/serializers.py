@@ -52,11 +52,10 @@ class RegisterSerializer(serializers.Serializer):
     )
 
     FINANCIAL_GOAL_CHOICES = (
-        ('브론즈', '브론즈'),
-        ('실버', '실버'),
-        ('골드', '골드'),
-        ('플래', '플래'),
-        ('다이아', '다이아'),
+        ('1일1치킨', '1일1치킨'),
+        ('파이어족', '파이어족'),
+        ('건물주;;', '건물주;;'),
+        ('재벌되기;;;', '재벌되기;;;'),
     )
 
     INVESTMENT_EXPERIENCE_CHOICES = (
