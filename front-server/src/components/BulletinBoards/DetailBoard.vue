@@ -28,6 +28,7 @@
           <p>
             {{ com.username }} - {{ com.content }}
             <input
+              v-if="$store.state.user.userData.username === com.username"
               id="delete"
               type="submit"
               value="댓글삭제"
@@ -41,7 +42,7 @@
             id="comment"
             v-model.trim="comment"
             type="text"
-            @keyup.enter="submit"
+            @keyup.enter="createComment"
           />
           <input id="submit" type="submit" />
         </form>
@@ -83,9 +84,9 @@ export default {
     //   console.log(this.article.comment_set)
     //   return this.article.comment_set
     // }
-    isCurrentUser(){
-      return this.$store.state.user.userData.username === this.article.username
-    }
+    isCurrentUser() {
+      return this.$store.state.user.userData.username === this.article.username;
+    },
   },
   watch: {
     number: function (val, oldval) {
@@ -125,9 +126,8 @@ export default {
           .then((res) => {
             console.log(res.data);
             console.log("삭제완료");
-            alert('게시글을 삭제했습니다')
+            alert("게시글을 삭제했습니다");
             this.$router.push({ name: "BulletinBoardView" });
-            
           })
           .catch((err) => {
             console.log(err);

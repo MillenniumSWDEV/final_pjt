@@ -62,6 +62,7 @@ const user = {
         .then((res) => {
           console.log(res.data.key);
           context.commit("SAVE_TOKEN", res.data.key);
+          context.dispatch("userDetail");
         })
         .catch((err) => {
           console.log(err);
