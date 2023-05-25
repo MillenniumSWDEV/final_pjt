@@ -23,7 +23,7 @@
           </h3>
           <hr />
           <div v-for="(item, index) in depositCart" :key="index">
-            <DetailProducts :pd="item" />
+            <DetailProducts :pd="item.id" prdt-type="D" />
             <hr />
           </div>
         </div>
@@ -37,7 +37,7 @@
           </h3>
           <hr />
           <div v-for="(item, index) in savingCart" :key="index">
-            <DetailProducts :pd="item" />
+            <DetailProducts :pd="item.id" prdt-type="S" />
             <hr />
           </div>
         </div>
