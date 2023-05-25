@@ -81,7 +81,9 @@ const user = {
         .then((res) => {
           context.commit("SAVE_TOKEN", res.data.key);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          alert('아이디 또는 비밀번호를 확인해주세요')
+          console.log(err)});
     },
     logout(context) {
       console.log("로그아웃요청들어옴");
