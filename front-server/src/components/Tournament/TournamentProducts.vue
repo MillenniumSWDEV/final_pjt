@@ -17,8 +17,8 @@
           style="width: 100px; height: 30px; box-sizing: content-box"
           pill
           variant="primary"
-          :pressed="selected === '예금'"
-          @click="select('예금')"
+          :pressed="selected === 'D'"
+          @click="select('D')"
         >
           예금
         </b-button>
@@ -28,8 +28,8 @@
           style="width: 100px; height: 30px; box-sizing: content-box"
           pill
           variant="info"
-          :pressed="selected === '적금'"
-          @click="select('적금')"
+          :pressed="selected === 'S'"
+          @click="select('S')"
         >
           적금
         </b-button>
@@ -57,7 +57,7 @@
       </div>
 
       <div v-if="complete">
-        <DetailProducts :pd="winner" />
+        <DetailProducts :pd="winner" :prdt-type="selected" />
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@ export default {
         !this.left &&
         !this.right
       ) {
-        this.winner = this.products.pop();
+        this.winner = this.products.pop().id;
         this.complete = true;
       }
     },
@@ -118,12 +118,12 @@ export default {
       this.next_round = [];
       this.roundCnt = 32;
       this.complete = false;
-      if (v === "예금") {
+      if (v === "D") {
         this.products = [...this.$store.state.finlife.depositProducts]
           .sort(() => Math.random() - 0.5)
           .slice(0, 32);
       }
-      if (v === "적금") {
+      if (v === "S") {
         this.products = [...this.$store.state.finlife.savingProducts]
           .sort(() => Math.random() - 0.5)
           .slice(0, 32);

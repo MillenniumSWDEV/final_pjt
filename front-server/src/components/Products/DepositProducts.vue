@@ -67,7 +67,7 @@
 
     <div v-else>
       <b-button @click="listOrDetail">뒤로 가기</b-button>
-      <DetailProducts :pd="prdt" />
+      <DetailProducts :pd="prdtId" prdt-type="D"/>
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
       currentPage: 1,
       items: [],
       goDetail: false,
-      prdt: null,
+      prdtId: null,
     };
   },
   computed: {
@@ -105,7 +105,8 @@ export default {
   },
   methods: {
     listOrDetail(dp) {
-      this.prdt = dp;
+      this.prdtId = dp.id;
+      console.log(this.prdtId)
       this.goDetail = this.goDetail ? false : true;
     },
     addOrDeleteDepositCart(fin_prdt_cd) {

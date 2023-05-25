@@ -18,6 +18,7 @@
             v-model.trim="username"
             class="updateInput"
             type="text"
+            disabled="true"
           /><br />
         </div>
         <div class="mb-3">
@@ -45,65 +46,68 @@
             <option value="직장인">직장인</option>
             <option value="전업주부">전업주부</option>
             <option value="무직">Music</option>
-            <option value="기타">기타</option>
+            <option value="취준생">취준생</option>
           </select>
+        </div>
+        <div class="mb-3">
+          <label for="salary">소득수준 : </label>
+          <select class="ml-2" v-model.trim="salary" name="salary">
+            <option value="연소득 1,000만원 미만">연소득 1,000만원 미만</option>
+            <option value="연소득 1,000만원 이상 3,000만원 미만">연소득 1,000만원 이상 3,000만원 미만</option>
+            <option value="연소득 3,000만원 이상 5,000만원 미만">연소득 3,000만원 이상 5,000만원 미만</option>
+            <option value="연소득 5,000만원 이상">연소득 5,000만원 이상</option>
+          </select><br />
         </div>
         <div class="mb-3">
           <label for="monthly_expenses" style="padding-right: 16px"
             >월지출 :
           </label>
-          <input
-            id="monthly_expenses"
-            v-model.trim="monthly_expenses"
-            type="text"
-            class="updateInput"
-          /><br />
+          <select class="ml-2" v-model.trim="monthly_expenses" name="monthly_expenses">
+            <option value="백만원 이하">백만원 이하</option>
+            <option value="삼백만원 이하">삼백만원 이하</option>
+            <option value="오백만원 이하">오백만원 이하</option>
+            <option value="천만원 이하">천만원 이하</option>
+          </select>
+          <br />
         </div>
-        <div class="mb-3">
-          <label for="salary">소득수준 : </label>
-          <input
-            id="salary"
-            v-model.trim="salary"
-            class="updateInput"
-            type="text"
-          /><br />
-        </div>
-
         <div class="mb-3">
           <label for="financial_goal">금융목표 : </label>
-          <input
-            id="financial_goal"
-            v-model.trim="financial_goal"
-            type="text"
-            class="updateInput"
-          /><br />
+          <select class="ml-2" v-model.trim="financial_goal" name="financial_goal">
+            <option value="1일1치킨">1일1치킨</option>
+            <option value="파이어족;">파이어족;</option>
+            <option value="건물주;;">건물주;;</option>
+            <option value="재벌되기;;;">재벌되기;;;</option>
+          </select><br />
         </div>
         <div class="mb-3">
           <label for="investment_experience">투자경험 : </label>
-          <input
-            id="investment_experience"
-            v-model.trim="investment_experience"
-            type="text"
-            class="updateInput"
-          /><br />
+          <select class="ml-2" v-model.trim="investment_experience" name="investment_experience">
+            <option value="적다">적다</option>
+            <option value="중간">중간</option>
+            <option value="많다">많다</option>
+          </select><br />
         </div>
         <div class="mb-3">
           <label for="saving_preference">투자성향 : </label>
-          <input
-            id="saving_preference"
-            v-model.trim="saving_preference"
-            type="text"
-            class="updateInput"
-          /><br />
+          <select class="ml-2" v-model.trim="saving_preference" name="saving_preference">
+            <option value="예금">예금</option>
+            <option value="적금">적금</option>
+            <option value="대출">대출</option>
+            <option value="기타">기타</option>
+          </select><br />
         </div>
         <div class="mb-3">
           <label for="preferred_bank">선호은행 : </label>
-          <input
-            id="preferred_bank"
-            v-model.trim="preferred_bank"
-            type="text"
-            class="updateInput"
-          /><br />
+          <select class="ml-2" v-model.trim="preferred_bank" name="preferred_bank">
+            <option value="국민은행">국민은행</option>
+            <option value="기업은행">기업은행</option>
+            <option value="신한은행">신한은행</option>
+            <option value="KEB하나은행">KEB하나은행</option>
+            <option value="우리은행">우리은행</option>
+            <option value="하나은행">하나은행</option>
+            <option value="외환은행">외환은행</option>
+            <option value="SC제일은행">SC제일은행</option>
+          </select><br />
         </div>
         <b-button class="mt-4" variant="outline-primary" @click="updateUser()"
           >수정하기</b-button
