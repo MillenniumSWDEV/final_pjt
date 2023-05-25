@@ -98,7 +98,7 @@
           </span>
           {{ product.etc_note }}
         </b-card-text>
-        <!-- <p>마음에 들어 한 사람 수 - {{ product.carted_user.length }}명</p> -->
+        <p>마음에 들어 한 사람 수 - {{ product.carted_user.length }}명</p>
         <div v-if="product.depositoptions_set">
           <b-button
             v-if="
