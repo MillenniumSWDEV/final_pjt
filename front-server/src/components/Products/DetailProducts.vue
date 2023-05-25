@@ -1,31 +1,31 @@
 <template>
   <div id="DetailProducts" style="margin-top: 20px">
     <div>
-      <b-card :header="pd.fin_prdt_nm">
+      <b-card :header="product.fin_prdt_nm">
         <b-row align-h="around">
           <b-col>
             <b-card-text>
               <p>
                 <span style="font-weight: 600; font-size: 18px">가입대상: </span
-                >{{ pd.join_member }}
+                >{{ product.join_member }}
               </p>
               <p>
                 <span style="font-weight: 600; font-size: 18px"
                   >가입 제한:
                 </span>
-                {{ joinDeny[pd.join_deny] }}
+                {{ joinDeny[product.join_deny] }}
               </p>
               <p>
                 <span style="font-weight: 600; font-size: 18px"
                   >가입 방법:
                 </span>
-                {{ pd.join_way }}
+                {{ product.join_way }}
               </p>
               <p>
                 <span style="font-weight: 600; font-size: 18px"
                   >우대조건:
                 </span>
-                {{ pd.spcl_cnd }}
+                {{ product.spcl_cnd }}
               </p>
             </b-card-text>
           </b-col>
@@ -46,7 +46,10 @@
                   </b-button>
                 </b-button-group>
               </div>
-              <div v-for="(option, idx) in product.depositoptions_set" :key="idx">
+              <div
+                v-for="(option, idx) in product.depositoptions_set"
+                :key="idx"
+              >
                 <ul v-if="selected === idx">
                   <li>저축 기간: {{ option.save_trm }}개월</li>
                   <li>저축 금리 유형: {{ option.intr_rate_type_nm }}</li>
@@ -71,7 +74,10 @@
                   </b-button>
                 </b-button-group>
               </div>
-              <div v-for="(option, idx) in product.savingoptions_set" :key="idx">
+              <div
+                v-for="(option, idx) in product.savingoptions_set"
+                :key="idx"
+              >
                 <ul v-if="selected === idx">
                   <li style="font-weight: bold">
                     적립 유형: {{ option.rsrv_type_nm }}
@@ -90,10 +96,10 @@
           ><span style="font-weight: 900; font-size: 16px"
             >기타 유의 사항
           </span>
-          {{ pd.etc_note }}
+          {{ product.etc_note }}
         </b-card-text>
-        <!-- <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p> -->
-        <div v-if="pd.depositoptions_set">
+        <!-- <p>마음에 들어 한 사람 수 - {{ product.carted_user.length }}명</p> -->
+        <div v-if="product.depositoptions_set">
           <b-button
             v-if="
               !$store.state.finlife.depositCart.some((cartedProduct) =>
@@ -142,7 +148,7 @@ export default {
   name: "DetailProducts",
   props: {
     pd: Number,
-    prdtType: String
+    prdtType: String,
   },
   data() {
     return {
@@ -159,13 +165,13 @@ export default {
       return this.$store.state.user.isLogin; //로그인 여부
     },
     product() {
-      console.log(this.pd, this.prdtType)
-      if (this.prdtType === "D"){
-        return this.$store.state.finlife.depositProducts[this.pd-1]
+      console.log(this.pd, this.prdtType);
+      if (this.prdtType === "D") {
+        return this.$store.state.finlife.depositProducts[this.pd - 1];
       } else {
-        return this.$store.state.finlife.savingProducts[this.pd-1]
+        return this.$store.state.finlife.savingProducts[this.pd - 1];
       }
-    }
+    },
   },
   methods: {
     selectTrm(id) {
