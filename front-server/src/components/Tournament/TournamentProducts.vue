@@ -102,6 +102,8 @@ export default {
     // 버튼을 누름에 따라 32개의 상품이 무작위로 products에 들어가게 됩니다.
     select(v) {
       this.selected = v;
+      this.left = null;
+      this.right = null;
       this.next_round = [];
       this.roundCnt = 32;
       this.complete = false;
