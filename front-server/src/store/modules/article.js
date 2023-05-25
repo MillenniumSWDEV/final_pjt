@@ -71,6 +71,32 @@ const article = {
           console.log(err);
         });
     },
+    // 게시글 수정
+    updateArticle(context, payload){
+      const title = payload.title
+      const content = payload.content
+      const articleId = payload.articleId
+      
+      axios({
+        method: "put",
+        url: `${API_URL}/api/v1/articles/${articleId}/`,
+        data: {
+          title,
+          content,
+        },
+        headers: {
+          Authorization: `Token ${this.state.user.token}`,
+          // Authorization: `Token a365d5005ce82ab5dd1681e97e5042216dd2aa8a`, // 테스트용
+        },
+      })
+        .then((res) => {
+          console.log("응답받음");
+          context.commit("GET_ARTICLE_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     // 게시글 지우는 코드
     articleDelete(context, articleId) {
       console.log("deleted");

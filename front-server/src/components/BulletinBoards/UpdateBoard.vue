@@ -12,7 +12,7 @@
           <label for="content">내용 : </label>
           <textarea v-model="article.content" cols="30" rows="10"></textarea
           ><br />
-          <b-button variant="primary" @click="articleEdit">수정하기</b-button>
+          <b-button variant="primary" @click="articleEdit()">수정하기</b-button>
         </form>
       </b-card>
     </b-card-group>
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     isLogin() {
-      return this.$store.getters.isLogin; //로그인 여부
+      return this.$store.state.user.isLogin; //로그인 여부
     },
   },
   created() {
@@ -44,6 +44,7 @@ export default {
       this.$emit("goBack", this.article);
     },
     getArticleDetail() {
+      // this.$store.dispatch('getArticleDetail', this.$route.params.articleId)
       axios({
         method: "get",
         url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}/`,
@@ -62,9 +63,16 @@ export default {
       if (this.isLogin) {
         const title = this.article.title;
         const content = this.article.content;
+      //   const articleId = this.$route.params.articleId
+
+      //   const payload ={
+      //     title,content,articleId
+      //   }
+      //   this.$store.dispatch('updateArticle', payload)
+
         axios({
           method: "PUT",
-          url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}`,
+          url: `${API_URL}/api/v1/articles/${this.$route.params.articleId}/`,
           // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용
           data: {
             title,
@@ -78,6 +86,8 @@ export default {
           .then((res) => {
             console.log(res.data);
             this.article = res.data;
+            alert('게시글을 수정했습니다')
+            this.$router.push({name: "BulletinBoardView"})
           })
           .catch((err) => {
             console.log(err);
