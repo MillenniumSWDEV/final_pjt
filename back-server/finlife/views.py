@@ -48,7 +48,6 @@ def save_deposit_products(req):
     data = api_test(req).json()
     products = data['result']
     
-    # return Response(products)
     for product in products['baseList']: 
         try:
             product_inDB = DepositProduct.objects.get(fin_prdt_cd= product["fin_prdt_cd"])
@@ -59,25 +58,29 @@ def save_deposit_products(req):
                 serializer.save()
 
     for option in products['optionList']:
+        product = DepositProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
+
         if option['intr_rate'] == None:
             option['intr_rate'] = -1
         
         if option['intr_rate2'] == None:
             option['intr_rate2'] = -1
-         
-        # serializer = DepositOptionsSerializer(data = option)
-        # if serializer.is_valid(raise_exception = True):
-        #     serializer.save()
 
-        # for key in option.keys():
-        #     if option[key] == None:
-        #         option[key] = -1
+        option_inDB = DepositOptions.objects.filter(intr_rate_type_nm=option['intr_rate_type_nm'],
+                                                    intr_rate=option['intr_rate'],
+                                                    intr_rate2=option['intr_rate2'],
+                                                    save_trm=option['save_trm'], 
+                                                    fin_prdt_cd_id=product.pk
+                                                    )
+        if option_inDB.exists():
+            continue
 
-        product = DepositProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
-        serializer = DepositOptionsSerializer(data = option)
-        
-        if serializer.is_valid(raise_exception=True): 
-            serializer.save(fin_prdt_cd=product)      
+        else:
+            product = DepositProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
+            serializer = DepositOptionsSerializer(data = option)
+            
+            if serializer.is_valid(raise_exception=True): 
+                serializer.save(fin_prdt_cd=product)      
 
     return Response(status = status.HTTP_201_CREATED)
 
@@ -150,19 +153,30 @@ def save_savings_products(req):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
     
-    # return Response(data)
     for option in products['optionList']:
+        product = SavingProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
+
         if option['intr_rate'] == None:
             option['intr_rate'] = -1
         
         if option['intr_rate2'] == None:
             option['intr_rate2'] = -1
-         
-        product = SavingProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
-        serializer = SavingOptionsSerializer(data = option)
 
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(fin_prdt_cd=product)
+        option_inDB = SavingOptions.objects.filter(intr_rate_type_nm=option['intr_rate_type_nm'],
+                                                    intr_rate=option['intr_rate'],
+                                                    intr_rate2=option['intr_rate2'],
+                                                    save_trm=option['save_trm'], 
+                                                    fin_prdt_cd_id=product.pk
+                                                    )
+        if option_inDB.exists():
+            continue
+
+        else:
+            product = SavingProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
+            serializer = SavingOptionsSerializer(data = option)
+
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(fin_prdt_cd=product)
 
     return Response( status=status.HTTP_201_CREATED )
 
