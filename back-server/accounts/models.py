@@ -5,9 +5,10 @@ from finlife.models import DepositProduct
 class User(AbstractUser):
 
     SALARY_CHOICES = (
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
+        ('연소득 1,000만원 미만', '연소득 1,000만원 미만'),
+        ('연소득 1,000만원 이상 3,000만원 미만', '연소득 1,000만원 이상 3,000만원 미만'),
+        ('연소득 3,000만원 이상 5,000만원 미만', '연소득 3,000만원 이상 5,000만원 미만'),
+        ('연소득 5,000만원 이상', '연소득 5,000만원 이상'),
     )
 
     JOB_CHOICES = (
@@ -45,11 +46,10 @@ class User(AbstractUser):
     )
 
     FINANCIAL_GOAL_CHOICES = (
-        ('브론즈', '브론즈'),
-        ('실버', '실버'),
-        ('골드', '골드'),
-        ('플래', '플래'),
-        ('다이아', '다이아'),
+        ('1일1치킨', '1일1치킨'),
+        ('파이어족;', '파이어족;'),
+        ('건물주;;', '건물주;;'),
+        ('재벌되기;;;', '재벌되기;;;'),
     )
 
     INVESTMENT_EXPERIENCE_CHOICES = (
@@ -67,16 +67,16 @@ class User(AbstractUser):
 
 
     nickname = models.CharField(max_length=50)
-    salary = models.CharField(max_length=20, choices=SALARY_CHOICES, null=True, blank=True)
+    salary = models.CharField(max_length=50, choices=SALARY_CHOICES, null=True, blank=True)
     job = models.CharField(max_length=255, choices=JOB_CHOICES, null=True, blank=True)  # 직업
     monthly_expenses = models.CharField(max_length=255, choices=MONTHLY_EXPENSES_CHOICES, null=True, blank=True)  # 월 지출
     age = models.PositiveIntegerField(null=True, blank=True)  # 나이
     preferred_bank = models.CharField(max_length=255, choices=PREFERRED_BANK_CHOICES, null=True, blank=True)  # 선호하는 은행
     subscribed_products = models.ManyToManyField(DepositProduct, blank=True)  # 이미 가입된 상품
-    saving_preference = models.CharField(max_length=20, choices=SAVING_PREFERENCE_CHOICES, null=True, blank=True)  # 저축 성향
-    financial_goal = models.CharField(max_length=20, choices=FINANCIAL_GOAL_CHOICES, null=True, blank=True)  # 재무목표
-    investment_experience = models.CharField(max_length=20, choices=INVESTMENT_EXPERIENCE_CHOICES, null=True, blank=True)  # 투자경험
-    asset_holdings = models.CharField(max_length=20, choices=ASSET_HOLDINGS_CHOICES, null=True, blank=True)  # 보유자산
+    saving_preference = models.CharField(max_length=50, choices=SAVING_PREFERENCE_CHOICES, null=True, blank=True)  # 저축 성향
+    financial_goal = models.CharField(max_length=50, choices=FINANCIAL_GOAL_CHOICES, null=True, blank=True)  # 재무목표
+    investment_experience = models.CharField(max_length=50, choices=INVESTMENT_EXPERIENCE_CHOICES, null=True, blank=True)  # 투자경험
+    asset_holdings = models.CharField(max_length=50, choices=ASSET_HOLDINGS_CHOICES, null=True, blank=True)  # 보유자산
 
 
     def __str__(self):
