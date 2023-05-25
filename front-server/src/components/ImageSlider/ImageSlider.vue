@@ -32,7 +32,7 @@
             img-height="837"
             src="@/assets/이미지슬라이드2.png"
             alt="image slot"
-            @click="goTournament()"
+            @click="goTournament(true)"
           />
         </template>
       </b-carousel-slide>
@@ -56,9 +56,10 @@ export default {
     onSlideEnd(slide) {
       this.sliding = false;
     },
-    goTournament() {
+    goTournament(tf) {
       this.$router.push({
         name: "FinTestView",
+        params: { test: tf }
       });
     },
   },
