@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="MyCart">
     <b-nav class="container mt-3" tabs fill>
       <b-nav-item
         :active="selected"
@@ -14,23 +14,35 @@
         >적금 바구니</b-nav-item
       >
     </b-nav>
-    <div v-if="selected" class="mt-3 container">
-      <div v-if="depositCart">
-        <div v-for="(item, index) in depositCart" :key="index">
-          <DetailProducts :pd="item" />
+    <div class="container" style="height: 700px; overflow: scroll">
+      <div v-if="selected" class="mt-3 container">
+        <div v-if="depositCart">
+          <h3>
+            {{ username }}님! 총 {{ depositCart.length }} 개의 상품을
+            담았습니다💕
+          </h3>
           <hr />
+          <div v-for="(item, index) in depositCart" :key="index">
+            <DetailProducts :pd="item" />
+            <hr />
+          </div>
         </div>
+        <h2 v-else>마음에 들어한 예금 상품이 없어요.</h2>
       </div>
-      <h2 v-else>마음에 들어한 예금 상품이 없어요.</h2>
-    </div>
-    <div v-if="!selected" class="mt-3 container">
-      <div v-if="depositCart">
-        <div v-for="(item, index) in savingCart" :key="index">
-          <DetailProducts :pd="item" />
+      <div v-if="!selected" class="mt-3 container">
+        <div v-if="depositCart">
+          <h3>
+            {{ username }}님! 총 {{ savingCart.length }} 개의 상품을
+            담았습니다💕
+          </h3>
           <hr />
+          <div v-for="(item, index) in savingCart" :key="index">
+            <DetailProducts :pd="item" />
+            <hr />
+          </div>
         </div>
+        <h2 v-else>마음에 들어한 적금 상품이 없어요.</h2>
       </div>
-      <h2 v-else>마음에 들어한 적금 상품이 없어요.</h2>
     </div>
   </div>
 </template>
@@ -41,12 +53,14 @@ import DetailProducts from "../Products/DetailProducts.vue";
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
+  name: "MyCart",
   components: {
     DetailProducts,
   },
   data() {
     return {
       selected: true,
+      username: this.$store.state.user.userData.username,
     };
   },
   computed: {
