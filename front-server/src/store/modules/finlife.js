@@ -15,26 +15,21 @@ const finlife = {
     // 예금 상품 저장
     GET_DEPOSIT_PRODUCTS(state, DPdata) {
       state.depositProducts = DPdata;
-      console.log("DP save complete", DPdata);
     },
     // 적금 상품 저장
     GET_SAVING_PRODUCTS(state, SPdata) {
       state.savingProducts = SPdata;
-      console.log(SPdata);
     },
     // 환율 정보 저장
     GET_EX_RATES(state, ERdata) {
       state.exchangeRates = ERdata;
-      console.log(ERdata);
     },
     GET_DEPOSIT_CART(state, payload) {
-      console.log("aaa", payload);
       if (payload) {
         state.depositCart = payload;
       }
     },
     GET_SAVING_CART(state, payload) {
-      console.log("aaa", payload);
       if (payload) {
         state.savingCart = payload;
       }
@@ -50,10 +45,7 @@ const finlife = {
             context.commit("GET_DEPOSIT_PRODUCTS", res.data);
           })
           .catch((error) => console.log(error));
-      } else {
-        console.log("야금야금");
       }
-      console.log(reload);
     },
     // 적금 상품 axios
     getSavingProducts(context, reload) {
@@ -64,8 +56,6 @@ const finlife = {
             context.commit("GET_SAVING_PRODUCTS", res.data);
           })
           .catch((error) => console.log(error));
-      } else {
-        console.log("저끔저끔");
       }
     },
     // 환율 정보 내놔
@@ -74,12 +64,9 @@ const finlife = {
         axios
           .get(`${API_URL}/finlife/save-ex-rate/`)
           .then((res) => {
-            console.log(res);
             context.commit("GET_EX_RATES", res.data);
           })
           .catch((err) => console.log(err));
-      } else {
-        console.log("화뉼화뉼");
       }
     },
     // 예금상품 장바구니 목록 불러오기
@@ -93,7 +80,6 @@ const finlife = {
         },
       })
         .then((res) => {
-          console.log(res.data);
           context.commit("GET_DEPOSIT_CART", res.data);
         })
         .catch((err) => {
@@ -111,7 +97,6 @@ const finlife = {
         },
       })
         .then((res) => {
-          console.log(res.data);
           context.commit("GET_SAVING_CART", res.data);
         })
         .catch((err) => {

@@ -165,7 +165,6 @@ export default {
       return this.$store.state.user.isLogin; //로그인 여부
     },
     product() {
-      console.log(this.pd, this.prdtType);
       if (this.prdtType === "D") {
         return this.$store.state.finlife.depositProducts[this.pd - 1];
       } else {
@@ -179,7 +178,6 @@ export default {
     },
     addOrDeleteDepositCart(fin_prdt_cd) {
       if (this.isLogin) {
-        console.log(fin_prdt_cd);
         this.$store.dispatch("addOrDeleteDepositCart", fin_prdt_cd);
       } else {
         alert("로그인이 필요한 작업입니다.");
@@ -187,7 +185,6 @@ export default {
     },
     addOrDeleteSavingCart(fin_prdt_cd) {
       if (this.isLogin) {
-        console.log(fin_prdt_cd);
         this.$store.dispatch("addOrDeleteSavingCart", fin_prdt_cd);
       } else {
         alert("로그인이 필요한 작업입니다.");

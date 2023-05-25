@@ -28,7 +28,7 @@
           <p>
             {{ com.username }} - {{ com.content }}
             <input
-              v-if="$store.state.user.userData.username === com.username"
+              v-if="$store.state.user.userData?.username === com.username"
               id="delete"
               type="submit"
               value="댓글삭제"
@@ -42,7 +42,7 @@
             id="comment"
             v-model.trim="comment"
             type="text"
-            @keyup.enter="createComment"
+            @keyup.enter="submit"
           />
           <input id="submit" type="submit" />
         </form>
@@ -67,10 +67,8 @@ export default {
   },
   data() {
     return {
-      // article: this.$store.state.article.article,
       comment: null,
       showUpdateBoard: false,
-      // commentList: this.article.comment_set,
     };
   },
   computed: {
@@ -80,22 +78,17 @@ export default {
     isLogin() {
       return this.$store.state.user.isLogin; //로그인 여부
     },
-    // comment_set(){
-    //   console.log(this.article.comment_set)
-    //   return this.article.comment_set
-    // }
     isCurrentUser() {
-      return this.$store.state.user.userData.username === this.article.username;
+      return (
+        this.$store.state.user.userData?.username === this.article.username
+      );
     },
   },
   watch: {
-    number: function (val, oldval) {
-      console.log(`값이 ${oldval}에서 ${val}로 변함`);
-    },
+    number: function (val, oldval) {},
   },
   created() {
     this.getArticleDetail();
-    console.log("xxxx", this.commentList);
   },
   methods: {
     goBulletinBoard() {
@@ -111,8 +104,6 @@ export default {
       this.$store.dispatch("getArticleDetail", this.$route.params.articleId);
     },
     articleDelete() {
-      console.log("삭제요청");
-      console.log("로그인여부", this.isLogin);
       if (this.isLogin) {
         axios({
           method: "DELETE",
@@ -124,22 +115,16 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res.data);
-            console.log("삭제완료");
             alert("게시글을 삭제했습니다");
             this.$router.push({ name: "BulletinBoardView" });
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => {});
       } else {
         alert("로그인이필요합니다");
       }
     },
     createComment() {
-      console.log("로그인여부", this.isLogin);
       if (this.isLogin) {
-        console.log(this.comment);
         const content = this.comment;
         const articleId = this.$route.params.articleId;
         const payload = {
@@ -153,7 +138,6 @@ export default {
       }
     },
     deleteComment(comment) {
-      console.log("삭제. 댓글", comment);
       this.$store.dispatch("deleteComment", comment);
     },
   },

@@ -1,6 +1,6 @@
 <template>
-  <div id="KakaoMap" class="container" style="width: 550px;">
-    <b-card-group deck style="width: 450px;">
+  <div id="KakaoMap" class="container" style="width: 550px">
+    <b-card-group deck style="width: 450px">
       <b-card
         header="ExchangeRate"
         header-tag="header"
@@ -53,12 +53,10 @@ export default {
       level: 3,
     };
     this.mapInstance = new window.kakao.maps.Map(container, options);
-    console.log("Ahoi", this.mapInstance);
   },
   methods: {
     // 검색으로 장소를 찾아보자!
     searchPlace() {
-      console.log(1, this.keyword);
       // 이미 찍힌 마커가 있다면 없애줘
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
@@ -66,9 +64,7 @@ export default {
 
       const ps = new window.kakao.maps.services.Places();
       ps.keywordSearch(this.keyword, (data, status, pge) => {
-        console.log(2, this.data);
         this.data = data;
-        console.log(2.5, this.data);
 
         const positions = this.data.map(
           (place) => new kakao.maps.LatLng(...[place.y, place.x])
@@ -84,13 +80,11 @@ export default {
               '<div style="padding:5px;">' +
               this.data[index].place_name +
               "</div>";
-            console.log(iwContent);
             const infowindow = new kakao.maps.InfoWindow({
               content: iwContent,
             });
             kakao.maps.event.addListener(marker, "mouseover", () => {
               //마커 position을 출력합니다.
-              console.log(this.data[index].place_name);
               infowindow.open(this.mapInstance, marker);
             });
             kakao.maps.event.addListener(marker, "mouseout", function () {
@@ -104,9 +98,7 @@ export default {
             (bounds, latlng) => bounds.extend(latlng),
             new kakao.maps.LatLngBounds()
           );
-          console.log(1, bounds);
           this.mapInstance.setBounds(bounds);
-          console.log("owari");
         }
       });
     },

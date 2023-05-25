@@ -54,7 +54,6 @@ export default {
       if (this.stage === 15) {
         this.res = true;
       }
-      console.log("imp:", this.score.impulse, "enj:", this.score.enjoy);
     },
   },
 };
