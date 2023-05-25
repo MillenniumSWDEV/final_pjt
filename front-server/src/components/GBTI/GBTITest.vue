@@ -1,7 +1,7 @@
 <template>
   <div id="GBTIView" class="container">
-    <div v-if="startImage" class="mt-5">
-    <img src="@/assets/소비성향테스트이미지.png" @click="startTest()">
+    <div v-if="startImage" class="mt-4">
+      <img src="@/assets/소비성향테스트이미지.png" @click="startTest()" />
     </div>
     <div v-else class="mt-5 d-flex justify-content-center w-100">
       <div v-if="!res">
@@ -36,8 +36,8 @@ export default {
     };
   },
   methods: {
-    startTest(){
-      this.startImage = false
+    startTest() {
+      this.startImage = false;
     },
     choiceEvent(data) {
       if (data === "i") {
