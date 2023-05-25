@@ -60,7 +60,6 @@ const user = {
         },
       })
         .then((res) => {
-          console.log(res.data.key);
           context.commit("SAVE_TOKEN", res.data.key);
           context.dispatch("userDetail");
         })
@@ -90,7 +89,6 @@ const user = {
         });
     },
     logout(context) {
-      console.log("로그아웃요청들어옴");
       axios({
         method: "POST",
         url: `${API_URL}/accounts/logout/`,
@@ -147,7 +145,6 @@ const user = {
         },
       })
         .then((res) => {
-          console.log(res.data);
           context.commit("USER_DETAIL", res.data);
           alert("회원정보가 수정되었습니다");
           router.push({ name: "MainPageView" });
@@ -166,7 +163,6 @@ const user = {
         },
       })
         .then((res) => {
-          console.log(res);
           context.commit("DELETE_USER");
         })
         .catch((err) => {

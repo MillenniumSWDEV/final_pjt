@@ -112,7 +112,7 @@ export default {
       });
     },
     goMyCart() {
-      if (this.isLogin){
+      if (this.isLogin) {
         this.boardActive = false;
         this.productActive = false;
         this.finTestActive = false;
@@ -121,14 +121,14 @@ export default {
           name: "MyCartView",
         });
       } else {
-        alert('로그인이 필요한 작업입니다')
+        alert("로그인이 필요한 작업입니다");
       }
     },
     goLoginView() {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = false;
-      this.cartActive = true;
+      this.cartActive = false;
       this.$router.push({
         name: "LoginView",
       });
@@ -146,6 +146,7 @@ export default {
       this.boardActive = false;
       this.productActive = false;
       this.finTestActive = false;
+      this.cartActive = false;
       this.$router.push({
         name: "MyPageView",
       });

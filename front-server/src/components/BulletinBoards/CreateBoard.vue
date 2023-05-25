@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     createArticle() {
-      console.log("로그인여부", this.isLogin);
       if (this.isLogin) {
         const title = this.title;
         const content = this.content;

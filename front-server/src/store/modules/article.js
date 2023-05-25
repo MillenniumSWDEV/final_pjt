@@ -12,11 +12,9 @@ const article = {
     // 게시글
     GET_ARTICLES(state, newArticle) {
       state.articles = newArticle;
-      console.log(state.articles);
     },
     GET_ARTICLE_DETAIL(state, articleDetail) {
       state.article = articleDetail;
-      console.log("뮤테이션", state.article);
     },
   },
   actions: {
@@ -30,25 +28,20 @@ const article = {
           context.commit("GET_ARTICLES", res.data);
         })
         .catch((err) => {
-          console.log(err);
           // 404 싫어요
           context.commit("GET_ARTICLES", []);
         });
     },
     // article의 id로 detail을 불러오는 함수
     getArticleDetail(context, articleId) {
-      console.log("action호출");
       axios({
         method: "get",
         url: `${API_URL}/api/v1/articles/${articleId}/`,
       })
         .then((res) => {
-          console.log("응답받음");
           context.commit("GET_ARTICLE_DETAIL", res.data);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     },
     // 게시글작성
     createArticle(context, payload) {
@@ -64,12 +57,9 @@ const article = {
         },
       })
         .then((res) => {
-          console.log(res.data);
           this.dispatch("getArticles");
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     },
     // 게시글 수정
     updateArticle(context, payload) {
@@ -90,27 +80,20 @@ const article = {
         },
       })
         .then((res) => {
-          console.log("응답받음");
           context.commit("GET_ARTICLE_DETAIL", res.data);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     },
     // 게시글 지우는 코드
     articleDelete(context, articleId) {
-      console.log("deleted");
       axios({
         method: "delete",
         url: `${API_URL}/api/v1/articles/${articleId}/`,
       })
         .then((res) => {
-          console.log(res);
           this.$router.push({ name: "ArticleView" });
         })
-        .catch((error) => {
-          console.log(error, context);
-        });
+        .catch((error) => {});
     },
     // 댓글 달기
     createComment(context, payload) {
@@ -125,7 +108,6 @@ const article = {
         },
       })
         .then((res) => {
-          console.log(res.data);
           this.dispatch("getArticleDetail", res.data.article);
         })
         .catch((error) => console.log(error, context));
@@ -134,7 +116,6 @@ const article = {
     deleteComment(context, comment) {
       const commentId = comment.id;
       const articleID = comment.article;
-      console.log("deleteComment액션");
       axios({
         method: "delete",
         url: `${API_URL}/api/v1/comments/${commentId}/`,

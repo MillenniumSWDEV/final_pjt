@@ -106,7 +106,6 @@ export default {
     },
     addOrDeleteSavingCart(fin_prdt_cd) {
       if (this.isLogin) {
-        console.log(fin_prdt_cd);
         this.$store.dispatch("addOrDeleteSavingCart", fin_prdt_cd);
       } else {
         alert("로그인이 필요한 작업입니다.");

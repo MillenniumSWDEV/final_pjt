@@ -51,7 +51,6 @@ export default {
         // url: `${API_URL}/api/v1/articles/20/`,     // 테스트용
       })
         .then((res) => {
-          console.log(res);
           this.article = res.data;
         })
         .catch((err) => {
@@ -59,16 +58,15 @@ export default {
         });
     },
     articleEdit() {
-      console.log("수정요청");
       if (this.isLogin) {
         const title = this.article.title;
         const content = this.article.content;
-      //   const articleId = this.$route.params.articleId
+        //   const articleId = this.$route.params.articleId
 
-      //   const payload ={
-      //     title,content,articleId
-      //   }
-      //   this.$store.dispatch('updateArticle', payload)
+        //   const payload ={
+        //     title,content,articleId
+        //   }
+        //   this.$store.dispatch('updateArticle', payload)
 
         axios({
           method: "PUT",
@@ -84,10 +82,9 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res.data);
             this.article = res.data;
-            alert('게시글을 수정했습니다')
-            this.$router.push({name: "BulletinBoardView"})
+            alert("게시글을 수정했습니다");
+            this.$router.push({ name: "BulletinBoardView" });
           })
           .catch((err) => {
             console.log(err);

@@ -67,7 +67,7 @@
 
     <div v-else>
       <b-button @click="listOrDetail">뒤로 가기</b-button>
-      <DetailProducts :pd="prdtId" prdt-type="D"/>
+      <DetailProducts :pd="prdtId" prdt-type="D" />
     </div>
   </div>
 </template>
@@ -106,12 +106,10 @@ export default {
   methods: {
     listOrDetail(dp) {
       this.prdtId = dp.id;
-      console.log(this.prdtId)
       this.goDetail = this.goDetail ? false : true;
     },
     addOrDeleteDepositCart(fin_prdt_cd) {
       if (this.isLogin) {
-        console.log(fin_prdt_cd);
         this.$store.dispatch("addOrDeleteDepositCart", fin_prdt_cd);
       } else {
         alert("로그인이 필요한 작업입니다.");

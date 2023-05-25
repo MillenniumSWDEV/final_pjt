@@ -12,8 +12,6 @@ export default {
   components: {
     DetailBoard,
   },
-  created() {
-    // console.log("dddd", $route.params);
-  },
+  created() {},
 };
 </script>
