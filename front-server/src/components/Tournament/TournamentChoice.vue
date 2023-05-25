@@ -1,12 +1,11 @@
 <template>
-  <div v-if="!!prdt" @click="select">
-    <div>
+  <div v-if="!!prdt" style="min-width: 500px" @click="select">
+    <div class="d-flex justify-content-center">
       <b-card
         border-variant="primary"
         :header="prdt.fin_prdt_nm"
         header-bg-variant="primary"
         header-text-variant="white"
-        align="center"
       >
         <b-card-text>
           {{ prdt.id }}
@@ -15,12 +14,12 @@
           <p>{{ prdt.spcl_cnd }}</p>
           <div v-if="prdt.depositoptions_set">
             <p v-for="option in prdt.depositoptions_set" :key="option.id">
-              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}
+              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}개월
             </p>
           </div>
           <div v-else>
             <p v-for="option in prdt.savingoptions_set" :key="option.id">
-              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}
+              최대 금리 {{ option.intr_rate2 }} - {{ option.save_trm }}개월
             </p>
           </div>
         </b-card-text>

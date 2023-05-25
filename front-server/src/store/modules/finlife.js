@@ -5,11 +5,11 @@ const API_URL = "http://127.0.0.1:8000";
 
 const finlife = {
   state: {
-    depositProducts: null,
-    savingProducts: null,
-    exchangeRates: null,
-    depositCart: null,
-    savingCart: null,
+    depositProducts: [],
+    savingProducts: [],
+    exchangeRates: [],
+    depositCart: [],
+    savingCart: [],
   },
   mutations: {
     // 예금 상품 저장
@@ -37,7 +37,7 @@ const finlife = {
   actions: {
     // 예금 정보 axios
     getDepositProducts(context, reload) {
-      if (!this.state.finlife.depositProducts || reload) {
+      if (!this.state.finlife.depositProducts.length || reload) {
         axios
           .get(`${API_URL}/finlife/deposit-products/`)
           .then((res) => {
@@ -51,7 +51,7 @@ const finlife = {
     },
     // 적금 상품 axios
     getSavingProducts(context, reload) {
-      if (!this.state.finlife.savingProducts || reload) {
+      if (!this.state.finlife.savingProducts.length || reload) {
         axios
           .get(`${API_URL}/finlife/saving-products/`)
           .then((res) => {
@@ -64,7 +64,7 @@ const finlife = {
     },
     // 환율 정보 내놔
     getExRates(context) {
-      if (!this.state.finlife.exchangeRates) {
+      if (!this.state.finlife.exchangeRates.length) {
         axios
           .get(`${API_URL}/finlife/save-ex-rate/`)
           .then((res) => {

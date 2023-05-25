@@ -1,15 +1,20 @@
 <template>
   <div id="TournamentView" class="container">
-    <div v-if="startImage" class="mt-5">
+    <div v-if="startImage" class="mt-3">
       <img src="@/assets/이상형월드컵이미지.png" @click="startTest()" />
     </div>
-    <div v-else class="d-flex flex-column justify-content-center mt-5 mx-auto">
+    <div
+      v-else
+      class="d-flex flex-column justify-content-center mt-2 mx-auto w-100"
+    >
       <h3 style="font-weight: 800; text-align: center; margin-bottom: 30px">
         금사빠 (금융과 사랑에 빠지다)
       </h3>
-      <b-button-group size="md" class="d-flex w-10">
+      <div class="d-flex justify-content-center w-50 mb-3 mx-auto">
         <b-button
-          class="me-5"
+          size="lg"
+          class="mx-auto me-5"
+          style="width: 100px; height: 30px; box-sizing: content-box"
           pill
           variant="primary"
           :pressed="selected === 'D'"
@@ -18,7 +23,9 @@
           예금
         </b-button>
         <b-button
-          class="me-5"
+          size="lg"
+          class="mx-auto"
+          style="width: 100px; height: 30px; box-sizing: content-box"
           pill
           variant="info"
           :pressed="selected === 'S'"
@@ -26,16 +33,20 @@
         >
           적금
         </b-button>
-      </b-button-group>
-      <p v-if="!complete">{{ next_round.length }} / {{ roundCnt / 2 }}</p>
-      <b-button variant="success" @click="next"
+      </div>
+      <b-button
+        variant="success"
+        class="mx-auto"
+        style="width: 280px; height: 40px"
+        @click="next"
         >{{ roundCnt }}강 시작하기</b-button
       >
+      <h4 v-if="!complete">{{ next_round.length }} / {{ roundCnt / 2 }}</h4>
       <div align="center" justify="center" style="display: flex">
-        <div cols="6" align="center" style="width: 370px">
+        <div cols="6" align="center" style="min-width: 500px">
           <TournamentChoice id="left" :prdt="left" @choice-event="leftChoice" />
         </div>
-        <div cols="6" align="center" style="width: 370px">
+        <div cols="6" align="center" style="min-width: 500px">
           <TournamentChoice
             id="right"
             :prdt="right"
@@ -135,7 +146,7 @@ export default {
 
     next(n) {
       if (!this.selected) {
-        alert("선택해 당장");
+        alert("예금과 적금 중에 선택해 당장!!!");
       } else if (
         // 자기 마음대로 넘어가는 현상 및 다음 스테이지로 넘어가지 않는 현상 방지용 조건문
         (this.next_round.length === 0 && this.products.length % 2 === 0) ||
@@ -153,4 +164,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>
