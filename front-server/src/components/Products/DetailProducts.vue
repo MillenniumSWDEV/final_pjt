@@ -1,14 +1,32 @@
 <template>
-  <div>
+  <div id="DetailProducts" style="margin-top: 20px">
     <div>
-      <b-card :title="product.fin_prdt_nm" :sub-title="product.kor_co_nm">
+      <b-card :header="pd.fin_prdt_nm">
         <b-row align-h="around">
           <b-col>
             <b-card-text>
-              <p>가입대상: {{ product.join_member }}</p>
-              <p>가입 제한: {{ joinDeny[product.join_deny] }}</p>
-              <p>가입 방법: {{ product.join_way }}</p>
-              <p>우대조건: {{ product.spcl_cnd }}</p>
+              <p>
+                <span style="font-weight: 600; font-size: 18px">가입대상: </span
+                >{{ pd.join_member }}
+              </p>
+              <p>
+                <span style="font-weight: 600; font-size: 18px"
+                  >가입 제한:
+                </span>
+                {{ joinDeny[pd.join_deny] }}
+              </p>
+              <p>
+                <span style="font-weight: 600; font-size: 18px"
+                  >가입 방법:
+                </span>
+                {{ pd.join_way }}
+              </p>
+              <p>
+                <span style="font-weight: 600; font-size: 18px"
+                  >우대조건:
+                </span>
+                {{ pd.spcl_cnd }}
+              </p>
             </b-card-text>
           </b-col>
 
@@ -68,9 +86,14 @@
           </b-col>
         </b-row>
 
-        <b-card-text>기타 유의 사항 {{ product.etc_note }} </b-card-text>
-        <p>마음에 들어 한 사람 수 - {{ product.carted_user.length }}명</p>
-        <div v-if="product.depositoptions_set">
+        <b-card-text
+          ><span style="font-weight: 900; font-size: 16px"
+            >기타 유의 사항
+          </span>
+          {{ pd.etc_note }}
+        </b-card-text>
+        <!-- <p>마음에 들어 한 사람 수 - {{ pd.carted_user.length }}명</p> -->
+        <div v-if="pd.depositoptions_set">
           <b-button
             v-if="
               !$store.state.finlife.depositCart.some((cartedProduct) =>
