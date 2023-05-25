@@ -28,10 +28,16 @@ const finlife = {
       console.log(ERdata);
     },
     GET_DEPOSIT_CART(state, payload) {
-      state.depositCart = payload;
+      console.log('aaa',payload)
+      if(payload === null) {
+        state.depositCart = payload;
+      }
     },
     GET_SAVING_CART(state, payload) {
-      state.savingCart = payload;
+      console.log('aaa',payload)
+      if(payload) {
+        state.savingCart = payload;
+      }
     },
   },
   actions: {
