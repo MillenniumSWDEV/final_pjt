@@ -17,9 +17,9 @@
         </p>
         <h4 style="font-size: 20px; font-weight: 900">내용</h4>
         <p class="pb-3">{{ article?.content }}</p>
-        <div class="d-flex justify-content-end">
+        <div v-if="isCurrentUser" class="d-flex justify-content-end">
           <b-button variant="warning" @click="showUpdateBoard = true"
-            >수정하러가기</b-button
+            >수정하기</b-button
           >
           <b-button variant="danger" @click="articleDelete">삭제하기</b-button>
         </div>
@@ -83,6 +83,9 @@ export default {
     //   console.log(this.article.comment_set)
     //   return this.article.comment_set
     // }
+    isCurrentUser(){
+      return this.$store.state.user.userData.username === this.article.username
+    }
   },
   watch: {
     number: function (val, oldval) {
@@ -121,8 +124,10 @@ export default {
         })
           .then((res) => {
             console.log(res.data);
-            this.$router.push({ name: "BulletinBoardView" });
             console.log("삭제완료");
+            alert('게시글을 삭제했습니다')
+            this.$router.push({ name: "BulletinBoardView" });
+            
           })
           .catch((err) => {
             console.log(err);
