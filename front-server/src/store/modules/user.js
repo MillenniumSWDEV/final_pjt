@@ -145,9 +145,13 @@ const user = {
         .then((res) => {
           console.log(res.data);
           context.commit("USER_DETAIL", res.data);
+          alert('회원정보가 수정되었습니다')
+          router.push({ name: "MainPageView" });
+
         })
         .catch((err) => {
           console.log(err);
+          alert('입력하신 정보를 확인해주세요')
         });
     },
     deleteUser(context) {
