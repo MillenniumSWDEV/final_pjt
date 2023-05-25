@@ -14,10 +14,10 @@
         >소비 성향 테스트</b-nav-item
       >
     </b-nav>
-    <div v-if="selected">
+    <div v-if="!selected">
       <TournamentProducts />
     </div>
-    <div v-if="!selected">
+    <div v-if="selected">
       <GBTITest />
     </div>
   </div>
