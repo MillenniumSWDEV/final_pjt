@@ -28,10 +28,11 @@ const user = {
       (state.userData = null), (state.token = null);
     },
     RESET_TOKEN(state) {
-      (state.token = null),
-        (state.isLogin = false),
-        (this.state.finlife.depositCart = null),
-        (this.state.finlife.savingCart = null);
+      state.token = null;
+      state.userData = null;
+      state.isLogin = false;
+      this.state.finlife.depositCart = [];
+      this.state.finlife.savingCart = [];
       router.push({ name: "MainPageView" });
     },
   },
@@ -80,10 +81,12 @@ const user = {
       })
         .then((res) => {
           context.commit("SAVE_TOKEN", res.data.key);
+          context.dispatch("userDetail");
         })
         .catch((err) => {
-          alert('아이디 또는 비밀번호를 확인해주세요')
-          console.log(err)});
+          alert("아이디 또는 비밀번호를 확인해주세요");
+          console.log(err);
+        });
     },
     logout(context) {
       console.log("로그아웃요청들어옴");
@@ -145,13 +148,12 @@ const user = {
         .then((res) => {
           console.log(res.data);
           context.commit("USER_DETAIL", res.data);
-          alert('회원정보가 수정되었습니다')
+          alert("회원정보가 수정되었습니다");
           router.push({ name: "MainPageView" });
-
         })
         .catch((err) => {
           console.log(err);
-          alert('입력하신 정보를 확인해주세요')
+          alert("입력하신 정보를 확인해주세요");
         });
     },
     deleteUser(context) {

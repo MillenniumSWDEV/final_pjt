@@ -15,7 +15,7 @@ const finlife = {
     // 예금 상품 저장
     GET_DEPOSIT_PRODUCTS(state, DPdata) {
       state.depositProducts = DPdata;
-      console.log('DP save complete', DPdata);
+      console.log("DP save complete", DPdata);
     },
     // 적금 상품 저장
     GET_SAVING_PRODUCTS(state, SPdata) {
@@ -28,14 +28,14 @@ const finlife = {
       console.log(ERdata);
     },
     GET_DEPOSIT_CART(state, payload) {
-      console.log('aaa',payload)
-      if(payload === null) {
+      console.log("aaa", payload);
+      if (payload) {
         state.depositCart = payload;
       }
     },
     GET_SAVING_CART(state, payload) {
-      console.log('aaa',payload)
-      if(payload) {
+      console.log("aaa", payload);
+      if (payload) {
         state.savingCart = payload;
       }
     },
@@ -53,7 +53,7 @@ const finlife = {
       } else {
         console.log("야금야금");
       }
-      console.log(reload)
+      console.log(reload);
     },
     // 적금 상품 axios
     getSavingProducts(context, reload) {
@@ -141,39 +141,39 @@ const finlife = {
           .catch((err) => {
             console.log(err);
           });
-        } else {
-          axios({
-            method: "delete",
-            url: `${API_URL}/finlife/deposit-product/cart/${fin_prdt_cd}/`,
+      } else {
+        axios({
+          method: "delete",
+          url: `${API_URL}/finlife/deposit-product/cart/${fin_prdt_cd}/`,
           headers: {
             Authorization: `Token ${this.state.user.token}`,
           },
         })
-        .then((res) => {
-          context.dispatch("getDepositCart");
-          context.dispatch("getDepositProducts", true);
-          alert("관심목록에서 삭제되었습니다.");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            context.dispatch("getDepositCart");
+            context.dispatch("getDepositProducts", true);
+            alert("관심목록에서 삭제되었습니다.");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     // 적금상품 장바구니에 추가하기
     addOrDeleteSavingCart(context, fin_prdt_cd) {
       if (
         !this.state.finlife.savingCart.some((cartedProduct) =>
-        Object.values(cartedProduct).includes(fin_prdt_cd)
+          Object.values(cartedProduct).includes(fin_prdt_cd)
         )
-        ) {
-          axios({
-            method: "post",
-            url: `${API_URL}/finlife/saving-product/cart/${fin_prdt_cd}/`,
-            headers: {
-              Authorization: `Token ${this.state.user.token}`,
-              // Authorization : `Token 27032a1c97414bc9dfeb6b134355c88ded581731`
-            },
-          })
+      ) {
+        axios({
+          method: "post",
+          url: `${API_URL}/finlife/saving-product/cart/${fin_prdt_cd}/`,
+          headers: {
+            Authorization: `Token ${this.state.user.token}`,
+            // Authorization : `Token 27032a1c97414bc9dfeb6b134355c88ded581731`
+          },
+        })
           .then((res) => {
             context.dispatch("getSavingCart");
             context.dispatch("getSavingProducts", true);

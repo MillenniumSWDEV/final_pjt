@@ -5,8 +5,8 @@ const API_URL = "http://127.0.0.1:8000";
 
 const article = {
   state: {
-    articles: null,
-    article: null,
+    articles: [],
+    article: [],
   },
   mutations: {
     // 게시글
@@ -72,11 +72,11 @@ const article = {
         });
     },
     // 게시글 수정
-    updateArticle(context, payload){
-      const title = payload.title
-      const content = payload.content
-      const articleId = payload.articleId
-      
+    updateArticle(context, payload) {
+      const title = payload.title;
+      const content = payload.content;
+      const articleId = payload.articleId;
+
       axios({
         method: "put",
         url: `${API_URL}/api/v1/articles/${articleId}/`,
