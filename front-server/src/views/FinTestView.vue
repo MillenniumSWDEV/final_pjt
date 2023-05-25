@@ -17,7 +17,7 @@
     <div v-if="selected" class="mt-3">
       <TournamentProducts />
     </div>
-    <div v-if="!selected" class="">
+    <div v-if="!selected">
       <GBTITest />
     </div>
   </div>
